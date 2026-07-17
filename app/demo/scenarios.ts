@@ -1,0 +1,22 @@
+/** Stable IDs and timestamps used by the built-in demo and its tests. */
+export const DEMO_SCENARIOS = {
+  vaultId: "vault-flavio-macbook",
+  thesisPath: "Documents/University/Thesis-Final.docx",
+  thesisTuesdayRequest: "2026-07-14T19:00:00.000Z",
+  healthyTuesdaySnapshotId: "snapshot-2026-07-14-1730",
+  healthyTuesdayThesisObjectId: "object-thesis-v3-healthy",
+  healthyTuesdayExpectedVerdict: "fully_recoverable",
+  healthyTuesdaySafeCopyAction: "create",
+  healthyTuesdayOriginalLocationAction: "conflict",
+  laterCorruptedSnapshotId: "snapshot-2026-07-15-2030",
+  corruptedThesisObjectId: "object-thesis-v4-corrupted",
+  missingObjectSnapshotId: "snapshot-2026-07-16-2030",
+  missingPresentationObjectId: "object-presentation-v3-missing",
+  retentionRiskSnapshotId: "snapshot-2026-07-12-2030",
+  retentionRiskPath: "Finance/Tax-Return-2025.pdf",
+  retentionRiskExpiresAt: "2026-07-19T00:00:00.000Z",
+  partialFolderPath: "Projects",
+  partialFolderExpectedVerdict: "partially_recoverable",
+  conflictPath: "Documents/University/Thesis-Final.docx",
+  identicalDestinationPath: "Projects/README.md",
+} as const;

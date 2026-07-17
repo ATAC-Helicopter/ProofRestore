@@ -1,0 +1,38 @@
+# Development log
+
+## 2026-07-18
+
+- Inspected the seed repository, execution brief, product spec, demo draft, story draft, and submission checklist.
+- Found no existing app or Git repository; initialized a strict, deployment-ready Next.js foundation.
+- Established non-overlapping agent ownership for schema/architecture, deterministic engine/tests, and demo fixtures.
+- Implemented a version `1.0` manifest contract with strict Zod parsing, UTC timestamp normalization, safe relative paths, duplicate detection, bounded collections, expiry-reference validation, and a 5 MiB parsing limit.
+- Implemented the trusted TypeScript core: exact and point-in-time snapshot selection, case-sensitive normalized path resolution, recursive folder selection, availability/hash/size integrity checks, destination actions, byte totals, request verdicts, stable evidence, and retention risk.
+- Added the readable eight-snapshot demo vault. It contains the verified Tuesday thesis, later silent corruption, a missing presentation object after a reported-success job, an expiring final healthy tax-return copy, a partially recoverable project folder, a newer destination conflict, and an identical destination file.
+- Added the complete client flow: welcome, manifest import, vault dashboard, file search, version timeline, constrained recovery request, deterministic verdict, dry-run plan, evidence viewer, and downloadable Markdown proof report.
+- Added the optional server-side OpenAI Responses API interpreter with strict structured output, candidate-path enforcement, an eight-second timeout, minimal request context, and deterministic fallback. The core flow remains functional without a key.
+- Added security handling for malformed manifests, unsafe traversal, oversized input, HTML/Markdown controls in reports, and imported content rendered only as text.
+
+### Codex collaboration
+
+- The lead agent inspected the seed, established boundaries, initialized the application, integrated all work, and owned the final build and product verification.
+- The schema and architecture agent owned manifest contracts, validation, architecture, and the edge-case catalog.
+- The recovery agent owned pure deterministic selection, integrity, planning, evidence, retention behavior, and adversarial engine tests.
+- The demo-data agent owned the built-in vault, scenario constants, and fixture validation tests, then completed the submission documentation pass.
+- Work used non-overlapping file ownership in a shared repository; the lead reviewed and validated integrated results.
+
+### Verification milestones
+
+- The exact demo integration now proves: demo vault → thesis path → Tuesday 19:00 UTC → `snapshot-2026-07-14-1730` → verified object/hash/size → fully recoverable → deterministic conflict-aware plan.
+- The Vitest suite passes all **57** unit and integration tests.
+- Formatting, lint, strict type checking, and the Next.js 15.5.20 production build pass in the final validation chain.
+- The Playwright Chromium suite passes **3/3**, covering the critical demo through report download, valid and malformed imports, the no-key API fallback, and a mobile viewport smoke test.
+- `npm audit` reports only transitive moderate PostCSS advisories with no currently available non-breaking remediation.
+
+### Final fixes and decisions
+
+- Aligned the fixed Tuesday-evening request with the no-key interpreter’s 19:00 UTC interpretation.
+- Kept later corrupt versions in the timeline while selecting the last eligible healthy historical version for the requested time.
+- Modeled the missing presentation as a catalog reference with no stored object, allowing the validator to accept the manifest while the recovery engine correctly fails integrity.
+- Separated data recoverability from destination safety: the thesis bytes are fully recoverable, while original-location simulation reports a conflict with a newer destination copy.
+- Kept the report deterministic and safely escaped; model-generated prose is not required.
+- Excluded `tests/e2e/` from Vitest discovery so Playwright owns the browser spec and the two test runners remain isolated.

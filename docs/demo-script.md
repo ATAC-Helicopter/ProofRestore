@@ -1,0 +1,117 @@
+# ProofRestore demo script
+
+Target runtime: **1:50–2:10**. Use the built-in vault and no API key for the most reliable recording.
+
+## 0:00–0:15 — Set up the problem
+
+**On screen:** ProofRestore welcome screen.
+
+**Narration:**
+
+> “Backup software tells us a job completed. But that green status does not prove our files can be recovered. ProofRestore verifies the recovery before the emergency.”
+
+Point to the hero: **Know your backup will restore before you need it.**
+
+## 0:15–0:30 — Reveal hidden risk
+
+**Click:** **Explore demo vault**.
+
+**Expected result:** `Flavio's MacBook Backup` opens with eight snapshots. The central contrast reads:
+
+- **Backup status — Completed**
+- **Recoverability status — At risk**
+
+**Narration:**
+
+> “This job reported success, but recoverability is at risk. Deterministic verification found integrity and retention problems that the job status missed.”
+
+## 0:30–0:55 — Find the thesis
+
+The search is prefilled with `Thesis-Final.docx`.
+
+**Click:** `Documents/University/Thesis-Final.docx` in the matching-file list.
+
+**Expected result:** The file timeline appears. Healthy historical versions are green; later corrupted versions are red. The request field reads:
+
+> Can I recover my thesis from Tuesday evening?
+
+**Narration:**
+
+> “The latest thesis copy is corrupt, so I’ll ask for the Tuesday-evening version.”
+
+## 0:55–1:15 — Prove the recovery point
+
+**Click:** **Verify recoverability**.
+
+**Expected result:**
+
+- request resolved to `Documents/University/Thesis-Final.docx`;
+- Tuesday evening interpreted as `2026-07-14 19:00 UTC`;
+- latest eligible snapshot selected: `snapshot-2026-07-14-1730`;
+- verdict: **Fully recoverable**;
+- integrity: **verified**.
+
+**Narration:**
+
+> “Language interpretation identified the path and time. Deterministic code selected the snapshot, found the stored object, checked its hash and size, and produced the verdict.”
+
+## 1:15–1:38 — Run the safe restore simulation
+
+**Click:** **Run restore simulation**.
+
+**Expected result:** A simulation-only banner appears. The thesis is recoverable, but the original-location plan marks it as a **conflict** because the destination contains a newer, different file. No real file changes occur.
+
+**Narration:**
+
+> “Recoverability and overwrite safety are separate. The backup bytes are verified, while the dry run protects the newer destination copy by surfacing a conflict.”
+
+**Click:** **Open exact evidence**.
+
+Point to `snapshot_selected`, `path_found`, `object_found`, `hash_match`, `size_match`, and `destination_conflict` evidence.
+
+## 1:38–1:55 — Generate proof
+
+**Click:** **Generate proof report**.
+
+**Expected result:** `proof-of-recoverability.md` downloads and a preview appears. It contains the request, recovery point, verdict, metrics, conflicts, restore plan, retention warnings, evidence appendix, methodology, and an explicit simulation statement.
+
+**Narration:**
+
+> “ProofRestore turns the dry run into a portable evidence report. Every claim traces to deterministic checks.”
+
+## 1:55–2:10 — Close on the trust boundary
+
+**Narration:**
+
+> “OpenAI can interpret what I mean, but it never decides whether data exists or is recoverable. That decision stays in tested deterministic TypeScript. Backups should not require faith.”
+
+End on the footer: **Backups should not require faith.**
+
+## Exact click path
+
+```text
+Explore demo vault
+→ select Documents/University/Thesis-Final.docx
+→ Verify recoverability
+→ Fully recoverable at snapshot-2026-07-14-1730
+→ Run restore simulation
+→ Open exact evidence
+→ Generate proof report
+```
+
+## Recording preparation
+
+- Run `npm run build` and `npm run start`.
+- Use a clean Chromium window at 1440×900 or similar.
+- Leave `OPENAI_API_KEY` unset for a deterministic recording.
+- Clear prior downloads so `proof-of-recoverability.md` is easy to identify.
+- Keep browser zoom at 100% and the pointer visible.
+- Rehearse once with the network disconnected; the primary flow should be unchanged.
+
+## Fallback plan
+
+If natural-language interpretation does not resolve the request, leave the search as `Thesis-Final.docx`, select the exact path manually, keep the supplied Tuesday-evening prompt, and click **Verify recoverability** again. The no-key fallback maps Tuesday evening to 19:00 UTC using the manifest’s fixed reference time.
+
+If report download is blocked by recording-browser permissions, show the in-page report preview. If the optional OpenAI route is unavailable, continue without it; no verdict or restore-plan behavior depends on that route.
+
+If a visual or browser issue appears during recording, reload and repeat the exact click path. The built-in manifest, timestamps, hashes, destination state, and outputs are fixed.
