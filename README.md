@@ -127,7 +127,7 @@ npm run build
 npm run test:e2e
 ```
 
-The Chromium E2E suite passes 4/4. It covers the demo vault through thesis selection, Tuesday recovery, restore simulation, evidence expansion, and report download; valid and malformed manifest imports; the no-key API fallback; mobile overflow; and invalidation of stale evidence when a request changes.
+The Chromium E2E suite passes 6/6. It covers the demo vault through thesis selection, Tuesday recovery, restore simulation, evidence expansion, and report download; valid and malformed manifest imports; the no-key API fallback; responsive clipping checks at four viewport sizes; partial-folder failure presentation; and invalidation of stale evidence when a request changes.
 
 ## Submission media
 

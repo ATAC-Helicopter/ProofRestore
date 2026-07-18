@@ -72,7 +72,7 @@ The final challenge was making these technical distinctions legible within a two
 - A safe restore simulation that never writes, overwrites, deletes, or executes real data.
 - A realistic eight-snapshot demo where successful jobs hide corruption, a missing object, destination conflict, partial folder recovery, and expiry risk.
 - An escaped Proof of Recoverability report with metrics, plan, warnings, methodology, and evidence appendix.
-- A green final validation chain: formatting, lint, strict type checking, 59 unit/integration tests, a Next.js production build, and 3/3 Chromium E2E tests covering the demo, imports, fallback behavior, and mobile layout.
+- A green final validation chain: formatting, lint, strict type checking, 59 unit/integration tests, a Next.js production build, and 6/6 Chromium E2E tests covering the demo, imports, fallback behavior, responsive layout, stale-result invalidation, and partial recovery presentation.
 
 ## What we learned
 

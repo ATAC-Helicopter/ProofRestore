@@ -35,7 +35,7 @@
 - [x] Typecheck passes
 - [x] Unit/integration tests pass: 59 tests
 - [x] Production build passes
-- [x] Chromium E2E suite passes: 4/4 tests, including the critical flow
+- [x] Chromium E2E suite passes: 6/6 tests, including the critical flow, responsive clipping checks, and partial recovery presentation
 - [x] Clean automated Chromium flow completed
 - [x] Valid and malformed imports smoke-tested locally
 - [x] No-key API fallback smoke-tested locally

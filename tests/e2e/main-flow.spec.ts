@@ -20,6 +20,8 @@ test("proves the Tuesday-evening thesis recovery flow", async ({ page }) => {
   await expect(
     page.getByText("At risk", { exact: true }).first(),
   ).toBeVisible();
+  await expect(page.locator(".status-green").first()).toBeVisible();
+  await expect(page.locator(".status-amber").first()).toBeVisible();
   await page.getByRole("button", { name: "Check a file" }).click();
 
   const thesis = page.getByRole("button", {
@@ -68,6 +70,7 @@ test("proves the Tuesday-evening thesis recovery flow", async ({ page }) => {
       level: 2,
     }),
   ).toBeVisible();
+  await expect(page.getByText("Conflict review required")).toBeVisible();
   await expect(
     page.getByText("Backups should not require faith."),
   ).toBeVisible();
@@ -167,4 +170,97 @@ test("changing a request invalidates stale recovery evidence", async ({
   await expect(
     page.getByRole("button", { name: "Restore simulation" }),
   ).toBeDisabled();
+});
+
+test("keeps the request workflow unclipped across responsive layouts", async ({
+  page,
+}) => {
+  for (const viewport of [
+    { width: 1366, height: 768 },
+    { width: 1024, height: 768 },
+    { width: 768, height: 1024 },
+    { width: 390, height: 844 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    await page.getByRole("button", { name: "Explore demo vault" }).click();
+    await page.getByRole("button", { name: "Check a file" }).click();
+
+    const title = page.getByRole("heading", {
+      name: "What do you need to recover?",
+    });
+    const titleBox = await title.boundingBox();
+    const header = page.locator(".workspace-header");
+    const headerBox = await header.boundingBox();
+    const headerPosition = await header.evaluate(
+      (element) => getComputedStyle(element).position,
+    );
+    if (headerPosition === "sticky" && titleBox && headerBox) {
+      expect(titleBox.y).toBeGreaterThanOrEqual(headerBox.y + headerBox.height);
+    }
+
+    const searchInput = page.getByRole("textbox", {
+      name: "Search files and folders",
+    });
+    expect((await searchInput.boundingBox())?.height).toBeGreaterThanOrEqual(
+      44,
+    );
+    await page.getByRole("button", { name: /^Thesis-Final\.docx/ }).click();
+
+    const clipping = await page.evaluate(() => {
+      const workspace =
+        document.querySelector<HTMLElement>(".request-workspace");
+      const version = document.querySelector<HTMLElement>(".version-panel");
+      return {
+        documentOverflow:
+          document.documentElement.scrollWidth - window.innerWidth,
+        workspace:
+          (workspace?.scrollHeight ?? 0) - (workspace?.clientHeight ?? 0),
+        version: (version?.scrollHeight ?? 0) - (version?.clientHeight ?? 0),
+      };
+    });
+    expect(clipping.documentOverflow).toBeLessThanOrEqual(1);
+    expect(clipping.workspace).toBeLessThanOrEqual(1);
+    expect(clipping.version).toBeLessThanOrEqual(1);
+
+    await page.getByText("Choose an exact snapshot", { exact: true }).click();
+    await expect(page.locator(".version-option")).toHaveCount(4);
+    for (const option of await page.locator(".version-option").all()) {
+      expect((await option.boundingBox())?.height).toBeGreaterThanOrEqual(64);
+    }
+    await expect(
+      page.getByRole("button", { name: "Verify recoverability" }),
+    ).toBeVisible();
+  }
+});
+
+test("shows partial restore failures without green success styling on mobile", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Explore demo vault" }).click();
+  await page.getByRole("button", { name: "Check a file" }).click();
+  await page
+    .getByRole("textbox", { name: "Search files and folders" })
+    .fill("Projects");
+  await page.getByRole("button", { name: /^Projects Vault root/ }).click();
+  await page.getByText("Choose an exact snapshot", { exact: true }).click();
+  await page
+    .locator(".version-option")
+    .filter({ hasText: "snapshot-2026-07-16-2030" })
+    .click();
+  await expect(
+    page.getByLabel("Include everything inside this folder"),
+  ).toBeChecked();
+  await page.getByRole("button", { name: "Verify recoverability" }).click();
+  await expect(
+    page.getByRole("heading", {
+      name: "Some of this recovery is unavailable.",
+    }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Run restore simulation" }).click();
+  await expect(page.locator(".simulation-summary.danger")).toBeVisible();
+  await expect(page.getByText("Cannot recover", { exact: true })).toBeVisible();
+  await expect(page.getByText("unavailable", { exact: true })).toBeVisible();
 });

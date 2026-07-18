@@ -25,7 +25,7 @@
 - The exact demo integration now proves: demo vault → thesis path → Tuesday 19:00 UTC → `snapshot-2026-07-14-1730` → verified object/hash/size → fully recoverable → deterministic conflict-aware plan.
 - The Vitest suite passes all **59** unit and integration tests.
 - Formatting, lint, strict type checking, and the Next.js 15.5.20 production build pass in the final validation chain.
-- The Playwright Chromium suite passes **4/4**, covering the critical demo through report download, valid and malformed imports, the no-key API fallback, mobile overflow, and stale-result invalidation.
+- The Playwright Chromium suite passes **6/6**, covering the critical demo through report download, valid and malformed imports, the no-key API fallback, four responsive viewport checks, partial-folder failure presentation, and stale-result invalidation.
 - `npm audit` reports only transitive moderate PostCSS advisories with no currently available non-breaking remediation.
 
 ### Final fixes and decisions
@@ -56,3 +56,11 @@
 - Recorded a paced 1:17 demo as silent WebM and narrated MP4, with the narration track and source script retained for editing.
 - Three independent read-only agents supplied the guided-flow specification, adversarial accessibility/trust review, and release/video audit; the lead inspected and integrated their recommendations.
 - Linked the repository to the `proofrestore` Vercel project, deployed the deterministic no-key build, and verified the public homepage and interpreter fallback at `https://proofrestore.vercel.app`.
+
+### Responsive interface correction
+
+- Replaced the fixed-height, clipped recovery-point timeline with a natural-height request workspace, a concise request-time choice, and an expandable exact-snapshot picker.
+- Corrected shared component selector drift so status pills, verification facts, action groups, disclosures, and headings receive their intended hierarchy and semantic colors.
+- Removed nested scrolling from the recovery workflow and report, added sticky-header scroll clearance, and made the investigation workspace stack before it becomes cramped.
+- Reduced dashboard and result clutter, hid empty simulation groups, preserved restore-action labels on mobile, and corrected partial/unavailable simulations so they cannot appear as green success.
+- Regenerated every checked-in submission screenshot and added browser assertions for clipping, target sizes, exact-snapshot readability, and unavailable-item visibility.

@@ -79,7 +79,7 @@ function StatusPill({
   tone: "green" | "amber" | "red" | "blue" | "neutral";
   children: React.ReactNode;
 }) {
-  return <span className={`status-pill ${tone}`}>{children}</span>;
+  return <span className={`status-pill status-${tone}`}>{children}</span>;
 }
 
 function Brand() {
@@ -169,6 +169,7 @@ export function ProofRestoreApp() {
     useState<DestinationMode>("safe_copy");
   const [includeChildren, setIncludeChildren] = useState(false);
   const [recoveryPoint, setRecoveryPoint] = useState("interpreted");
+  const [showOlderVersions, setShowOlderVersions] = useState(false);
   const [plan, setPlan] = useState<RecoveryPlan>();
   const [interpretation, setInterpretation] = useState<string>();
   const [interpreterSource, setInterpreterSource] = useState<
@@ -293,7 +294,10 @@ export function ProofRestoreApp() {
   }, [activeStage, plan]);
 
   function focusSoon(ref: React.RefObject<HTMLElement | null>) {
-    window.setTimeout(() => ref.current?.focus({ preventScroll: true }), 0);
+    window.setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "auto" });
+      ref.current?.focus({ preventScroll: true });
+    }, 0);
   }
 
   function goToStage(stage: Stage) {
@@ -304,7 +308,7 @@ export function ProofRestoreApp() {
         ?.focus({ preventScroll: true });
       document
         .getElementById("active-stage")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        ?.scrollIntoView({ behavior: "auto", block: "start" });
     }, 0);
   }
 
@@ -334,6 +338,7 @@ export function ProofRestoreApp() {
     setQuery(DEMO_QUERY);
     setDestinationMode("safe_copy");
     setRecoveryPoint("interpreted");
+    setShowOlderVersions(false);
     setPlan(undefined);
     setSimulated(false);
     setReport(undefined);
@@ -360,6 +365,7 @@ export function ProofRestoreApp() {
         : `Can I recover ${path}?`,
     );
     setRecoveryPoint("interpreted");
+    setShowOlderVersions(false);
     resetDownstream(`${basename(path)} selected.`);
   }
 
@@ -382,6 +388,7 @@ export function ProofRestoreApp() {
       setQuery("");
       setDestinationMode("safe_copy");
       setRecoveryPoint("interpreted");
+      setShowOlderVersions(false);
       setError(undefined);
       setAnnouncement(`${imported.vaultName} imported and validated.`);
       focusSoon(vaultHeadingRef);
@@ -467,7 +474,7 @@ export function ProofRestoreApp() {
     setSimulated(false);
     setReport(undefined);
     setInvestigating(false);
-    setActiveStage(3);
+    goToStage(3);
     setAnnouncement(
       `Verification complete. Result: ${nextPlan.verdict.replaceAll("_", " ")}.`,
     );
@@ -513,10 +520,11 @@ export function ProofRestoreApp() {
     setQuery("");
     setDestinationMode("safe_copy");
     setRecoveryPoint("interpreted");
+    setShowOlderVersions(false);
     setPlan(undefined);
     setSimulated(false);
     setReport(undefined);
-    setActiveStage(2);
+    goToStage(2);
     setAnnouncement("Ready for another recovery check.");
   }
 
@@ -641,11 +649,21 @@ export function ProofRestoreApp() {
   const hasConflict = Boolean(
     plan?.items.some((item) => item.action === "conflict"),
   );
+  const hasUnavailable = Boolean(
+    plan?.items.some((item) => item.action === "unavailable"),
+  );
   const restoreSafety = hasConflict
-    ? "Needs a decision"
-    : plan?.items.some((item) => item.action === "unavailable")
+    ? "Conflict review required"
+    : hasUnavailable
       ? "Cannot complete"
-      : "Ready to simulate";
+      : simulated
+        ? "Simulation passed"
+        : "Ready to simulate";
+  const simulationTone = hasUnavailable
+    ? "danger"
+    : hasConflict
+      ? "warning"
+      : "verified";
 
   return (
     <main className="workspace-shell">
@@ -889,9 +907,12 @@ export function ProofRestoreApp() {
                       const versions = manifest.snapshots.filter((snapshot) =>
                         snapshot.files.some((entry) => entry.path === path),
                       );
-                      const newest = versions
-                        .at(-1)
-                        ?.files.find((entry) => entry.path === path);
+                      const newestSnapshot = [...versions].sort((a, b) =>
+                        b.createdAt.localeCompare(a.createdAt),
+                      )[0];
+                      const newest = newestSnapshot?.files.find(
+                        (entry) => entry.path === path,
+                      );
                       const integrity =
                         newest?.type === "file"
                           ? evaluateIntegrity(
@@ -967,29 +988,40 @@ export function ProofRestoreApp() {
                         <strong>{basename(selectedPath)}</strong>
                         <span className="path-text">{selectedPath}</span>
                       </div>
-                      <label htmlFor="recovery-point">Recovery point</label>
-                      <select
-                        id="recovery-point"
-                        value={recoveryPoint}
-                        onChange={(event) => {
-                          setRecoveryPoint(event.target.value);
-                          resetDownstream();
-                        }}
-                      >
-                        <option value="interpreted">
-                          Interpret from my request
-                        </option>
-                        {selectedVersions.map(({ snapshot }) => (
-                          <option value={snapshot.id} key={snapshot.id}>
-                            {displayDate(snapshot.createdAt)} ·{" "}
-                            {snapshot.status}
-                          </option>
-                        ))}
-                      </select>
-                      <ul className="version-timeline">
-                        {selectedVersions
-                          .slice(0, 6)
-                          .map(({ snapshot, entry }) => {
+                      <label className="interpretation-option">
+                        <input
+                          type="radio"
+                          name="recovery-point"
+                          value="interpreted"
+                          checked={recoveryPoint === "interpreted"}
+                          onChange={() => {
+                            setRecoveryPoint("interpreted");
+                            resetDownstream();
+                          }}
+                        />
+                        <span>
+                          <strong>Use time from my request</strong>
+                          <small>
+                            Language identifies the time. Tested code selects
+                            the eligible snapshot.
+                          </small>
+                        </span>
+                      </label>
+
+                      <details className="version-history-disclosure">
+                        <summary>
+                          <span>
+                            {recoveryPoint === "interpreted"
+                              ? "Choose an exact snapshot"
+                              : "Exact snapshot selected"}
+                          </span>
+                          <small>{selectedVersions.length} versions</small>
+                        </summary>
+                        <ul className="version-timeline">
+                          {(showOlderVersions
+                            ? selectedVersions
+                            : selectedVersions.slice(0, 4)
+                          ).map(({ snapshot, entry }) => {
                             const integrity =
                               entry.type === "file"
                                 ? evaluateIntegrity(
@@ -1003,12 +1035,17 @@ export function ProofRestoreApp() {
                               ];
                             return (
                               <li key={snapshot.id}>
-                                <span
-                                  className="timeline-marker"
-                                  aria-hidden="true"
-                                />
-                                <div>
-                                  <div className="timeline-row">
+                                <button
+                                  type="button"
+                                  className="version-option"
+                                  aria-pressed={recoveryPoint === snapshot.id}
+                                  aria-label={`${displayDate(snapshot.createdAt)}, ${integrity?.verdict ?? "folder"}, snapshot ${snapshot.status}`}
+                                  onClick={() => {
+                                    setRecoveryPoint(snapshot.id);
+                                    resetDownstream();
+                                  }}
+                                >
+                                  <span className="timeline-row">
                                     <strong>
                                       {displayDate(snapshot.createdAt)}
                                     </strong>
@@ -1023,9 +1060,9 @@ export function ProofRestoreApp() {
                                     >
                                       {integrity?.verdict ?? "folder"}
                                     </StatusPill>
-                                  </div>
-                                  <span>
-                                    Snapshot {snapshot.status}
+                                  </span>
+                                  <span className="timeline-meta">
+                                    {snapshot.status} snapshot
                                     {entry.type === "file"
                                       ? ` · ${humanBytes(entry.size)}`
                                       : ""}
@@ -1033,12 +1070,29 @@ export function ProofRestoreApp() {
                                       ? ` · retained until ${displayDate(expiry)}`
                                       : " · no expiry listed"}
                                   </span>
-                                  <small className="mono">{snapshot.id}</small>
-                                </div>
+                                  <small className="timeline-snapshot-id mono">
+                                    {snapshot.id}
+                                  </small>
+                                </button>
                               </li>
                             );
                           })}
-                      </ul>
+                        </ul>
+                        {selectedVersions.length > 4 ? (
+                          <button
+                            className="show-versions-button"
+                            type="button"
+                            aria-expanded={showOlderVersions}
+                            onClick={() =>
+                              setShowOlderVersions((current) => !current)
+                            }
+                          >
+                            {showOlderVersions
+                              ? "Show fewer versions"
+                              : `Show ${selectedVersions.length - 4} older versions`}
+                          </button>
+                        ) : null}
+                      </details>
                     </>
                   )}
                 </aside>
@@ -1280,25 +1334,31 @@ export function ProofRestoreApp() {
                 </div>
               ) : (
                 <div className="simulation-results">
-                  <div
-                    className={`simulation-summary ${hasConflict ? "warning" : "verified"}`}
-                  >
+                  <div className={`simulation-summary ${simulationTone}`}>
                     <div>
                       <span className="eyebrow">
                         Simulation complete · no files changed
                       </span>
                       <h3>
-                        {hasConflict
-                          ? "The backup is recoverable, but the original location needs a decision."
-                          : "The restore plan is ready for review."}
+                        {hasUnavailable
+                          ? "This restore cannot complete with the selected recovery point."
+                          : hasConflict
+                            ? "The backup is recoverable, but the original location needs a decision."
+                            : "The restore plan is ready for review."}
                       </h3>
                       <p>
-                        {hasConflict
-                          ? "A newer, different destination file is protected from overwrite. Use a safe copy or review the conflict first."
-                          : "The dry run calculated every action without touching the destination."}
+                        {hasUnavailable
+                          ? "At least one selected item is unavailable. Review the item and exact evidence before relying on this plan."
+                          : hasConflict
+                            ? "A newer, different destination file is protected from overwrite. Use a safe copy or review the conflict first."
+                            : "The dry run calculated every action without touching the destination."}
                       </p>
                     </div>
-                    <StatusPill tone={hasConflict ? "amber" : "green"}>
+                    <StatusPill
+                      tone={
+                        hasUnavailable ? "red" : hasConflict ? "amber" : "green"
+                      }
+                    >
                       Restore plan: {restoreSafety}
                     </StatusPill>
                   </div>
@@ -1308,23 +1368,28 @@ export function ProofRestoreApp() {
                     aria-label="Restore simulation totals"
                   >
                     {[
-                      ["Will restore", ["create", "create_directory"]],
-                      ["Will overwrite", ["overwrite"]],
-                      ["Will skip", ["skip_identical"]],
-                      ["Cannot recover", ["unavailable"]],
-                      ["Warnings", ["conflict"]],
-                    ].map(([label, actions]) => (
-                      <article key={label as string}>
-                        <span>{label as string}</span>
-                        <strong>
-                          {
-                            plan.items.filter((item) =>
-                              (actions as string[]).includes(item.action),
-                            ).length
-                          }
-                        </strong>
-                      </article>
-                    ))}
+                      {
+                        label: "Will restore",
+                        actions: ["create", "create_directory"],
+                      },
+                      { label: "Will overwrite", actions: ["overwrite"] },
+                      { label: "Will skip", actions: ["skip_identical"] },
+                      { label: "Cannot recover", actions: ["unavailable"] },
+                      { label: "Warnings", actions: ["conflict"] },
+                    ]
+                      .map((group) => ({
+                        ...group,
+                        count: plan.items.filter((item) =>
+                          group.actions.includes(item.action),
+                        ).length,
+                      }))
+                      .filter((group) => group.count > 0)
+                      .map((group) => (
+                        <article key={group.label}>
+                          <span>{group.label}</span>
+                          <strong>{group.count}</strong>
+                        </article>
+                      ))}
                   </div>
 
                   <ul className="restore-plan-list">
