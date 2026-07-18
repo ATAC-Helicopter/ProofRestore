@@ -306,6 +306,13 @@ a:focus-visible {
 .file-item button:hover .path {
   color: var(--blue);
 }
+.file-item button[aria-pressed="true"] {
+  color: var(--blue);
+}
+.file-item button[aria-pressed="true"] .muted {
+  color: var(--green);
+  font-weight: 750;
+}
 .path {
   overflow-wrap: anywhere;
 }
@@ -339,7 +346,7 @@ a:focus-visible {
 }
 .evidence-item {
   display: grid;
-  grid-template-columns: 130px 1fr auto;
+  grid-template-columns: minmax(170px, auto) 1fr auto;
   gap: 12px;
   align-items: start;
   font-size: 14px;

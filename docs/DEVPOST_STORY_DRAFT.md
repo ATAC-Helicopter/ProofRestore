@@ -2,11 +2,20 @@
 
 > Implementation claims below reflect the verified repository. Add public links, media, and any challenge-specific fields in Devpost before submission.
 
+## Ready-to-paste metadata
+
+- **Tagline:** Know your backup will restore before you need it.
+- **Built with:** Next.js, React, TypeScript, Tailwind CSS, Zod, OpenAI Responses API, Vitest, Playwright, Codex
+- **Repository:** `[add public repository URL]`
+- **Live demo:** `[add deployment URL]`
+- **Video:** `[add public video URL]`
+- **Demo limitation:** Restore operations are simulations; the built-in vault is synthetic and the primary recording uses the deterministic no-key interpreter.
+
 ## Inspiration
 
 A green “backup completed” badge creates confidence, but it does not answer the question that matters during an emergency: **can the files actually be restored?**
 
-ProofRestore was inspired by hands-on experience building backup software and seeing how difficult it is for users to verify recovery before something goes wrong. Backups should not require faith. They should provide evidence.
+ProofRestore starts from a simple reliability gap: backup software reports whether a job completed, while users need to know whether the referenced data can actually be recovered. Backups should not require faith. They should provide evidence.
 
 ## What it does
 
@@ -29,7 +38,7 @@ It can detect missing objects, silent corruption, incomplete folder recovery, ov
 
 ProofRestore is designed around a strict trust boundary.
 
-The optional OpenAI-powered layer interprets natural-language recovery requests into constrained structured data. It is not allowed to decide whether a file exists or is recoverable. If the API key is absent, the request times out, or output is malformed, a deterministic interpreter preserves the complete demo flow.
+The product UI sends natural-language recovery requests through one constrained interpretation endpoint. Model use is explicit opt-in: with a server-side key and `ENABLE_OPENAI_INTERPRETER=true`, the endpoint uses OpenAI Responses API structured output. The primary recording leaves model use disabled and exercises the deterministic fallback for reliability. Neither interpretation path is allowed to decide whether a file exists or is recoverable.
 
 A deterministic TypeScript recovery engine performs:
 
@@ -63,7 +72,7 @@ The final challenge was making these technical distinctions legible within a two
 - A safe restore simulation that never writes, overwrites, deletes, or executes real data.
 - A realistic eight-snapshot demo where successful jobs hide corruption, a missing object, destination conflict, partial folder recovery, and expiry risk.
 - An escaped Proof of Recoverability report with metrics, plan, warnings, methodology, and evidence appendix.
-- A green final validation chain: formatting, lint, strict type checking, 57 unit/integration tests, a Next.js production build, and 3/3 Chromium E2E tests covering the demo, imports, fallback behavior, and mobile layout.
+- A green final validation chain: formatting, lint, strict type checking, 59 unit/integration tests, a Next.js production build, and 3/3 Chromium E2E tests covering the demo, imports, fallback behavior, and mobile layout.
 
 ## What we learned
 

@@ -9,10 +9,29 @@ const requestSchema = z.object({
   referenceDateTime: z.string().datetime(),
 });
 
+const MAX_REQUEST_BYTES = 64 * 1024;
+
 export async function POST(request: Request) {
   try {
-    const input = requestSchema.parse(await request.json());
-    if (!process.env.OPENAI_API_KEY) {
+    const declaredLength = Number(request.headers.get("content-length") ?? 0);
+    if (declaredLength > MAX_REQUEST_BYTES) {
+      return NextResponse.json(
+        { error: "Request body is too large" },
+        { status: 413 },
+      );
+    }
+    const body = await request.text();
+    if (new TextEncoder().encode(body).byteLength > MAX_REQUEST_BYTES) {
+      return NextResponse.json(
+        { error: "Request body is too large" },
+        { status: 413 },
+      );
+    }
+    const input = requestSchema.parse(JSON.parse(body) as unknown);
+    if (
+      !process.env.OPENAI_API_KEY ||
+      process.env.ENABLE_OPENAI_INTERPRETER !== "true"
+    ) {
       return NextResponse.json({
         result: interpretWithoutModel(input),
         interpreter: "deterministic_fallback",

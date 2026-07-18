@@ -2,8 +2,8 @@
 
 ## Devpost project details
 
-- [ ] Final project story reflects the actual finished build
-- [ ] Built-with tags are accurate
+- [x] Final project story reflects the actual finished build
+- [x] Built-with tags are accurate
 - [ ] Public repository link added
 - [ ] Live deployment link added
 - [ ] Public video link added
@@ -33,33 +33,37 @@
 - [x] Formatting passes
 - [x] Lint passes
 - [x] Typecheck passes
-- [x] Unit/integration tests pass: 57 tests
+- [x] Unit/integration tests pass: 59 tests
 - [x] Production build passes
 - [x] Chromium E2E suite passes: 3/3 tests, including the critical flow
 - [x] Clean automated Chromium flow completed
 - [x] Valid and malformed imports smoke-tested locally
 - [x] No-key API fallback smoke-tested locally
-- [ ] README setup tested from scratch
+- [x] README setup tested from a fresh local clone
 - [x] No secrets detected in the repository review
 
 ## Media
 
-- [ ] 3:2 project cover image
-- [ ] Dashboard screenshot
-- [ ] Recovery result screenshot
-- [ ] Restore simulation screenshot
-- [ ] Proof report screenshot
+- [x] 3:2 project cover image captured
+- [x] Dashboard screenshot captured
+- [x] Recovery result screenshot captured
+- [x] Restore simulation screenshot captured
+- [x] Proof report screenshot captured
 - [ ] Video under required duration
 - [ ] Voice narration is clear
 - [ ] Captions added if possible
 
 ## Final release checks
 
+- [x] GitHub Actions validation workflow added
+- [x] Node/npm runtime metadata added
+- [ ] Public-release license selected and added
+- [ ] Git remote configured and pushed
 - [x] `npx playwright install chromium` completed in the verification environment
 - [x] No-key demo rehearsed in a clean Chromium context
 - [ ] Report download verified in the deployed site
 - [x] Mobile viewport smoke-tested
 - [x] Keyboard-accessible labels used by the final automated flow
 - [ ] Deployment environment contains no exposed secrets
-- [ ] Known limitations match the shipped MVP
+- [x] Known limitations match the shipped MVP
 - [ ] Submission completed before the safety deadline

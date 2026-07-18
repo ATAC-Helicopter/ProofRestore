@@ -9,7 +9,7 @@
 - Implemented the trusted TypeScript core: exact and point-in-time snapshot selection, case-sensitive normalized path resolution, recursive folder selection, availability/hash/size integrity checks, destination actions, byte totals, request verdicts, stable evidence, and retention risk.
 - Added the readable eight-snapshot demo vault. It contains the verified Tuesday thesis, later silent corruption, a missing presentation object after a reported-success job, an expiring final healthy tax-return copy, a partially recoverable project folder, a newer destination conflict, and an identical destination file.
 - Added the complete client flow: welcome, manifest import, vault dashboard, file search, version timeline, constrained recovery request, deterministic verdict, dry-run plan, evidence viewer, and downloadable Markdown proof report.
-- Added the optional server-side OpenAI Responses API interpreter with strict structured output, candidate-path enforcement, an eight-second timeout, minimal request context, and deterministic fallback. The core flow remains functional without a key.
+- Added the optional server-side OpenAI Responses API interpreter with strict structured output, candidate-path enforcement, an eight-second timeout, minimal request context, and deterministic fallback. The UI uses this endpoint, while model access requires an explicit opt-in and the core flow remains functional without a key.
 - Added security handling for malformed manifests, unsafe traversal, oversized input, HTML/Markdown controls in reports, and imported content rendered only as text.
 
 ### Codex collaboration
@@ -23,7 +23,7 @@
 ### Verification milestones
 
 - The exact demo integration now proves: demo vault → thesis path → Tuesday 19:00 UTC → `snapshot-2026-07-14-1730` → verified object/hash/size → fully recoverable → deterministic conflict-aware plan.
-- The Vitest suite passes all **57** unit and integration tests.
+- The Vitest suite passes all **59** unit and integration tests.
 - Formatting, lint, strict type checking, and the Next.js 15.5.20 production build pass in the final validation chain.
 - The Playwright Chromium suite passes **3/3**, covering the critical demo through report download, valid and malformed imports, the no-key API fallback, and a mobile viewport smoke test.
 - `npm audit` reports only transitive moderate PostCSS advisories with no currently available non-breaking remediation.
@@ -36,3 +36,12 @@
 - Separated data recoverability from destination safety: the thesis bytes are fully recoverable, while original-location simulation reports a conflict with a newer destination copy.
 - Kept the report deterministic and safely escaped; model-generated prose is not required.
 - Excluded `tests/e2e/` from Vitest discovery so Playwright owns the browser spec and the two test runners remain isolated.
+
+### Submission preparation
+
+- Three read-only subagent audits reviewed submission copy, release engineering/security, and UX/media readiness; the lead agent verified and integrated the actionable findings.
+- Rehearsed the documented setup from a fresh local clone: `npm ci`, formatting, lint, typecheck, 59 tests, and the production build all pass.
+- Added GitHub Actions validation, Node/npm project metadata, a favicon, Open Graph/Twitter metadata, and a reproducible Playwright screenshot-capture script.
+- Captured a 1500×1000 cover plus dashboard, result, simulation/evidence, and report screenshots at 1600×900.
+- Corrected hard-coded dashboard claims for imported manifests, changed the initial restore-test status to **Not run**, added keyboard-operable import buttons, exposed selected-file state, and moved focus to new recovery results.
+- Added a 64 KiB interpreter request limit and made credentialed model use require `ENABLE_OPENAI_INTERPRETER=true`; public no-key demos remain safe and deterministic.

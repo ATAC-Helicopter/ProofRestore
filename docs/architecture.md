@@ -78,7 +78,7 @@ Every material decision carries a stable evidence code and entity references. Re
 
 ## Runtime and deployment
 
-The UI and deterministic core run without an API key. When `OPENAI_API_KEY` is configured, only the server route can access it. Full manifests and object metadata are not sent to the model; the route receives the minimum request context needed for interpretation. The project has no authentication, persistence, background worker, provider connection, or destructive restore endpoint. It is suitable for a stateless Vercel deployment.
+The UI and deterministic core run without an API key. Model use requires both a server-only `OPENAI_API_KEY` and `ENABLE_OPENAI_INTERPRETER=true`; otherwise the same endpoint returns deterministic interpretation. Full manifests and object metadata are not sent to the model, request bodies are limited to 64 KiB, and model-selected paths must match supplied candidates. The project has no authentication, persistence, background worker, provider connection, or destructive restore endpoint. It is suitable for a stateless Vercel deployment; a public credentialed deployment should add rate limits and spend controls.
 
 ## Deliberate limitations
 
@@ -87,3 +87,4 @@ The UI and deterministic core run without an API key. When `OPENAI_API_KEY` is c
 - The restore plan is a simulation and cannot create, overwrite, or delete files.
 - Case-sensitive matching is consistent across platforms but may differ from a source filesystem.
 - Retention results describe the explicit or derived policy data present in the manifest, not a live provider policy.
+- The MVP does not include authentication or rate limiting, so public deployments should leave credentialed model interpretation disabled unless external controls are added.

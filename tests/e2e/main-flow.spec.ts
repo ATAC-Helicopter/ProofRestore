@@ -15,10 +15,17 @@ test("proves the Tuesday-evening thesis recovery flow", async ({ page }) => {
   await expect(page.getByText("Completed", { exact: true })).toBeVisible();
   await expect(page.getByText("Recoverability status")).toBeVisible();
   await expect(page.getByText("At risk", { exact: true })).toBeVisible();
+  await expect(page.getByText("Not run", { exact: true })).toBeVisible();
 
   await page
     .getByRole("button", { name: /Documents\/University\/Thesis-Final\.docx/ })
     .click();
+  await expect(
+    page.getByRole("button", {
+      name: /Documents\/University\/Thesis-Final\.docx/,
+    }),
+  ).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByText("Selected", { exact: true })).toBeVisible();
   await expect(
     page.getByLabel("Natural-language recovery request"),
   ).toHaveValue("Can I recover my thesis from Tuesday evening?");
@@ -29,12 +36,16 @@ test("proves the Tuesday-evening thesis recovery flow", async ({ page }) => {
   await expect(
     page.getByText("Tue 14 Jul, 17:30 UTC", { exact: true }).last(),
   ).toBeVisible();
+  await expect(
+    page.getByText(/Request interpreted by the deterministic fallback/),
+  ).toBeVisible();
 
   await page.getByRole("button", { name: "Run restore simulation" }).click();
   await expect(
     page.getByText("Restore simulation · no files changed"),
   ).toBeVisible();
   await expect(page.getByText("conflict", { exact: true })).toBeVisible();
+  await expect(page.getByText("Just now", { exact: true })).toBeVisible();
   await page.getByText(/Open exact evidence/).click();
   await expect(page.getByText("hash_match", { exact: true })).toBeVisible();
 
@@ -53,17 +64,24 @@ test("accepts a valid manifest and rejects a malformed import", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.getByLabel("Import backup manifest").setInputFiles({
+  const importedVault = structuredClone(demoVault);
+  importedVault.vaultName = "Imported failure scenario";
+  const latestSnapshot = importedVault.snapshots.at(-1);
+  if (!latestSnapshot) throw new Error("Demo fixture must contain a snapshot");
+  latestSnapshot.status = "failed";
+  latestSnapshot.jobReportedSuccess = false;
+  await page.locator("#welcome-import").setInputFiles({
     name: "demo-vault.json",
     mimeType: "application/json",
-    buffer: Buffer.from(JSON.stringify(demoVault)),
+    buffer: Buffer.from(JSON.stringify(importedVault)),
   });
   await expect(
-    page.getByRole("heading", { name: "Flavio's MacBook Backup" }),
+    page.getByRole("heading", { name: "Imported failure scenario" }),
   ).toBeVisible();
+  await expect(page.getByText("Failed", { exact: true })).toBeVisible();
 
   await page.getByRole("button", { name: "Back to welcome" }).click();
-  await page.getByLabel("Import backup manifest").setInputFiles({
+  await page.locator("#welcome-import").setInputFiles({
     name: "malformed.json",
     mimeType: "application/json",
     buffer: Buffer.from('{"schemaVersion":"1.0"}'),
@@ -81,7 +99,12 @@ test("serves the no-key interpreter fallback and keeps the welcome usable on mob
   await expect(
     page.getByRole("button", { name: "Explore demo vault" }),
   ).toBeVisible();
-  await expect(page.getByLabel("Import backup manifest")).toBeAttached();
+  await expect(
+    page.getByRole("button", { name: "Import backup manifest" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Explore demo vault" }).click();
+  await expect(page.getByText("At risk", { exact: true })).toBeVisible();
+  await expect(page.getByLabel("Search protected paths")).toBeVisible();
 
   const response = await page.request.post("/api/interpret", {
     data: {

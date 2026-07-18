@@ -8,6 +8,8 @@ The product is built around one distinction:
 
 > Backup success is not recovery success.
 
+![ProofRestore dashboard showing completed backup status and at-risk recoverability](docs/assets/submission/cover-1500x1000.png)
+
 The built-in synthetic vault demonstrates that distinction directly: the latest backup job reports success, while deterministic verification finds a corrupted thesis version, a missing presentation object, and a healthy financial document whose only copy is nearing expiry.
 
 ## Demo flow
@@ -64,19 +66,19 @@ The engine is read-only. It has no filesystem restore, overwrite, deletion, exec
 
 ## OpenAI usage
 
-When `OPENAI_API_KEY` is configured, `POST /api/interpret` uses the OpenAI Responses API with a strict JSON schema. The route sends only the user query, a bounded list of valid path candidates, and a reference timestamp. It does not send the full manifest or object metadata, and it rejects a model-selected path outside the supplied candidates.
+The product UI sends recovery language through `POST /api/interpret`. By default the route uses the complete deterministic fallback. When both `OPENAI_API_KEY` is configured and `ENABLE_OPENAI_INTERPRETER=true`, it uses the OpenAI Responses API with a strict JSON schema. The route sends only the user query, a bounded list of valid path candidates, and a reference timestamp. It does not send the full manifest or object metadata, and it rejects a model-selected path outside the supplied candidates.
 
-If the key is missing, the request times out, or model output is malformed, the route returns the deterministic fallback interpreter. The main demo is intentionally independent of model availability.
+If model use is disabled, the key is missing, the request times out, or model output is malformed, the route returns the deterministic fallback interpreter. The main demo is intentionally independent of model availability. Public deployments should leave model use disabled unless they also add appropriate rate limits and spend controls.
 
 ## Local setup
 
 Requirements:
 
-- Node.js 20 or newer
+- Node.js 20.17 or newer
 - npm
 
 ```bash
-npm install
+npm ci
 cp .env.example .env.local
 npm run dev
 ```
@@ -89,11 +91,17 @@ Environment variables are optional:
 # Enables the server-side structured interpreter.
 OPENAI_API_KEY=
 
+# Explicit opt-in. Leave false for public no-key demos.
+ENABLE_OPENAI_INTERPRETER=false
+
 # Optional override; defaults to gpt-5-mini.
 OPENAI_MODEL=gpt-5-mini
+
+# Optional canonical deployment URL for social metadata.
+NEXT_PUBLIC_SITE_URL=
 ```
 
-Never expose `OPENAI_API_KEY` through a `NEXT_PUBLIC_` variable. The complete built-in flow runs with both values unset.
+Never expose `OPENAI_API_KEY` through a `NEXT_PUBLIC_` variable. The complete built-in flow runs with the key unset and model interpretation disabled.
 
 ## Validation
 
@@ -105,7 +113,7 @@ npm test
 npm run build
 ```
 
-The final repository passes formatting, lint, strict type checking, all 57 Vitest unit/integration tests, and the production build on Next.js 15.5.20.
+The final repository passes formatting, lint, strict type checking, all 59 Vitest unit/integration tests, and the production build on Next.js 15.5.20. The same checks run in [GitHub Actions](.github/workflows/ci.yml).
 
 The critical browser test requires a production build and Playwright Chromium:
 
@@ -116,6 +124,21 @@ npm run test:e2e
 ```
 
 The Chromium E2E suite passes 3/3. It covers the demo vault through thesis selection, Tuesday recovery, restore simulation, evidence expansion, and report download; valid and malformed manifest imports; the no-key API fallback; and a mobile viewport smoke test.
+
+## Submission media
+
+The checked-in capture script reproduces the cover and four gallery screenshots from the production build:
+
+```bash
+npm run build
+npm run capture:submission
+```
+
+- [3:2 project cover](docs/assets/submission/cover-1500x1000.png)
+- [Vault dashboard](docs/assets/submission/01-dashboard-1600x900.png)
+- [Recovery result](docs/assets/submission/02-recovery-result-1600x900.png)
+- [Restore simulation and evidence](docs/assets/submission/03-simulation-evidence-1600x900.png)
+- [Proof report](docs/assets/submission/04-proof-report-1600x900.png)
 
 ## Manifest import
 
@@ -129,7 +152,7 @@ ProofRestore is stateless and Vercel-compatible.
 
 1. Push the repository to a Git provider and import it into Vercel.
 2. Keep the standard Next.js build command, `npm run build`.
-3. Optionally add `OPENAI_API_KEY` and `OPENAI_MODEL` as server-side environment variables.
+3. For the safest public demo, leave model use disabled. A credentialed deployment requires `OPENAI_API_KEY`, `ENABLE_OPENAI_INTERPRETER=true`, and appropriate rate-limit/spend protection.
 4. Deploy, then exercise the no-key demo flow and, if configured, the interpreter endpoint.
 
 For another Node host, run `npm install`, `npm run build`, and `npm run start`. No database, migrations, storage bucket, or background service is required.
@@ -140,7 +163,7 @@ For another Node host, run `npm install`, `npm run build`, and `npm run start`. 
 - Restore operations are simulations only. No file is ever restored or modified.
 - There is no authentication, persistence, scheduling, multi-user workflow, or signed report.
 - Retention findings use the expiry data represented in the manifest; they do not change provider policies.
-- The optional OpenAI route is constrained to interpretation. The current built-in UI path deliberately uses the deterministic fallback so the demo cannot depend on credentials or network access.
+- The OpenAI route is constrained to interpretation. Model use is explicitly opt-in, while the default UI path uses the same endpoint's deterministic fallback so the demo cannot depend on credentials or network access.
 - Markdown is the downloadable report format; HTML/PDF export is not included in the MVP.
 - The synthetic demo timestamps are fixed in UTC for reproducible results.
 - `npm audit` reports transitive moderate PostCSS advisories with no currently available non-breaking remediation; application dependencies should be reviewed again before production use.

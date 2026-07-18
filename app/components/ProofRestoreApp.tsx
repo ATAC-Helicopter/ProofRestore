@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 import { demoVault, DEMO_SCENARIOS } from "@/app/demo";
 import { interpretWithoutModel } from "@/app/interpret/fallback";
+import { interpretedRecoveryRequestSchema } from "@/app/interpret/types";
 import { parseVaultManifestJson } from "@/app/manifest";
 import {
   analyzeRetention,
@@ -64,10 +65,15 @@ export function ProofRestoreApp() {
   const [query, setQuery] = useState(DEMO_QUERY);
   const [plan, setPlan] = useState<RecoveryPlan>();
   const [interpretation, setInterpretation] = useState<string>();
+  const [interpreterSource, setInterpreterSource] = useState<
+    "openai" | "deterministic_fallback"
+  >();
+  const [investigating, setInvestigating] = useState(false);
   const [simulated, setSimulated] = useState(false);
   const [report, setReport] = useState<string>();
   const [error, setError] = useState<string>();
   const resultRef = useRef<HTMLDivElement>(null);
+  const importInputRef = useRef<HTMLInputElement>(null);
 
   const paths = useMemo(() => uniquePaths(manifest), [manifest]);
   const matchingPaths = useMemo(() => {
@@ -107,7 +113,7 @@ export function ProofRestoreApp() {
     [manifest, objects, selectedPath],
   );
   const retention = useMemo(
-    () => analyzeRetention(manifest, new Date("2026-07-18T12:00:00.000Z")),
+    () => analyzeRetention(manifest, new Date(manifest.generatedAt)),
     [manifest],
   );
 
@@ -122,6 +128,22 @@ export function ProofRestoreApp() {
     );
   }).length;
   const integrityIssues = latestFiles.length - latestVerified;
+  const retentionRisks = retention.filter(
+    (item) => !item.healthyAlternativeSurvives,
+  ).length;
+  const backupStatus = !latest
+    ? { label: "Unavailable", detail: "No snapshot", tone: "red" }
+    : latest.status === "complete" && latest.jobReportedSuccess
+      ? { label: "Completed", detail: "Job succeeded", tone: "green" }
+      : latest.status === "partial"
+        ? { label: "Partial", detail: "Review required", tone: "amber" }
+        : { label: "Failed", detail: "Job incomplete", tone: "red" };
+  const recoverabilityStatus =
+    latestFiles.length > 0 && integrityIssues === 0 && retentionRisks === 0
+      ? { label: "Verified", detail: "Evidence healthy", tone: "green" }
+      : latestFiles.length === 0
+        ? { label: "Unknown", detail: "No files verified", tone: "amber" }
+        : { label: "At risk", detail: "Action needed", tone: "amber" };
 
   function choosePath(path: string) {
     setSelectedPath(path);
@@ -133,26 +155,54 @@ export function ProofRestoreApp() {
     setPlan(undefined);
     setSimulated(false);
     setReport(undefined);
+    setInterpreterSource(undefined);
     setError(undefined);
   }
 
-  function investigate() {
+  async function investigate() {
     setError(undefined);
-    const interpreted = interpretWithoutModel({
+    setInvestigating(true);
+    const interpreterInput = {
       query,
       pathCandidates: paths,
       referenceDateTime: manifest.generatedAt,
-    });
+    };
+    let interpreted = interpretWithoutModel(interpreterInput);
+    let source: "openai" | "deterministic_fallback" = "deterministic_fallback";
+    try {
+      const response = await fetch("/api/interpret", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(interpreterInput),
+      });
+      if (response.ok) {
+        const payload = (await response.json()) as {
+          result?: unknown;
+          interpreter?: unknown;
+        };
+        const parsed = interpretedRecoveryRequestSchema.safeParse(
+          payload.result,
+        );
+        if (parsed.success) {
+          interpreted = parsed.data;
+          source = payload.interpreter === "openai" ? "openai" : source;
+        }
+      }
+    } catch {
+      // The local interpreter above is the complete, safe no-network fallback.
+    }
     const resolvedPath = interpreted.resolvedPath ?? selectedPath;
     if (!resolvedPath) {
       setError(
         interpreted.clarificationQuestion ?? "Choose a protected path first.",
       );
+      setInvestigating(false);
       return;
     }
     const requestedAt = interpreted.requestedDateTime;
     if (!requestedAt) {
       setError("Choose a recovery point or include a date in the request.");
+      setInvestigating(false);
       return;
     }
     const nextPlan = planRecovery(manifest, {
@@ -164,17 +214,18 @@ export function ProofRestoreApp() {
     });
     setSelectedPath(resolvedPath);
     setInterpretation(interpreted.dateInterpretation);
+    setInterpreterSource(source);
     setPlan(nextPlan);
     setSimulated(false);
     setReport(undefined);
-    window.setTimeout(
-      () =>
-        resultRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        }),
-      0,
-    );
+    setInvestigating(false);
+    window.setTimeout(() => {
+      resultRef.current?.focus({ preventScroll: true });
+      resultRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 0);
   }
 
   async function importManifest(file: File | undefined) {
@@ -187,6 +238,7 @@ export function ProofRestoreApp() {
       setPlan(undefined);
       setSimulated(false);
       setReport(undefined);
+      setInterpreterSource(undefined);
       setSearch("");
       setError(undefined);
     } catch (importError) {
@@ -240,10 +292,15 @@ export function ProofRestoreApp() {
               >
                 Explore demo vault
               </button>
-              <label className="button" htmlFor="welcome-import">
+              <button
+                className="button"
+                type="button"
+                onClick={() => importInputRef.current?.click()}
+              >
                 Import backup manifest
-              </label>
+              </button>
               <input
+                ref={importInputRef}
                 id="welcome-import"
                 className="sr-only"
                 type="file"
@@ -283,10 +340,15 @@ export function ProofRestoreApp() {
                 Generated {displayDate(manifest.generatedAt)}
               </span>
             </div>
-            <label className="button" htmlFor="dashboard-import">
+            <button
+              className="button"
+              type="button"
+              onClick={() => importInputRef.current?.click()}
+            >
               Import another manifest
-            </label>
+            </button>
             <input
+              ref={importInputRef}
               id="dashboard-import"
               className="sr-only"
               type="file"
@@ -299,16 +361,20 @@ export function ProofRestoreApp() {
             <article className="card status-card">
               <div>
                 <div className="muted">Backup status</div>
-                <div className="status-value">Completed</div>
+                <div className="status-value">{backupStatus.label}</div>
               </div>
-              <span className="pill green">Job succeeded</span>
+              <span className={`pill ${backupStatus.tone}`}>
+                {backupStatus.detail}
+              </span>
             </article>
             <article className="card status-card">
               <div>
                 <div className="muted">Recoverability status</div>
-                <div className="status-value">At risk</div>
+                <div className="status-value">{recoverabilityStatus.label}</div>
               </div>
-              <span className="pill amber">Action needed</span>
+              <span className={`pill ${recoverabilityStatus.tone}`}>
+                {recoverabilityStatus.detail}
+              </span>
             </article>
           </div>
 
@@ -331,16 +397,11 @@ export function ProofRestoreApp() {
             </div>
             <div className="card metric">
               <span className="muted">Retention risks</span>
-              <strong>
-                {
-                  retention.filter((item) => !item.healthyAlternativeSurvives)
-                    .length
-                }
-              </strong>
+              <strong>{retentionRisks}</strong>
             </div>
             <div className="card metric">
               <span className="muted">Last restore test</span>
-              <strong>Now</strong>
+              <strong>{simulated ? "Just now" : "Not run"}</strong>
             </div>
           </div>
 
@@ -372,7 +433,9 @@ export function ProofRestoreApp() {
                       aria-pressed={selectedPath === path}
                     >
                       <span className="path mono">{path}</span>
-                      <span className="muted">Select →</span>
+                      <span className="muted">
+                        {selectedPath === path ? "Selected" : "Select →"}
+                      </span>
                     </button>
                   </li>
                 ))}
@@ -391,8 +454,14 @@ export function ProofRestoreApp() {
                 onChange={(event) => setQuery(event.target.value)}
               />
               <div className="actions">
-                <button className="button primary" onClick={investigate}>
-                  Verify recoverability
+                <button
+                  className="button primary"
+                  onClick={() => void investigate()}
+                  disabled={investigating}
+                >
+                  {investigating
+                    ? "Interpreting request…"
+                    : "Verify recoverability"}
                 </button>
               </div>
               {error ? (
@@ -435,6 +504,8 @@ export function ProofRestoreApp() {
             <section
               className="card"
               ref={resultRef}
+              tabIndex={-1}
+              aria-live="polite"
               style={{ marginTop: 14 }}
               aria-labelledby="result-title"
             >
@@ -468,7 +539,11 @@ export function ProofRestoreApp() {
               </div>
               {interpretation ? (
                 <p className="muted">
-                  {interpretation}. Snapshot selection and the verdict were
+                  Request interpreted by{" "}
+                  {interpreterSource === "openai"
+                    ? "OpenAI structured output"
+                    : "the deterministic fallback"}
+                  . {interpretation}. Snapshot selection and the verdict were
                   computed by the trusted engine.
                 </p>
               ) : null}

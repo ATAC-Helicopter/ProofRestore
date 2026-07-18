@@ -53,7 +53,7 @@ The search is prefilled with `Thesis-Final.docx`.
 
 **Narration:**
 
-> “Language interpretation identified the path and time. Deterministic code selected the snapshot, found the stored object, checked its hash and size, and produced the verdict.”
+> “The deterministic fallback interpreted the path and time for this no-key recording. Then trusted code selected the snapshot, found the stored object, checked its hash and size, and produced the verdict.”
 
 ## 1:15–1:38 — Run the safe restore simulation
 
@@ -83,7 +83,7 @@ Point to `snapshot_selected`, `path_found`, `object_found`, `hash_match`, `size_
 
 **Narration:**
 
-> “OpenAI can interpret what I mean, but it never decides whether data exists or is recoverable. That decision stays in tested deterministic TypeScript. Backups should not require faith.”
+> “ProofRestore also includes an optional OpenAI Responses API endpoint for constrained request interpretation. Whether that endpoint or the no-key fallback interprets the request, it never decides whether data exists or is recoverable. That authority stays in tested deterministic TypeScript. Backups should not require faith.”
 
 End on the footer: **Backups should not require faith.**
 
@@ -104,6 +104,7 @@ Explore demo vault
 - Run `npm run build` and `npm run start`.
 - Use a clean Chromium window at 1440×900 or similar.
 - Leave `OPENAI_API_KEY` unset for a deterministic recording.
+- Keep `ENABLE_OPENAI_INTERPRETER=false` for the primary recording.
 - Clear prior downloads so `proof-of-recoverability.md` is easy to identify.
 - Keep browser zoom at 100% and the pointer visible.
 - Rehearse once with the network disconnected; the primary flow should be unchanged.

@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 6 complete — local implementation and submission readiness.
+Phase 6 in progress — local submission package prepared; external publication pending.
 
 ## Completed
 
@@ -16,19 +16,23 @@ Phase 6 complete — local implementation and submission readiness.
 - Built the responsive welcome, vault health, search, timeline, recovery result, simulation, evidence, manifest import, and Markdown report flow.
 - Added the constrained Responses API interpreter and deterministic timeout/no-key/malformed-output fallback.
 - Added unit and integration coverage across manifests, interpretation, recovery, fixtures, retention, evidence, and reports.
-- Confirmed all 57 Vitest tests and the production build pass.
+- Confirmed all 59 Vitest tests and the production build pass.
 - Confirmed formatting, lint, strict type checking, and the Next.js 15.5.20 production build pass in the final chain.
 - Confirmed the Playwright Chromium suite passes 3/3, covering the mandatory flow through report download, valid and malformed imports, the no-key API fallback, and a mobile viewport.
 - Added architecture, edge-case, setup, deployment, demo, and submission documentation.
+- Rehearsed setup from a fresh local clone with `npm ci`, full static checks, tests, and a production build.
+- Added CI, Node/npm metadata, favicon/social metadata, and reproducible submission-media capture.
+- Captured the 3:2 cover and four gallery screenshots from the deterministic production flow.
+- Replaced imported-vault status claims with deterministic dashboard analysis and made restore-test timing truthful.
+- Routed the UI through the constrained interpreter endpoint while keeping model use explicit opt-in with a safe fallback.
 
 ## In progress
 
-- External submission work: capture final media, deploy, and finish the Devpost fields.
+- External submission work: publish the repository, deploy, record the video, upload media, and finish the Devpost fields.
 
 ## Next
 
 - Verify imports and report download again after deployment.
-- Test the repository setup from a clean clone.
 - Add the final public repository, deployment, video, and image links.
 
 ## Decisions
@@ -37,16 +41,17 @@ Phase 6 complete — local implementation and submission readiness.
 - The app has no database and performs no real restore writes.
 - Demo timestamps are fixed UTC values; Tuesday evening means the latest eligible snapshot at or before the fixed request time.
 - Natural-language parsing has a deterministic no-key fallback.
-- The primary UI uses the deterministic interpreter for recording reliability; the optional server endpoint adds Responses API structured interpretation without entering the verdict boundary.
+- The primary UI uses the constrained server endpoint; it defaults to deterministic interpretation and only enables Responses API structured interpretation through an explicit server-side opt-in.
 - Reports use an escaped deterministic Markdown template and state explicitly that no restore occurred.
 - The MVP remains stateless and Vercel-compatible, with no provider integration, database, authentication, or destructive operation.
 
 ## Risks
 
 - API-key behavior needs one final credentialed smoke test; it is not required for the no-key demo.
-- Deployment, clean-clone setup, and media capture remain external release tasks.
+- Deployment, video recording, gallery upload, and final Devpost entry remain external release tasks.
 - `npm audit` reports only transitive moderate PostCSS advisories and currently offers no non-breaking remediation; recheck before production use.
 
 ## Blocked items
 
-None.
+- Credentialed Responses API smoke testing requires a user-supplied key and explicit model-use opt-in.
+- Public repository, deployment, gallery, video, category, and Devpost fields require external account actions and final user choices.
