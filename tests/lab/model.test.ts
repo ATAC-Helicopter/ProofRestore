@@ -83,6 +83,14 @@ describe("Recovery Lab model", () => {
     expect(plan.verdict).toBe("unrecoverable");
     expect(plan.evidence.map((item) => item.code)).toContain("hash_mismatch");
     expect(corrupted.events.at(-1)?.message).toContain("Flipped a byte");
+
+    await expect(
+      injectLabCondition(corrupted, {
+        condition: "corrupt_object",
+        snapshotId: "lab-snapshot-001",
+        path: "Documents/Notes.txt",
+      }),
+    ).rejects.toThrow(/already corrupted/i);
   });
 
   it("detects a successful snapshot whose virtual object was removed", async () => {

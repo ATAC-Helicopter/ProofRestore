@@ -124,68 +124,102 @@ try {
 
   await page.goto(baseUrl);
   await page.mouse.move(1_420, 90, { steps: 10 });
-  await pause(6_500);
+  await pause(5_800);
 
   await clickWithPointer(
     page,
     page.getByRole("button", { name: "Explore demo vault" }),
-    9_000,
+    8_500,
   );
 
   await clickWithPointer(
     page,
     page.getByRole("button", { name: "Check a file" }),
-    1_500,
+    1_200,
   );
   await clickWithPointer(
     page,
     page.getByRole("button", { name: /^Thesis-Final\.docx/ }),
-    3_000,
+    2_000,
   );
   await clickWithPointer(
     page,
     page.getByText("Choose an exact snapshot", { exact: true }),
-    3_000,
+    2_000,
   );
   await clickWithPointer(
     page,
     page.getByRole("button", { name: /Show 4 older versions/ }),
-    3_000,
+    2_000,
   );
-  await clickWithPointer(page, page.getByLabel("Use time from my request"));
-  await clickWithPointer(page, page.getByLabel("Original location"), 8_000);
+  await clickWithPointer(
+    page,
+    page.getByLabel("Use time from my request"),
+    700,
+  );
+  await clickWithPointer(page, page.getByLabel("Original location"), 1_500);
 
   await clickWithPointer(
     page,
     page.getByRole("button", { name: "Verify recoverability" }),
-    1_000,
+    500,
   );
   await page
     .getByRole("heading", {
       name: "Yes — this version is fully recoverable.",
     })
     .waitFor();
-  await pause(16_000);
+  await pause(10_000);
 
   await clickWithPointer(
     page,
     page.getByRole("button", { name: "Run restore simulation" }),
-    10_000,
+    6_000,
   );
-  await clickWithPointer(page, page.getByText(/Open exact evidence/), 1_000);
+  await clickWithPointer(page, page.getByText(/Open exact evidence/), 500);
   await page.locator(".evidence-disclosure").scrollIntoViewIfNeeded();
-  await pause(11_000);
+  await pause(6_000);
 
   await clickWithPointer(
     page,
     page.getByRole("button", { name: "Continue to proof report" }),
-    12_000,
+    4_000,
   );
   await clickWithPointer(
     page,
     page.getByRole("button", { name: "Generate and download Markdown report" }),
-    10_000,
+    1_000,
   );
+
+  await clickWithPointer(
+    page,
+    page.getByRole("button", { name: "Exit vault" }),
+    1_000,
+  );
+  await clickWithPointer(
+    page,
+    page.getByRole("button", { name: "Open recovery lab" }),
+    6_000,
+  );
+  await clickWithPointer(
+    page,
+    page.getByRole("button", { name: "Use sample files" }),
+    5_000,
+  );
+  await clickWithPointer(page, page.getByLabel("Corrupt stored copy"), 700);
+  await clickWithPointer(
+    page,
+    page.getByRole("button", { name: "Apply to virtual vault" }),
+    4_000,
+  );
+  await clickWithPointer(
+    page,
+    page.getByRole("button", { name: "Run recovery check" }),
+    1_000,
+  );
+  await page.getByRole("heading", { name: "Unrecoverable" }).waitFor();
+  await page.locator(".lab-result").scrollIntoViewIfNeeded();
+  await pause(18_000);
 
   await page.close();
   await context.close();

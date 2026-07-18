@@ -53,12 +53,14 @@
 - [x] Restore simulation screenshot captured
 - [x] Proof report screenshot captured
 - [x] Welcome and recovery-request screenshots captured
+- [x] Recovery Lab setup/safety screenshot captured
 - [x] Recovery Lab corruption/evidence screenshot captured
-- [x] Video under required duration: 1:48
+- [x] Video under required duration: 1:45
+- [x] Final video demonstrates the mandatory thesis flow and hands-on Recovery Lab
 - [x] Natural neural narration generated, normalized, and muxed as 48 kHz stereo AAC
 - [x] Selectable English captions embedded in the final MP4 and retained as an SRT sidecar
-- [x] Alternate burned-caption MP4 retained for platforms without subtitle controls
 - [x] High-contrast pointer and click pulses recorded for every interaction
+- [ ] Public host accepts the SRT and exposes toggleable English CC after transcoding
 
 ## Final release checks
 

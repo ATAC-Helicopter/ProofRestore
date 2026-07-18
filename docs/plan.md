@@ -24,8 +24,8 @@ Phase 6 in progress — redesigned submission package deployed; final Devpost pu
 - Added CI, Node/npm metadata, favicon/social metadata, and reproducible submission-media capture.
 - Rebuilt the interface as a focused four-stage workflow: health, recovery request, restore simulation, and proof report.
 - Made safe copy the default destination, exposed exact snapshot and recursion controls, separated content recoverability from restore safety, and added deterministic provenance to results.
-- Captured the 3:2 cover and seven gallery states from the production flow, including the hands-on Recovery Lab.
-- Recorded a 1:17 narrated 1600×900 MP4 plus editable silent WebM, AIFF narration, and narration script.
+- Captured the 3:2 cover and eight gallery states from the production flow, including Recovery Lab setup/safety and corruption/evidence views.
+- Recorded a 1:45 narrated 1600×900 MP4 covering the core recovery flow and Recovery Lab, plus its editable silent WebM, natural neural MP3, selectable SRT captions, and narration script.
 - Deployed the safe deterministic build to https://proofrestore.vercel.app and smoke-tested its homepage and no-key interpreter endpoint.
 - Prepared the public repository at https://github.com/ATAC-Helicopter/ProofRestore.
 - Replaced imported-vault status claims with deterministic dashboard analysis and made restore-test timing truthful.

@@ -82,3 +82,12 @@
 - Reused the production Zod manifest boundary and deterministic recovery engine for every lab verdict, total, action, and evidence record.
 - Added an ordered activity/evidence log, reset and export controls, and a direct handoff into the complete recovery investigation and proof-report workflow.
 - Three independent agents reviewed the lab model, judge-facing UX, and adversarial test cases; the lead integrated and verified their recommendations.
+
+### Final integration and media pass
+
+- Documented a two-repository VaultSync roadmap based on a released language-neutral evidence contract, a read-only destination scanner/exporter, cross-repository conformance fixtures, and an optional later loopback bridge; Git submodules and shared internal storage are explicitly rejected.
+- Made repeated corruption injection fail safely instead of flipping the same byte back to its healthy value.
+- Added separate Recovery Lab setup/safety and corruption/evidence gallery images.
+- Re-cut the complete demo to 1:45 with a warm conversational neural voice, selectable English captions, visible pointer/click pulses, and a concise hands-on Recovery Lab sequence.
+- Added reproducible final MP4 assembly and documented the voice, rate, ffmpeg settings, caption publishing step, and source artifacts.
+- Removed duplicate, obsolete, subtitle-free, and permanently captioned video intermediates after verifying the final MP4 and retained rebuild sources.

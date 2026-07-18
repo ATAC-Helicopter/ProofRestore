@@ -87,7 +87,8 @@ Finally, backup completion is a statement about a job, not the future ability to
 
 ## What's next for ProofRestore
 
-- adapters for real backup formats and providers;
+- a versioned evidence contract and read-only VaultSync exporter so recoverability verification can run optionally after backup, from history, or on demand while both repositories remain independent;
+- adapters for other backup formats and providers;
 - scheduled restore simulations;
 - integration with VaultSync and other backup tools;
 - isolated test restores into disposable environments;

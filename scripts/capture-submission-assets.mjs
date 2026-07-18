@@ -86,11 +86,16 @@ try {
   await labPage.goto(baseUrl);
   await labPage.getByRole("button", { name: "Open recovery lab" }).click();
   await labPage.getByRole("button", { name: "Use sample files" }).click();
+  await screenshot(labPage, `${outputDir}/06-recovery-lab-setup-1600x900.png`);
   await labPage.getByLabel("Corrupt stored copy").check();
   await labPage.getByRole("button", { name: "Apply to virtual vault" }).click();
   await labPage.getByRole("button", { name: "Run recovery check" }).click();
   await labPage.locator(".lab-result").scrollIntoViewIfNeeded();
-  await screenshot(labPage, `${outputDir}/06-recovery-lab-1600x900.png`, false);
+  await screenshot(
+    labPage,
+    `${outputDir}/07-recovery-lab-result-1600x900.png`,
+    false,
+  );
   await labPage.close();
 } finally {
   await browser?.close();

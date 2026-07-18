@@ -343,6 +343,9 @@ export async function injectLabCondition(
       (object) => object.id === file.objectId,
     );
     if (!stored) throw new Error("The selected object is already missing");
+    if (stored.observedHash !== file.expectedHash) {
+      throw new Error("The selected object is already corrupted");
+    }
     const corrupted =
       stored.bytes.byteLength === 0
         ? new Uint8Array([255])

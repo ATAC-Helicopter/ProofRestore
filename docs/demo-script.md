@@ -1,6 +1,6 @@
 # ProofRestore demo script
 
-Target runtime: **under two minutes**. The checked-in narrated cut is **1:48**. Use the built-in vault and no API key for the most reliable recording.
+Target runtime: **under two minutes**. The checked-in narrated cut is **1:45** and includes both the mandatory recovery proof and the hands-on Recovery Lab. Use the built-in vault and no API key for the most reliable recording.
 
 ## 0:00–0:08 — Set up the problem
 
@@ -10,9 +10,11 @@ Target runtime: **under two minutes**. The checked-in narrated cut is **1:48**. 
 
 > “Backup software tells us a job completed. But that green status does not prove our files can be recovered. ProofRestore verifies the recovery before the emergency.”
 
+The checked-in narration uses the shorter equivalent in [demo-narration.txt](demo-narration.txt), which is the canonical spoken script.
+
 Point to the hero: **Know your backup will restore before you need it.**
 
-## 0:08–0:20 — Reveal hidden risk
+## 0:08–0:16 — Reveal hidden risk
 
 **Click:** **Explore demo vault**.
 
@@ -27,7 +29,7 @@ Point to the hero: **Know your backup will restore before you need it.**
 
 **Click:** **Check a file**.
 
-## 0:20–0:35 — Find the thesis
+## 0:16–0:29 — Find the thesis
 
 The search is prefilled with `Thesis-Final.docx`.
 
@@ -41,7 +43,7 @@ The search is prefilled with `Thesis-Final.docx`.
 
 > “The latest thesis copy is corrupt, so I’ll ask for the Tuesday-evening version.”
 
-## 0:35–0:48 — Prove the recovery point
+## 0:29–0:40 — Prove the recovery point
 
 **Click:** **Verify recoverability**.
 
@@ -57,7 +59,7 @@ The search is prefilled with `Thesis-Final.docx`.
 
 > “The deterministic fallback interpreted the path and time for this no-key recording. Then trusted code selected the snapshot, found the stored object, checked its hash and size, and produced the verdict.”
 
-## 0:48–1:03 — Run the safe restore simulation
+## 0:40–0:47 — Run the safe restore simulation
 
 **Click:** **Run restore simulation**.
 
@@ -71,7 +73,7 @@ The search is prefilled with `Thesis-Final.docx`.
 
 Point to `snapshot_selected`, `path_found`, `object_found`, `hash_match`, `size_match`, and `destination_conflict` evidence.
 
-## 1:03–1:13 — Generate proof
+## 0:47–1:00 — Inspect evidence and generate proof
 
 **Click:** **Continue to proof report**, then **Generate and download Markdown report**.
 
@@ -81,17 +83,27 @@ Point to `snapshot_selected`, `path_found`, `object_found`, `hash_match`, `size_
 
 > “ProofRestore turns the dry run into a portable evidence report. Every claim traces to deterministic checks.”
 
-## 1:13–1:17 — Close on the trust boundary
+## 1:00–1:22 — Let judges break a virtual backup
+
+**Click:** **Exit vault**, then **Open recovery lab**.
+
+**Expected result:** The lab states that selected files remain local and unchanged, and that its same-origin baseline is a controlled test rather than independent provider proof.
+
+**Click:** **Use sample files**, keep **Corrupt stored copy**, then click **Apply to virtual vault** and **Run recovery check**.
+
+**Expected result:** The ordered log records file hashing, snapshot creation, byte corruption, and deterministic verification. The result is **Unrecoverable** with `hash_mismatch` evidence.
+
+## 1:22–1:45 — Close on the trust boundary
 
 **Narration:**
 
-> “ProofRestore also includes an optional OpenAI Responses API endpoint for constrained request interpretation. Whether that endpoint or the no-key fallback interprets the request, it never decides whether data exists or is recoverable. That authority stays in tested deterministic TypeScript. Backups should not require faith.”
+> “Judges can choose their own files or folder, remove an object, create a conflict, export the manifest, or continue through the full workflow. Natural language interprets requests, but deterministic code decides recovery. Backups should not require faith.”
 
 End on the footer: **Backups should not require faith.**
 
-## Optional hands-on judge path
+## Extended hands-on judge path
 
-This is intentionally separate from the timed video. From the welcome screen, click **Open recovery lab**, choose files or a folder (or **Use sample files**), and review the local-only safety statement. Add snapshots or simulate a modification/deletion, choose a target, then inject corruption, a missing object, or a destination conflict. Click **Run recovery check** and inspect the deterministic verdict beside the ordered activity/evidence log. **Export manifest** downloads the generated test vault; **Open in full workflow** continues through the standard investigation, simulation, evidence, and report screens.
+The timed video demonstrates sample loading and corruption. For deeper judging, return to **Open recovery lab**, choose files or a folder, and review the local-only safety statement. Add snapshots or simulate a modification/deletion, choose a target, then inject corruption, a missing object, or a destination conflict. Click **Run recovery check** and inspect the deterministic verdict beside the ordered activity/evidence log. **Export manifest** downloads the generated test vault; **Open in full workflow** continues through the standard investigation, simulation, evidence, and report screens.
 
 ## Exact click path
 
@@ -108,6 +120,13 @@ Explore demo vault
 → Open exact evidence
 → Continue to proof report
 → Generate and download Markdown report
+→ Exit vault
+→ Open recovery lab
+→ Use sample files
+→ Corrupt stored copy
+→ Apply to virtual vault
+→ Run recovery check
+→ Unrecoverable with hash_mismatch and ordered evidence
 ```
 
 ## Recording preparation
@@ -119,9 +138,9 @@ Explore demo vault
 - Clear prior downloads so `proof-of-recoverability.md` is easy to identify.
 - Keep browser zoom at 100%; the automated recorder renders a high-contrast pointer and click pulse into the page.
 - Rehearse once with the network disconnected; the primary flow should be unchanged.
-- To reproduce the checked-in media after a production build, run `npm run capture:submission` and `npm run record:demo`.
-- The final MP4, silent WebM, neural narration MP3, SRT captions, and source text live in `docs/assets/submission/` and `docs/demo-narration.txt`.
-- Use `proofrestore-demo-final.mp4` for submission. It has a default selectable English caption track and its opening caption discloses that the narration is AI-generated. Use `proofrestore-demo-burned-captions.mp4` only on platforms that cannot expose embedded captions.
+- To reproduce the checked-in media after a production build, run `npm run capture:submission`, `npm run record:demo`, regenerate narration as documented, and run `npm run assemble:demo`.
+- The publication MP4, silent WebM, neural narration MP3, SRT captions, and source text live in `docs/assets/submission/` and `docs/demo-narration.txt`.
+- Use only `proofrestore-demo-final.mp4` for submission. Attach `proofrestore-demo-captions.srt` separately on the host and verify that CC remains toggleable after transcoding. See [media-production.md](media-production.md).
 
 ## Fallback plan
 

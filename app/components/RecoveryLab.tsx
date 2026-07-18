@@ -293,8 +293,8 @@ export function RecoveryLab({
               Break a virtual backup. Watch ProofRestore prove it.
             </h1>
             <p>
-              Upload non-sensitive files, create browser-only snapshots, inject
-              a failure, and inspect the deterministic evidence yourself.
+              Select non-sensitive local files, create browser-only snapshots,
+              inject a failure, and inspect the deterministic evidence yourself.
             </p>
           </div>
           <button className="button quiet" type="button" onClick={resetLab}>
