@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
+import { RecoveryLab } from "@/app/components/RecoveryLab";
 import { demoVault, DEMO_SCENARIOS } from "@/app/demo";
 import { interpretWithoutModel } from "@/app/interpret/fallback";
 import { interpretedRecoveryRequestSchema } from "@/app/interpret/types";
@@ -159,9 +160,12 @@ function EvidenceList({ evidence }: { evidence: Evidence[] }) {
 
 export function ProofRestoreApp() {
   const [started, setStarted] = useState(false);
+  const [labOpen, setLabOpen] = useState(false);
   const [activeStage, setActiveStage] = useState<Stage>(1);
   const [manifest, setManifest] = useState<VaultManifest>(demoVault);
-  const [manifestKind, setManifestKind] = useState<"demo" | "imported">("demo");
+  const [manifestKind, setManifestKind] = useState<"demo" | "imported" | "lab">(
+    "demo",
+  );
   const [search, setSearch] = useState("Thesis-Final.docx");
   const [selectedPath, setSelectedPath] = useState<string>();
   const [query, setQuery] = useState(DEMO_QUERY);
@@ -349,8 +353,40 @@ export function ProofRestoreApp() {
 
   function backToWelcome() {
     setStarted(false);
+    setLabOpen(false);
     setAnnouncement("Returned to the ProofRestore welcome screen.");
     focusSoon(welcomeHeadingRef);
+  }
+
+  function openLabVault(input: {
+    manifest: VaultManifest;
+    path: string;
+    snapshotId: string;
+    destinationMode: DestinationMode;
+  }) {
+    setManifest(input.manifest);
+    setManifestKind("lab");
+    setLabOpen(false);
+    setStarted(true);
+    setActiveStage(2);
+    setSearch(basename(input.path));
+    setSelectedPath(input.path);
+    setQuery(`Recover ${input.path} from ${input.snapshotId}`);
+    setDestinationMode(input.destinationMode);
+    setIncludeChildren(false);
+    setRecoveryPoint(input.snapshotId);
+    setShowOlderVersions(true);
+    setPlan(undefined);
+    setSimulated(false);
+    setReport(undefined);
+    setError(undefined);
+    setAnnouncement(
+      "Recovery Lab vault opened in the full deterministic workflow.",
+    );
+    window.setTimeout(
+      () => document.getElementById("stage-title-2")?.focus(),
+      0,
+    );
   }
 
   function choosePath(path: string) {
@@ -422,27 +458,29 @@ export function ProofRestoreApp() {
     let interpreted = interpretWithoutModel(interpreterInput);
     let source: "openai" | "deterministic_fallback" = "deterministic_fallback";
 
-    try {
-      const response = await fetch("/api/interpret", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(interpreterInput),
-      });
-      if (response.ok) {
-        const payload = (await response.json()) as {
-          result?: unknown;
-          interpreter?: unknown;
-        };
-        const parsed = interpretedRecoveryRequestSchema.safeParse(
-          payload.result,
-        );
-        if (parsed.success) {
-          interpreted = parsed.data;
-          source = payload.interpreter === "openai" ? "openai" : source;
+    if (manifestKind !== "lab") {
+      try {
+        const response = await fetch("/api/interpret", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(interpreterInput),
+        });
+        if (response.ok) {
+          const payload = (await response.json()) as {
+            result?: unknown;
+            interpreter?: unknown;
+          };
+          const parsed = interpretedRecoveryRequestSchema.safeParse(
+            payload.result,
+          );
+          if (parsed.success) {
+            interpreted = parsed.data;
+            source = payload.interpreter === "openai" ? "openai" : source;
+          }
         }
+      } catch {
+        // The deterministic interpretation above is a complete no-network fallback.
       }
-    } catch {
-      // The deterministic interpretation above is a complete no-network fallback.
     }
 
     const manualSnapshot =
@@ -528,6 +566,19 @@ export function ProofRestoreApp() {
     setAnnouncement("Ready for another recovery check.");
   }
 
+  if (labOpen) {
+    return (
+      <RecoveryLab
+        onClose={() => {
+          setLabOpen(false);
+          setAnnouncement("Returned to the ProofRestore welcome screen.");
+          focusSoon(welcomeHeadingRef);
+        }}
+        onOpenVault={openLabVault}
+      />
+    );
+  }
+
   if (!started) {
     return (
       <main className="welcome-shell">
@@ -555,6 +606,13 @@ export function ProofRestoreApp() {
                 <button
                   className="button secondary large"
                   type="button"
+                  onClick={() => setLabOpen(true)}
+                >
+                  Open recovery lab
+                </button>
+                <button
+                  className="button quiet large"
+                  type="button"
                   onClick={() => importInputRef.current?.click()}
                 >
                   Import backup manifest
@@ -572,6 +630,10 @@ export function ProofRestoreApp() {
                   }
                 />
               </div>
+              <p className="hero-lab-note">
+                Want to test your own data? The lab creates a temporary,
+                non-destructive vault in your browser.
+              </p>
               {error ? (
                 <p className="inline-alert" role="alert">
                   {error}
@@ -681,7 +743,11 @@ export function ProofRestoreApp() {
               </h1>
               <div className="vault-meta">
                 <StatusPill tone="blue">
-                  {manifestKind === "demo" ? "Demo vault" : "Imported manifest"}
+                  {manifestKind === "demo"
+                    ? "Demo vault"
+                    : manifestKind === "lab"
+                      ? "Recovery Lab"
+                      : "Imported manifest"}
                 </StatusPill>
                 <span>Generated {displayDate(manifest.generatedAt)}</span>
               </div>

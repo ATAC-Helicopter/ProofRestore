@@ -31,18 +31,32 @@ The complete demo works without an OpenAI API key.
 
 See [docs/demo-script.md](docs/demo-script.md) for the timed narration and fallback path.
 
+## Recovery Lab for hands-on testing
+
+Judges do not need to rely on the prepared demo. From the welcome screen, **Open recovery lab** creates a temporary, visible test environment in the current browser tab:
+
+1. Choose files, choose a folder, or load the small built-in sample.
+2. ProofRestore hashes every file locally and captures a baseline snapshot.
+3. Add clean snapshots, simulate a modified file, or simulate a deletion while preserving history.
+4. Inject byte-level corruption, remove a stored object behind a successful snapshot, or create a destination conflict.
+5. Select the exact snapshot and file, run the same deterministic recovery engine, and inspect the verdict, totals, evidence codes, and ordered activity log.
+6. Export the generated schema-valid manifest or open it in the complete investigation, simulation, evidence, and report workflow.
+
+The lab never modifies the chosen files. Bytes are read and hashed in the browser, while snapshots, modified bytes, deletions, stored objects, and destination state exist only in memory and disappear on refresh. Uploaded file names are not sent to the interpreter. Because the baseline and observed hash originate in the same controlled browser simulation, the lab demonstrates ProofRestore's verification logic; it is not independent proof of a real backup provider.
+
 ## Architecture
 
-ProofRestore is a stateless Next.js application with four deliberately separate layers:
+ProofRestore is a stateless Next.js application with five deliberately separate layers:
 
 - `app/manifest/` validates versioned JSON manifests with Zod, normalizes safe paths, rejects traversal, and applies size and collection limits.
 - `app/recovery/` is the trusted core. Pure TypeScript logic selects snapshots, resolves paths, verifies integrity, determines restore actions, calculates totals, analyzes retention, and emits stable evidence.
+- `app/lab/` builds bounded, schema-valid manifests from browser-selected files and applies explicit in-memory snapshot and failure operations. Raw bytes never enter an exported manifest.
 - `app/interpret/` and `app/api/interpret/` interpret recovery language into constrained structured data. They never decide existence, integrity, safety, or the final verdict.
 - `app/components/` presents the vault, timeline, recovery result, dry run, evidence, and report download. `app/reports/` renders the deterministic Markdown report.
 
 ```mermaid
 flowchart LR
-    A[Demo or imported manifest] --> B[Zod validation]
+    A[Demo, import, or Recovery Lab] --> B[Zod validation]
     B --> C[Deterministic recovery engine]
     Q[Natural-language request] --> I[Constrained interpreter]
     I --> C
@@ -117,7 +131,7 @@ npm test
 npm run build
 ```
 
-The final repository passes formatting, lint, strict type checking, all 59 Vitest unit/integration tests, and the production build on Next.js 15.5.20. The same checks run in [GitHub Actions](.github/workflows/ci.yml).
+The final repository passes formatting, lint, strict type checking, all 66 Vitest unit/integration tests, and the production build on Next.js 15.5.20. The same checks run in [GitHub Actions](.github/workflows/ci.yml).
 
 The critical browser test requires a production build and Playwright Chromium:
 
@@ -127,11 +141,11 @@ npm run build
 npm run test:e2e
 ```
 
-The Chromium E2E suite passes 6/6. It covers the demo vault through thesis selection, Tuesday recovery, restore simulation, evidence expansion, and report download; valid and malformed manifest imports; the no-key API fallback; responsive clipping checks at four viewport sizes; partial-folder failure presentation; and invalidation of stale evidence when a request changes.
+The Chromium E2E suite passes 8/8. It covers the demo vault through thesis selection, Tuesday recovery, restore simulation, evidence expansion, and report download; valid and malformed manifest imports; the no-key API fallback; responsive clipping checks; partial-folder failure presentation; stale-result invalidation; and desktop and mobile Recovery Lab flows, including a real hash mismatch and interpreter isolation.
 
 ## Submission media
 
-The checked-in scripts reproduce the cover, six gallery states, and a paced silent screen recording from the production build:
+The checked-in scripts reproduce the cover, seven gallery states, and a paced silent screen recording from the production build:
 
 ```bash
 npm run build
@@ -146,6 +160,7 @@ npm run record:demo
 - [Verified result](docs/assets/submission/03-verified-result-1600x900.png)
 - [Restore simulation and evidence](docs/assets/submission/04-simulation-evidence-1600x900.png)
 - [Proof report](docs/assets/submission/05-proof-report-1600x900.png)
+- [Recovery Lab with injected corruption and evidence](docs/assets/submission/06-recovery-lab-1600x900.png)
 - [Final narrated demo with selectable captions and visible pointer](docs/assets/submission/proofrestore-demo-final.mp4)
 - [Narrated demo without burned-in captions](docs/assets/submission/proofrestore-demo-narrated.mp4)
 - [Alternate demo with permanently visible captions](docs/assets/submission/proofrestore-demo-burned-captions.mp4)
@@ -173,6 +188,7 @@ For another Node host, run `npm install`, `npm run build`, and `npm run start`. 
 
 - ProofRestore reads versioned ProofRestore manifests; it does not connect to backup providers or arbitrary backup formats.
 - Restore operations are simulations only. No file is ever restored or modified.
+- The Recovery Lab is intentionally ephemeral and same-origin: it validates the product logic in a controlled browser simulation, not the authenticity of a real provider backup. Browser folder selection does not preserve empty folders.
 - There is no authentication, persistence, scheduling, multi-user workflow, or signed report.
 - Retention findings use the expiry data represented in the manifest; they do not change provider policies.
 - The OpenAI route is constrained to interpretation. Model use is explicitly opt-in, while the default UI path uses the same endpoint's deterministic fallback so the demo cannot depend on credentials or network access.

@@ -78,6 +78,20 @@ try {
 
   await page.getByRole("button", { name: "Continue to proof report" }).click();
   await screenshot(page, `${outputDir}/05-proof-report-1600x900.png`);
+
+  const labPage = await browser.newPage({
+    viewport: { width: 1600, height: 900 },
+    deviceScaleFactor: 1,
+  });
+  await labPage.goto(baseUrl);
+  await labPage.getByRole("button", { name: "Open recovery lab" }).click();
+  await labPage.getByRole("button", { name: "Use sample files" }).click();
+  await labPage.getByLabel("Corrupt stored copy").check();
+  await labPage.getByRole("button", { name: "Apply to virtual vault" }).click();
+  await labPage.getByRole("button", { name: "Run recovery check" }).click();
+  await labPage.locator(".lab-result").scrollIntoViewIfNeeded();
+  await screenshot(labPage, `${outputDir}/06-recovery-lab-1600x900.png`, false);
+  await labPage.close();
 } finally {
   await browser?.close();
   server.kill("SIGTERM");

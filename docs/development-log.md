@@ -23,9 +23,9 @@
 ### Verification milestones
 
 - The exact demo integration now proves: demo vault → thesis path → Tuesday 19:00 UTC → `snapshot-2026-07-14-1730` → verified object/hash/size → fully recoverable → deterministic conflict-aware plan.
-- The Vitest suite passes all **59** unit and integration tests.
+- The Vitest suite passes all **66** unit and integration tests.
 - Formatting, lint, strict type checking, and the Next.js 15.5.20 production build pass in the final validation chain.
-- The Playwright Chromium suite passes **6/6**, covering the critical demo through report download, valid and malformed imports, the no-key API fallback, four responsive viewport checks, partial-folder failure presentation, and stale-result invalidation.
+- The Playwright Chromium suite passes **8/8**, covering the critical demo through report download, valid and malformed imports, the no-key API fallback, responsive viewport checks, partial-folder failure presentation, stale-result invalidation, and desktop/mobile Recovery Lab use.
 - `npm audit` reports only transitive moderate PostCSS advisories with no currently available non-breaking remediation.
 
 ### Final fixes and decisions
@@ -40,7 +40,7 @@
 ### Submission preparation
 
 - Three read-only subagent audits reviewed submission copy, release engineering/security, and UX/media readiness; the lead agent verified and integrated the actionable findings.
-- Rehearsed the documented setup from a fresh local clone: `npm ci`, formatting, lint, typecheck, 59 tests, and the production build all pass.
+- Rehearsed the documented setup from a fresh local clone: `npm ci`, formatting, lint, typecheck, 66 tests, and the production build all pass.
 - Added GitHub Actions validation, Node/npm project metadata, a favicon, Open Graph/Twitter metadata, and a reproducible Playwright screenshot-capture script.
 - Captured a 1500×1000 cover plus dashboard, result, simulation/evidence, and report screenshots at 1600×900.
 - Corrected hard-coded dashboard claims for imported manifests, changed the initial restore-test status to **Not run**, added keyboard-operable import buttons, exposed selected-file state, and moved focus to new recovery results.
@@ -73,3 +73,12 @@
 - Embedded a default selectable English caption track in the final H.264 video, retained the SRT sidecar, and kept a separate burned-caption fallback for platforms without subtitle controls.
 - Normalized narration and exported 48 kHz stereo AAC audio for broad player compatibility.
 - Fully decoded the final MP4, measured its audio, inspected an eight-frame contact sheet, and verified that captioned frames differ from the uncaptioned master.
+
+### Judge testing Recovery Lab
+
+- Added a separate Recovery Lab so judges can choose their own files or folder, or load a safe built-in sample, without disrupting the two-minute guided demo.
+- Implemented bounded local SHA-256 hashing, parent-directory synthesis, baseline and follow-up snapshots, virtual modification and deletion, stored-byte corruption, missing objects, and destination conflicts.
+- Kept uploaded bytes entirely in browser memory, removed raw content from generated manifests, bypassed the interpretation endpoint for lab vaults, and displayed the limitation that same-origin baseline hashes are not independent provider proof.
+- Reused the production Zod manifest boundary and deterministic recovery engine for every lab verdict, total, action, and evidence record.
+- Added an ordered activity/evidence log, reset and export controls, and a direct handoff into the complete recovery investigation and proof-report workflow.
+- Three independent agents reviewed the lab model, judge-facing UX, and adversarial test cases; the lead integrated and verified their recommendations.

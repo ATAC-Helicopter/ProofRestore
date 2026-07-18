@@ -1,6 +1,6 @@
 # ProofRestore demo script
 
-Target runtime: **1:15–1:30**. The checked-in narrated cut is **1:17**. Use the built-in vault and no API key for the most reliable recording.
+Target runtime: **under two minutes**. The checked-in narrated cut is **1:48**. Use the built-in vault and no API key for the most reliable recording.
 
 ## 0:00–0:08 — Set up the problem
 
@@ -88,6 +88,10 @@ Point to `snapshot_selected`, `path_found`, `object_found`, `hash_match`, `size_
 > “ProofRestore also includes an optional OpenAI Responses API endpoint for constrained request interpretation. Whether that endpoint or the no-key fallback interprets the request, it never decides whether data exists or is recoverable. That authority stays in tested deterministic TypeScript. Backups should not require faith.”
 
 End on the footer: **Backups should not require faith.**
+
+## Optional hands-on judge path
+
+This is intentionally separate from the timed video. From the welcome screen, click **Open recovery lab**, choose files or a folder (or **Use sample files**), and review the local-only safety statement. Add snapshots or simulate a modification/deletion, choose a target, then inject corruption, a missing object, or a destination conflict. Click **Run recovery check** and inspect the deterministic verdict beside the ordered activity/evidence log. **Export manifest** downloads the generated test vault; **Open in full workflow** continues through the standard investigation, simulation, evidence, and report screens.
 
 ## Exact click path
 

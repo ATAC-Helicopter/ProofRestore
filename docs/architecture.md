@@ -10,6 +10,7 @@ ProofRestore answers a narrow question: can a selected backup version be recover
 flowchart LR
     U[User] --> UI[Next.js product UI]
     M[Demo or imported manifest] --> V[Zod manifest validator]
+    L[Browser-only Recovery Lab] --> V
     V --> UI
     UI --> I[Optional request interpreter]
     I -->|Structured intent only| E[Deterministic recovery engine]
@@ -31,14 +32,15 @@ Only deterministic TypeScript code may select a snapshot, resolve a path, establ
 
 ## Components
 
-| Area                | Responsibility                                       | Safety property                               |
-| ------------------- | ---------------------------------------------------- | --------------------------------------------- |
-| `app/manifest`      | Parse, normalize, bound, and validate manifest input | Strict versioned schema; no filesystem access |
-| `app/demo`          | Provide fixed synthetic backup history               | Reproducible UTC timestamps and scenarios     |
-| `app/recovery`      | Select, verify, plan, total, and explain             | Pure computations; never performs a restore   |
-| `app/api/interpret` | Convert natural language to constrained intent       | Never returns a recovery verdict              |
-| `app/reports`       | Render verified results into exportable proof        | Deterministic template with escaped input     |
-| `app/components`    | Present investigation, evidence, and simulation      | Status claims originate in engine results     |
+| Area                | Responsibility                                       | Safety property                                 |
+| ------------------- | ---------------------------------------------------- | ----------------------------------------------- |
+| `app/manifest`      | Parse, normalize, bound, and validate manifest input | Strict versioned schema; no filesystem access   |
+| `app/demo`          | Provide fixed synthetic backup history               | Reproducible UTC timestamps and scenarios       |
+| `app/lab`           | Build controlled manifests and inject test failures  | Browser memory only; raw bytes are not exported |
+| `app/recovery`      | Select, verify, plan, total, and explain             | Pure computations; never performs a restore     |
+| `app/api/interpret` | Convert natural language to constrained intent       | Never returns a recovery verdict                |
+| `app/reports`       | Render verified results into exportable proof        | Deterministic template with escaped input       |
+| `app/components`    | Present investigation, evidence, and simulation      | Status claims originate in engine results       |
 
 ## Manifest boundary
 
@@ -47,6 +49,14 @@ Manifest schema `1.0` is the only accepted version. Validation is strict: unknow
 Paths are data, never local filesystem targets. They are case-sensitive and normalized to relative POSIX separators. Absolute paths, Windows drive paths, UNC roots, control characters, `.` segments, and `..` traversal are rejected before recovery analysis. A file may reference an object absent from the object collection by design: this represents a real missing-object failure that the deterministic engine must surface rather than an invalid manifest shape.
 
 JSON upload text is byte-limited before parsing. The default helper limit is 5 MiB; the browser import surface should enforce the same limit before retaining the payload. Array limits provide a second bound against pathological valid JSON.
+
+## Recovery Lab boundary
+
+The Recovery Lab accepts up to 50 browser-selected files, 20 MiB per file and 50 MiB total. It reads bytes through the browser file picker, hashes them with Web Crypto SHA-256, synthesizes parent-directory records, and captures a schema-valid baseline snapshot. Explicit controls can capture another clean snapshot, append a byte to a virtual working copy, remove a virtual working file from a later snapshot, flip a stored byte, remove a referenced object, or add a conflicting destination entry.
+
+Every operation is recorded in an ordered on-screen activity log. The selected originals are never written, overwritten, deleted, or uploaded; raw bytes remain in browser memory and are stripped when the manifest is validated or exported. Lab investigations bypass the natural-language endpoint entirely, so selected names do not leave the tab. Refreshing or resetting clears the session.
+
+This boundary is intentionally honest: both the expected baseline hash and observed object hash initially originate in the same browser session. The lab proves that the deterministic engine detects controlled integrity and availability failures; it does not independently attest that a real backup provider stored the original bytes correctly.
 
 ## Recovery sequence
 

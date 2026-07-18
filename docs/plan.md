@@ -16,21 +16,22 @@ Phase 6 in progress — redesigned submission package deployed; final Devpost pu
 - Built the responsive welcome, vault health, search, timeline, recovery result, simulation, evidence, manifest import, and Markdown report flow.
 - Added the constrained Responses API interpreter and deterministic timeout/no-key/malformed-output fallback.
 - Added unit and integration coverage across manifests, interpretation, recovery, fixtures, retention, evidence, and reports.
-- Confirmed all 59 Vitest tests and the production build pass.
+- Confirmed all 66 Vitest tests and the production build pass.
 - Confirmed formatting, lint, strict type checking, and the Next.js 15.5.20 production build pass in the final chain.
-- Confirmed the Playwright Chromium suite passes 6/6, covering the mandatory flow, imports, no-key fallback, responsive clipping at four viewports, partial-folder failure presentation, and stale-result invalidation.
+- Confirmed the Playwright Chromium suite passes 8/8, covering the mandatory flow, imports, no-key fallback, responsive clipping, partial-folder failure presentation, stale-result invalidation, and desktop/mobile Recovery Lab testing.
 - Added architecture, edge-case, setup, deployment, demo, and submission documentation.
 - Rehearsed setup from a fresh local clone with `npm ci`, full static checks, tests, and a production build.
 - Added CI, Node/npm metadata, favicon/social metadata, and reproducible submission-media capture.
 - Rebuilt the interface as a focused four-stage workflow: health, recovery request, restore simulation, and proof report.
 - Made safe copy the default destination, exposed exact snapshot and recursion controls, separated content recoverability from restore safety, and added deterministic provenance to results.
-- Captured the 3:2 cover and six gallery states from the production flow.
+- Captured the 3:2 cover and seven gallery states from the production flow, including the hands-on Recovery Lab.
 - Recorded a 1:17 narrated 1600×900 MP4 plus editable silent WebM, AIFF narration, and narration script.
 - Deployed the safe deterministic build to https://proofrestore.vercel.app and smoke-tested its homepage and no-key interpreter endpoint.
 - Prepared the public repository at https://github.com/ATAC-Helicopter/ProofRestore.
 - Replaced imported-vault status claims with deterministic dashboard analysis and made restore-test timing truthful.
 - Routed the UI through the constrained interpreter endpoint while keeping model use explicit opt-in with a safe fallback.
 - Reworked the full interface hierarchy, replaced the clipped fixed-height recovery selector, removed nested scrolling, corrected semantic status styling, and regenerated the submission gallery.
+- Added a standalone browser-only Recovery Lab for judge-supplied files and folders, controlled snapshot history, byte corruption, missing objects, destination conflicts, complete action visibility, manifest export, and handoff into the full product flow.
 
 ## In progress
 

@@ -234,6 +234,89 @@ test("keeps the request workflow unclipped across responsive layouts", async ({
   }
 });
 
+test("lets a judge corrupt an uploaded virtual backup with full evidence", async ({
+  page,
+}) => {
+  let interpreterRequests = 0;
+  page.on("request", (request) => {
+    if (request.url().includes("/api/interpret")) interpreterRequests += 1;
+  });
+
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open recovery lab" }).click();
+  await expect(
+    page.getByRole("heading", {
+      name: "Break a virtual backup. Watch ProofRestore prove it.",
+    }),
+  ).toBeVisible();
+  await expect(page.getByText("Your originals stay untouched.")).toBeVisible();
+
+  await page.locator("#lab-file-input").setInputFiles({
+    name: "judge-notes.txt",
+    mimeType: "text/plain",
+    buffer: Buffer.from("A healthy source file selected by the judge."),
+  });
+  await expect(
+    page.getByRole("button", { name: /lab-snapshot-001/ }),
+  ).toBeVisible();
+  await page.getByText("View SHA-256", { exact: true }).click();
+  await expect(page.getByText(/^sha256:/).first()).toBeVisible();
+
+  await page.getByLabel("Corrupt stored copy").check();
+  await page.getByRole("button", { name: "Apply to virtual vault" }).click();
+  await expect(
+    page.getByText(/Flipped a byte in lab-object-001-001/),
+  ).toBeVisible();
+
+  await page.getByRole("button", { name: "Run recovery check" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Unrecoverable" }),
+  ).toBeFocused();
+  await expect(
+    page.locator(".lab-result").getByText("hash_mismatch", { exact: true }),
+  ).toBeVisible();
+
+  const downloadPromise = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Export generated manifest" }).click();
+  const download = await downloadPromise;
+  expect(download.suggestedFilename()).toBe("proofrestore-recovery-lab.json");
+
+  await page
+    .getByRole("button", { name: /Open full recovery workflow/ })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "What do you need to recover?" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Recovery Lab", { exact: true }).first(),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Verify recoverability" }).click();
+  await expect(
+    page.getByRole("heading", {
+      name: "This recovery point is not recoverable.",
+    }),
+  ).toBeFocused();
+  expect(interpreterRequests).toBe(0);
+});
+
+test("keeps the Recovery Lab usable on a phone", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open recovery lab" }).click();
+  await page.getByRole("button", { name: "Use sample files" }).click();
+  await expect(
+    page.getByRole("button", { name: /lab-snapshot-001/ }),
+  ).toBeVisible();
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - window.innerWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(1);
+  for (const button of await page.locator(".lab-step button").all()) {
+    const box = await button.boundingBox();
+    if (box) expect(box.height).toBeGreaterThanOrEqual(44);
+  }
+});
+
 test("shows partial restore failures without green success styling on mobile", async ({
   page,
 }) => {

@@ -26,6 +26,9 @@
 - [x] API-key route, structured schema, timeout, and fallback are implemented
 - [ ] Credentialed API-key smoke test completed
 - [x] Malformed imports fail safely in validation tests
+- [x] Recovery Lab accepts judge-selected files/folders or safe sample data
+- [x] Recovery Lab exposes snapshots, virtual modification/deletion, corruption, missing objects, conflicts, and an ordered activity log
+- [x] Recovery Lab exports a validated manifest and opens it in the complete workflow without sending selected names to the interpreter
 - [ ] Valid and malformed imports smoke-tested in the final deployed UI
 
 ## Engineering
@@ -33,9 +36,9 @@
 - [x] Formatting passes
 - [x] Lint passes
 - [x] Typecheck passes
-- [x] Unit/integration tests pass: 59 tests
+- [x] Unit/integration tests pass: 66 tests
 - [x] Production build passes
-- [x] Chromium E2E suite passes: 6/6 tests, including the critical flow, responsive clipping checks, and partial recovery presentation
+- [x] Chromium E2E suite passes: 8/8 tests, including the critical flow, responsive checks, partial recovery presentation, and desktop/mobile Recovery Lab testing
 - [x] Clean automated Chromium flow completed
 - [x] Valid and malformed imports smoke-tested locally
 - [x] No-key API fallback smoke-tested locally
@@ -50,6 +53,7 @@
 - [x] Restore simulation screenshot captured
 - [x] Proof report screenshot captured
 - [x] Welcome and recovery-request screenshots captured
+- [x] Recovery Lab corruption/evidence screenshot captured
 - [x] Video under required duration: 1:48
 - [x] Natural neural narration generated, normalized, and muxed as 48 kHz stereo AAC
 - [x] Selectable English captions embedded in the final MP4 and retained as an SRT sidecar
