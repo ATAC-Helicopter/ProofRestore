@@ -1,6 +1,6 @@
 # Submission media production
 
-The publication artifact is `docs/assets/submission/proofrestore-demo-final.mp4`. It contains the visible pointer/click pulses, natural neural narration, normalized stereo audio, and a default selectable English caption track. Upload `proofrestore-demo-captions.srt` separately to the video host because some services discard embedded MP4 subtitles while transcoding.
+The publication artifact is `docs/assets/submission/proofrestore-demo-final.mp4`. It contains deterministic human-like pointer movement, visible click pulses, smooth recorder-only scrolling, natural neural narration, normalized stereo audio, and a default selectable English caption track. Upload `proofrestore-demo-captions.srt` separately to the video host because some services discard embedded MP4 subtitles while transcoding.
 
 ## Rebuild the visual recording
 

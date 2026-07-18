@@ -1,87 +1,87 @@
 1
-00:00:00,050 --> 00:00:02,875
+00:00:00,050 --> 00:00:02,977
 [AI-generated narration] Backup success is not recovery success.
 
 2
-00:00:02,875 --> 00:00:06,159
+00:00:02,977 --> 00:00:06,261
 ProofRestore verifies recovery before an emergency.
 
 3
-00:00:06,159 --> 00:00:07,625
+00:00:06,261 --> 00:00:07,715
 I’ll open the demo vault.
 
 4
-00:00:07,625 --> 00:00:15,409
+00:00:07,715 --> 00:00:15,647
 The latest backup completed, but recoverability is at risk: eight snapshots hide two integrity issues and a retention risk.
 
 5
-00:00:15,409 --> 00:00:16,420
+00:00:15,647 --> 00:00:16,681
 I’ll check a file.
 
 6
-00:00:16,420 --> 00:00:19,579
+00:00:16,681 --> 00:00:19,613
 The request asks for my thesis from Tuesday evening.
 
 7
-00:00:19,579 --> 00:00:24,204
+00:00:19,613 --> 00:00:24,272
 Its history shows damaged recent versions and a verified Tuesday copy.
 
 8
-00:00:24,204 --> 00:00:28,784
+00:00:24,272 --> 00:00:28,738
 I’ll keep the interpreted time, choose the original location, and verify.
 
 9
-00:00:28,784 --> 00:00:35,340
+00:00:28,738 --> 00:00:35,249
 Deterministic code selects the eligible snapshot, finds the stored object, and proves its hash and size.
 
 10
-00:00:35,340 --> 00:00:37,681
+00:00:35,249 --> 00:00:37,545
 This version is fully recoverable.
 
 11
-00:00:37,681 --> 00:00:40,068
+00:00:37,545 --> 00:00:39,965
 The restore simulation changes nothing.
 
 12
-00:00:40,068 --> 00:00:45,579
+00:00:39,965 --> 00:00:45,886
 A newer destination file would conflict, so ProofRestore protects it instead of overwriting it.
 
 13
-00:00:45,579 --> 00:00:52,374
+00:00:45,886 --> 00:00:52,886
 These evidence entries trace the snapshot, path, object, matching hash and size, and conflict.
 
 14
-00:00:52,374 --> 00:00:58,568
+00:00:52,886 --> 00:00:59,113
 The downloaded proof report preserves the request, verdict, plan, methodology, and appendix.
 
 15
-00:00:58,568 --> 00:01:01,045
-Judges can test the same engine themselves.
+00:00:59,113 --> 00:01:01,568
+Anyone can test the same engine directly.
 
 16
-00:01:01,045 --> 00:01:08,102
+00:01:01,568 --> 00:01:08,647
 The Recovery Lab reads selected files locally and changes only in-memory copies—nothing is uploaded or modified.
 
 17
-00:01:08,102 --> 00:01:12,136
+00:01:08,647 --> 00:01:12,624
 I’ll load the sample, corrupt one stored copy, and run the check.
 
 18
-00:01:12,136 --> 00:01:15,738
+00:01:12,624 --> 00:01:16,215
 The ordered log exposes every snapshot and byte change.
 
 19
-00:01:15,738 --> 00:01:22,045
+00:01:16,215 --> 00:01:22,454
 The fixed expected hash and changed observed hash produce hash mismatch and an unrecoverable result.
 
 20
-00:01:22,045 --> 00:01:30,306
-Judges can choose their own files or folder, remove an object, create a conflict, export the manifest, or continue through the full workflow.
+00:01:22,454 --> 00:01:30,318
+You can choose your own files or folder, remove an object, create a conflict, export the manifest, or continue through the full workflow.
 
 21
-00:01:30,306 --> 00:01:35,409
+00:01:30,318 --> 00:01:35,079
 Natural language interprets requests, but deterministic code decides recovery.
 
 22
-00:01:35,409 --> 00:01:37,602
+00:01:35,079 --> 00:01:37,420
 Backups should not require faith.

@@ -33,7 +33,7 @@ See [docs/demo-script.md](docs/demo-script.md) for the timed narration and fallb
 
 ## Recovery Lab for hands-on testing
 
-Judges do not need to rely on the prepared demo. From the welcome screen, **Open recovery lab** creates a temporary, visible test environment in the current browser tab:
+You do not need to rely on the prepared demo. From the welcome screen, **Open recovery lab** creates a temporary, visible test environment in the current browser tab:
 
 1. Choose files, choose a folder, or load the small built-in sample.
 2. ProofRestore hashes every file locally and captures a baseline snapshot.
@@ -169,7 +169,7 @@ FFMPEG_PATH=/path/to/ffmpeg npm run assemble:demo
 - [Recovery Lab with injected corruption and evidence](docs/assets/submission/07-recovery-lab-result-1600x900.png)
 - [Final narrated demo with selectable captions and visible pointer](docs/assets/submission/proofrestore-demo-final.mp4)
 
-The editable source assets are the silent WebM recording, neural narration MP3, [SRT captions](docs/assets/submission/proofrestore-demo-captions.srt), and [demo-narration.txt](docs/demo-narration.txt). The final 1:45 cut is 1600×900 H.264 with normalized 48 kHz stereo AAC audio, a visible pointer/click pulse, and a default English caption track that viewers can enable or disable. It now covers both the mandatory thesis recovery and the hands-on Recovery Lab. The narration uses Microsoft Edge's `en-US-AndrewMultilingualNeural` voice at `+10%` and is disclosed in the first caption. Upload the SRT separately because video hosts may discard embedded subtitles during transcoding. Exact rebuild and publishing steps are in [docs/media-production.md](docs/media-production.md).
+The editable source assets are the silent WebM recording, neural narration MP3, [SRT captions](docs/assets/submission/proofrestore-demo-captions.srt), and [demo-narration.txt](docs/demo-narration.txt). The final 1:55 cut is 1600×900 H.264 with normalized 48 kHz stereo AAC audio, smooth recorder-controlled scrolling, human-like pointer movement and click pulses, and a default English caption track that viewers can enable or disable. It covers both the mandatory thesis recovery and the hands-on Recovery Lab. The narration uses Microsoft Edge's `en-US-AndrewMultilingualNeural` voice at `+10%` and is disclosed in the first caption. Upload the SRT separately because video hosts may discard embedded subtitles during transcoding. Exact rebuild and publishing steps are in [docs/media-production.md](docs/media-production.md).
 
 ## Manifest import
 
@@ -198,10 +198,14 @@ For another Node host, run `npm install`, `npm run build`, and `npm run start`. 
 - The OpenAI route is constrained to interpretation. Model use is explicitly opt-in, while the default UI path uses the same endpoint's deterministic fallback so the demo cannot depend on credentials or network access.
 - Markdown is the downloadable report format; HTML/PDF export is not included in the MVP.
 - The synthetic demo timestamps are fixed in UTC for reproducible results.
-- `npm audit` reports transitive moderate PostCSS advisories with no currently available non-breaking remediation; application dependencies should be reviewed again before production use.
+- A root override pins patched PostCSS `8.5.19` while the selected Next.js release still requests an older transitive version; keep the override until Next.js updates its own dependency and continue reviewing automated security alerts.
 
 ## Hackathon development note
 
 ProofRestore was built as a focused OpenAI hackathon sprint in Codex. The lead agent established the architecture, integrated the product, and ran final validation. Independent subagents worked with non-overlapping ownership on the manifest schema and architecture, recovery engine and adversarial tests, deterministic demo dataset, UI and interpreter integration, and submission documentation. All recoverability claims remain backed by executable deterministic logic and tests rather than agent or model judgment.
+
+## License and security
+
+ProofRestore is available under the [MIT License](LICENSE). Please report vulnerabilities privately through GitHub as described in [SECURITY.md](SECURITY.md); do not attach real backup data, private paths, or credentials to public issues.
 
 **Backups should not require faith.**

@@ -74,14 +74,14 @@
 - Normalized narration and exported 48 kHz stereo AAC audio for broad player compatibility.
 - Fully decoded the final MP4, measured its audio, inspected an eight-frame contact sheet, and verified that captioned frames differ from the uncaptioned master.
 
-### Judge testing Recovery Lab
+### Hands-on Recovery Lab
 
-- Added a separate Recovery Lab so judges can choose their own files or folder, or load a safe built-in sample, without disrupting the two-minute guided demo.
+- Added a separate Recovery Lab so anyone can choose their own files or folder, or load a safe built-in sample, without disrupting the two-minute guided demo.
 - Implemented bounded local SHA-256 hashing, parent-directory synthesis, baseline and follow-up snapshots, virtual modification and deletion, stored-byte corruption, missing objects, and destination conflicts.
 - Kept uploaded bytes entirely in browser memory, removed raw content from generated manifests, bypassed the interpretation endpoint for lab vaults, and displayed the limitation that same-origin baseline hashes are not independent provider proof.
 - Reused the production Zod manifest boundary and deterministic recovery engine for every lab verdict, total, action, and evidence record.
 - Added an ordered activity/evidence log, reset and export controls, and a direct handoff into the complete recovery investigation and proof-report workflow.
-- Three independent agents reviewed the lab model, judge-facing UX, and adversarial test cases; the lead integrated and verified their recommendations.
+- Three independent agents reviewed the lab model, user-facing UX, and adversarial test cases; the lead integrated and verified their recommendations.
 
 ### Final integration and media pass
 
@@ -91,3 +91,13 @@
 - Re-cut the complete demo to 1:45 with a warm conversational neural voice, selectable English captions, visible pointer/click pulses, and a concise hands-on Recovery Lab sequence.
 - Added reproducible final MP4 assembly and documented the voice, rate, ffmpeg settings, caption publishing step, and source artifacts.
 - Removed duplicate, obsolete, subtitle-free, and permanently captioned video intermediates after verifying the final MP4 and retained rebuild sources.
+
+### VaultSync study, public release hardening, and final video
+
+- Studied `/Users/flavio/Developer/VaultSync.nosync` read-only and left its clean `release/v1.8.4` worktree unchanged. The resulting repository study maps Core, CLI, UI, persistence, snapshot, retention, and backup-format seams to a future versioned evidence exporter.
+- Confirmed that the current VaultSync verifier cannot serve as ProofRestore's evidence source: it selects only the latest project snapshot, does not persist item-level failures, and cannot repair historical deferred hashes without rereading the actual backup destination.
+- Refined the future integration to begin with one explicit persisted backup and one reachable unencrypted destination, then add folder, ZIP, and encrypted content readers behind a common read-only interface. No submodule or shared database is proposed.
+- Replaced audience-specific video language with generic user language and rebuilt the recorder with seeded Bézier pointer paths, off-center clicks, human dwell timing, and smooth recorder-only scrolling.
+- Reassembled and fully decoded a 1:55, 1600×900 H.264 final video with natural 48 kHz stereo narration and an optional embedded English caption track; inspected representative frames and verified the embedded captions match the SRT source.
+- Added the MIT license, `SECURITY.md`, `CONTRIBUTING.md`, CODEOWNERS, pull-request guidance, Dependabot, CodeQL, SHA-pinned Actions, and strict browser security headers.
+- Pinned patched PostCSS 8.5.19 through the package override; `npm audit` now reports zero vulnerabilities.

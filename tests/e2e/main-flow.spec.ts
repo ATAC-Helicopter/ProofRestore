@@ -111,7 +111,24 @@ test("serves the no-key fallback and remains usable on mobile", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const documentResponse = await page.goto("/");
+  expect(documentResponse?.headers()).toMatchObject({
+    "cross-origin-opener-policy": "same-origin",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "DENY",
+  });
+  expect(documentResponse?.headers()["content-security-policy"]).toContain(
+    "frame-ancestors 'none'",
+  );
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () => getComputedStyle(document.documentElement).scrollBehavior,
+      ),
+    )
+    .toBe("auto");
   await expect(
     page.getByRole("button", { name: "Explore demo vault" }),
   ).toBeVisible();
@@ -234,7 +251,7 @@ test("keeps the request workflow unclipped across responsive layouts", async ({
   }
 });
 
-test("lets a judge corrupt an uploaded virtual backup with full evidence", async ({
+test("lets a user corrupt an uploaded virtual backup with full evidence", async ({
   page,
 }) => {
   let interpreterRequests = 0;
@@ -252,9 +269,9 @@ test("lets a judge corrupt an uploaded virtual backup with full evidence", async
   await expect(page.getByText("Your originals stay untouched.")).toBeVisible();
 
   await page.locator("#lab-file-input").setInputFiles({
-    name: "judge-notes.txt",
+    name: "tester-notes.txt",
     mimeType: "text/plain",
-    buffer: Buffer.from("A healthy source file selected by the judge."),
+    buffer: Buffer.from("A healthy source file selected by the tester."),
   });
   await expect(
     page.getByRole("button", { name: /lab-snapshot-001/ }),

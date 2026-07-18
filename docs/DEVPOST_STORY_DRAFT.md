@@ -34,7 +34,7 @@ The application distinguishes between:
 
 It can detect missing objects, silent corruption, incomplete folder recovery, overwrite conflicts, and healthy copies that may soon be removed by retention rules. It then produces a shareable **Proof of Recoverability** report.
 
-For hands-on judging, the browser-only Recovery Lab accepts selected files or a folder, creates a local baseline snapshot, lets the judge add history and inject controlled corruption, missing-object, or destination-conflict conditions, and shows each operation before running the same deterministic engine. It never changes or uploads the selected originals.
+For hands-on testing, the browser-only Recovery Lab accepts selected files or a folder, creates a local baseline snapshot, lets anyone add history and inject controlled corruption, missing-object, or destination-conflict conditions, and shows each operation before running the same deterministic engine. It never changes or uploads the selected originals.
 
 ## How we built it
 
@@ -73,7 +73,7 @@ The final challenge was making these technical distinctions legible within a two
 - Evidence-backed verdicts where every snapshot, path, integrity, destination, and retention claim comes from deterministic code.
 - A safe restore simulation that never writes, overwrites, deletes, or executes real data.
 - A realistic eight-snapshot demo where successful jobs hide corruption, a missing object, destination conflict, partial folder recovery, and expiry risk.
-- A transparent Recovery Lab where judges can test their own selected files, controlled snapshots, and injected failures without filesystem writes or server upload.
+- A transparent Recovery Lab where users can test their own selected files, controlled snapshots, and injected failures without filesystem writes or server upload.
 - An escaped Proof of Recoverability report with metrics, plan, warnings, methodology, and evidence appendix.
 - A green final validation chain: formatting, lint, strict type checking, 66 unit/integration tests, a Next.js production build, and 8/8 Chromium E2E tests covering the demo, imports, fallback behavior, responsive layout, stale-result invalidation, partial recovery presentation, and the Recovery Lab.
 

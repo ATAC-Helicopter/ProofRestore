@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Evidence-backed backup recoverability verification and safe restore simulation.",
   "private": true,
+  "license": "MIT",
   "packageManager": "npm@11.12.1",
   "engines": {
     "node": "24.x"
@@ -53,5 +54,8 @@
     "@tailwindcss/postcss": "^4.1.11",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
+  },
+  "overrides": {
+    "postcss": "8.5.19"
   }
 }

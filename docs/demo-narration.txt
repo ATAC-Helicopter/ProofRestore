@@ -10,8 +10,8 @@ The restore simulation changes nothing. A newer destination file would conflict,
 
 These evidence entries trace the snapshot, path, object, matching hash and size, and conflict. The downloaded proof report preserves the request, verdict, plan, methodology, and appendix.
 
-Judges can test the same engine themselves. The Recovery Lab reads selected files locally and changes only in-memory copies—nothing is uploaded or modified. I’ll load the sample, corrupt one stored copy, and run the check.
+Anyone can test the same engine directly. The Recovery Lab reads selected files locally and changes only in-memory copies—nothing is uploaded or modified. I’ll load the sample, corrupt one stored copy, and run the check.
 
 The ordered log exposes every snapshot and byte change. The fixed expected hash and changed observed hash produce hash mismatch and an unrecoverable result.
 
-Judges can choose their own files or folder, remove an object, create a conflict, export the manifest, or continue through the full workflow. Natural language interprets requests, but deterministic code decides recovery. Backups should not require faith.
+You can choose your own files or folder, remove an object, create a conflict, export the manifest, or continue through the full workflow. Natural language interprets requests, but deterministic code decides recovery. Backups should not require faith.

@@ -26,7 +26,7 @@
 - [x] API-key route, structured schema, timeout, and fallback are implemented
 - [ ] Credentialed API-key smoke test completed
 - [x] Malformed imports fail safely in validation tests
-- [x] Recovery Lab accepts judge-selected files/folders or safe sample data
+- [x] Recovery Lab accepts user-selected files/folders or safe sample data
 - [x] Recovery Lab exposes snapshots, virtual modification/deletion, corruption, missing objects, conflicts, and an ordered activity log
 - [x] Recovery Lab exports a validated manifest and opens it in the complete workflow without sending selected names to the interpreter
 - [ ] Valid and malformed imports smoke-tested in the final deployed UI
@@ -55,7 +55,7 @@
 - [x] Welcome and recovery-request screenshots captured
 - [x] Recovery Lab setup/safety screenshot captured
 - [x] Recovery Lab corruption/evidence screenshot captured
-- [x] Video under required duration: 1:45
+- [x] Video under required duration: 1:55
 - [x] Final video demonstrates the mandatory thesis flow and hands-on Recovery Lab
 - [x] Natural neural narration generated, normalized, and muxed as 48 kHz stereo AAC
 - [x] Selectable English captions embedded in the final MP4 and retained as an SRT sidecar
@@ -66,7 +66,10 @@
 
 - [x] GitHub Actions validation workflow added
 - [x] Node/npm runtime metadata added
-- [ ] Public-release license selected and added
+- [x] MIT public-release license selected and added
+- [x] Security policy, private vulnerability reporting, secret scanning, and push protection enabled
+- [x] Main branch protected from force pushes/deletion with required CI checks
+- [x] CodeQL, Dependabot configuration, SHA-pinned Actions, and browser security headers added
 - [x] Git remote configured and pushed
 - [x] `npx playwright install chromium` completed in the verification environment
 - [x] No-key demo rehearsed in a clean Chromium context

@@ -1,6 +1,6 @@
 # ProofRestore demo script
 
-Target runtime: **under two minutes**. The checked-in narrated cut is **1:45** and includes both the mandatory recovery proof and the hands-on Recovery Lab. Use the built-in vault and no API key for the most reliable recording.
+Target runtime: **under two minutes**. The checked-in narrated cut is **1:55** and includes both the mandatory recovery proof and the hands-on Recovery Lab. Use the built-in vault and no API key for the most reliable recording.
 
 ## 0:00–0:08 — Set up the problem
 
@@ -83,7 +83,7 @@ Point to `snapshot_selected`, `path_found`, `object_found`, `hash_match`, `size_
 
 > “ProofRestore turns the dry run into a portable evidence report. Every claim traces to deterministic checks.”
 
-## 1:00–1:22 — Let judges break a virtual backup
+## 1:00–1:22 — Break a virtual backup yourself
 
 **Click:** **Exit vault**, then **Open recovery lab**.
 
@@ -93,17 +93,17 @@ Point to `snapshot_selected`, `path_found`, `object_found`, `hash_match`, `size_
 
 **Expected result:** The ordered log records file hashing, snapshot creation, byte corruption, and deterministic verification. The result is **Unrecoverable** with `hash_mismatch` evidence.
 
-## 1:22–1:45 — Close on the trust boundary
+## 1:22–1:55 — Close on the trust boundary
 
 **Narration:**
 
-> “Judges can choose their own files or folder, remove an object, create a conflict, export the manifest, or continue through the full workflow. Natural language interprets requests, but deterministic code decides recovery. Backups should not require faith.”
+> “You can choose your own files or folder, remove an object, create a conflict, export the manifest, or continue through the full workflow. Natural language interprets requests, but deterministic code decides recovery. Backups should not require faith.”
 
 End on the footer: **Backups should not require faith.**
 
-## Extended hands-on judge path
+## Extended hands-on test path
 
-The timed video demonstrates sample loading and corruption. For deeper judging, return to **Open recovery lab**, choose files or a folder, and review the local-only safety statement. Add snapshots or simulate a modification/deletion, choose a target, then inject corruption, a missing object, or a destination conflict. Click **Run recovery check** and inspect the deterministic verdict beside the ordered activity/evidence log. **Export manifest** downloads the generated test vault; **Open in full workflow** continues through the standard investigation, simulation, evidence, and report screens.
+The timed video demonstrates sample loading and corruption. For deeper testing, return to **Open recovery lab**, choose files or a folder, and review the local-only safety statement. Add snapshots or simulate a modification/deletion, choose a target, then inject corruption, a missing object, or a destination conflict. Click **Run recovery check** and inspect the deterministic verdict beside the ordered activity/evidence log. **Export manifest** downloads the generated test vault; **Open in full workflow** continues through the standard investigation, simulation, evidence, and report screens.
 
 ## Exact click path
 

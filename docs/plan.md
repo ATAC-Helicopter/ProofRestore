@@ -25,13 +25,16 @@ Phase 6 in progress — redesigned submission package deployed; final Devpost pu
 - Rebuilt the interface as a focused four-stage workflow: health, recovery request, restore simulation, and proof report.
 - Made safe copy the default destination, exposed exact snapshot and recursion controls, separated content recoverability from restore safety, and added deterministic provenance to results.
 - Captured the 3:2 cover and eight gallery states from the production flow, including Recovery Lab setup/safety and corruption/evidence views.
-- Recorded a 1:45 narrated 1600×900 MP4 covering the core recovery flow and Recovery Lab, plus its editable silent WebM, natural neural MP3, selectable SRT captions, and narration script.
+- Recorded a 1:55 narrated 1600×900 MP4 covering the core recovery flow and Recovery Lab, plus its editable silent WebM, natural neural MP3, selectable SRT captions, and narration script.
+- Completed a read-only study of VaultSync's Core, CLI, UI, persistence, verification, snapshot, retention, and backup-format seams; documented a safe evidence-export contract without changing the VaultSync repository.
+- Added an MIT license, public security policy, contribution guidance, CodeQL and Dependabot configuration, SHA-pinned Actions, patched PostCSS resolution, and browser security headers.
+- Rebuilt the recorder with deterministic human-like pointer paths, intentional dwell/click timing, and smooth recorder-only scrolling while preserving reduced-motion behavior in the product.
 - Deployed the safe deterministic build to https://proofrestore.vercel.app and smoke-tested its homepage and no-key interpreter endpoint.
 - Prepared the public repository at https://github.com/ATAC-Helicopter/ProofRestore.
 - Replaced imported-vault status claims with deterministic dashboard analysis and made restore-test timing truthful.
 - Routed the UI through the constrained interpreter endpoint while keeping model use explicit opt-in with a safe fallback.
 - Reworked the full interface hierarchy, replaced the clipped fixed-height recovery selector, removed nested scrolling, corrected semantic status styling, and regenerated the submission gallery.
-- Added a standalone browser-only Recovery Lab for judge-supplied files and folders, controlled snapshot history, byte corruption, missing objects, destination conflicts, complete action visibility, manifest export, and handoff into the full product flow.
+- Added a standalone browser-only Recovery Lab for user-supplied files and folders, controlled snapshot history, byte corruption, missing objects, destination conflicts, complete action visibility, manifest export, and handoff into the full product flow.
 
 ## In progress
 
@@ -56,9 +59,9 @@ Phase 6 in progress — redesigned submission package deployed; final Devpost pu
 
 - API-key behavior needs one final credentialed smoke test; it is not required for the no-key demo.
 - Deployment, public video/gallery upload, and final Devpost entry remain external release tasks.
-- `npm audit` reports only transitive moderate PostCSS advisories and currently offers no non-breaking remediation; recheck before production use.
+- Public model-assisted interpretation should remain disabled until authentication, rate limiting, and spend controls are added; deterministic interpretation remains available.
 
 ## Blocked items
 
 - Credentialed Responses API smoke testing requires a user-supplied key and explicit model-use opt-in.
-- Gallery/video hosting, category, license choice, and final Devpost fields require external account actions or final user choices.
+- Gallery/video hosting, category, and final Devpost fields require external account actions or final user choices.
