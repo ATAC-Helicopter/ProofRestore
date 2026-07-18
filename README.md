@@ -67,10 +67,6 @@ flowchart LR
 
 More detail is available in [docs/architecture.md](docs/architecture.md), including the request sequence and security boundary.
 
-### Future VaultSync integration
-
-ProofRestore is designed to remain a standalone verifier while becoming an optional native VaultSync step after a backup, from backup history, or on demand. The repositories should stay separate and integrate through a released JSON evidence contract—not Git submodules or shared internal storage. The phased design, exporter CLI, native workflow, contract versioning, and optional local bridge are documented in [docs/vaultsync-integration.md](docs/vaultsync-integration.md).
-
 ## Deterministic trust boundary
 
 Natural-language interpretation may identify an intent, candidate path, requested time, recursion preference, and destination mode. It may preserve ambiguity or request clarification.
@@ -149,13 +145,12 @@ The Chromium E2E suite passes 8/8. It covers the demo vault through thesis selec
 
 ## Submission media
 
-The checked-in scripts reproduce the cover, eight gallery states, the paced pointer-enabled screen recording, and the final narrated MP4 assembly:
+The checked-in scripts reproduce the cover, eight gallery states, and the paced pointer-enabled visual recording:
 
 ```bash
 npm run build
 npm run capture:submission
 npm run record:demo
-FFMPEG_PATH=/path/to/ffmpeg npm run assemble:demo
 ```
 
 - [3:2 project cover](docs/assets/submission/cover-1500x1000.png)
@@ -169,7 +164,7 @@ FFMPEG_PATH=/path/to/ffmpeg npm run assemble:demo
 - [Recovery Lab with injected corruption and evidence](docs/assets/submission/07-recovery-lab-result-1600x900.png)
 - [Final narrated demo with selectable captions and visible pointer](docs/assets/submission/proofrestore-demo-final.mp4)
 
-The editable source assets are the silent WebM recording, neural narration MP3, [SRT captions](docs/assets/submission/proofrestore-demo-captions.srt), and [demo-narration.txt](docs/demo-narration.txt). The final 1:55 cut is 1600×900 H.264 with normalized 48 kHz stereo AAC audio, smooth recorder-controlled scrolling, human-like pointer movement and click pulses, and a default English caption track that viewers can enable or disable. It covers both the mandatory thesis recovery and the hands-on Recovery Lab. The narration uses Microsoft Edge's `en-US-AndrewMultilingualNeural` voice, gently retimed to match the final interaction sequence, and is disclosed in the first caption. Upload the SRT separately because video hosts may discard embedded subtitles during transcoding. Exact rebuild and publishing steps are in [docs/media-production.md](docs/media-production.md).
+The repository retains only the publication MP4, [SRT captions](docs/assets/submission/proofrestore-demo-captions.srt), and [narration source](docs/demo-narration.txt)—not large intermediate audio or silent-video renders. The final 1:55 cut is 1600×900 H.264 with normalized 48 kHz stereo AAC audio, smooth recorder-controlled scrolling, human-like pointer movement and click pulses, and a default English caption track that viewers can enable or disable. It covers both the mandatory thesis recovery and the hands-on Recovery Lab. The narration uses Microsoft Edge's `en-US-AndrewMultilingualNeural` voice and is disclosed in the first caption. Upload the SRT separately because video hosts may discard embedded subtitles during transcoding. Publishing checks are in [docs/media-production.md](docs/media-production.md).
 
 ## Manifest import
 

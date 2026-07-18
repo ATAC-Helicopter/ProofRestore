@@ -85,18 +85,14 @@
 
 ### Final integration and media pass
 
-- Documented a two-repository VaultSync roadmap based on a released language-neutral evidence contract, a read-only destination scanner/exporter, cross-repository conformance fixtures, and an optional later loopback bridge; Git submodules and shared internal storage are explicitly rejected.
 - Made repeated corruption injection fail safely instead of flipping the same byte back to its healthy value.
 - Added separate Recovery Lab setup/safety and corruption/evidence gallery images.
 - Re-cut the complete demo to 1:45 with a warm conversational neural voice, selectable English captions, visible pointer/click pulses, and a concise hands-on Recovery Lab sequence.
-- Added reproducible final MP4 assembly and documented the voice, rate, ffmpeg settings, caption publishing step, and source artifacts.
-- Removed duplicate, obsolete, subtitle-free, and permanently captioned video intermediates after verifying the final MP4 and retained rebuild sources.
+- Documented the final voice, caption publishing step, and retained publication artifacts.
+- Removed duplicate, obsolete, subtitle-free, permanently captioned, and large production intermediates after verifying the final MP4.
 
-### VaultSync study, public release hardening, and final video
+### Public release hardening and final video
 
-- Studied `/Users/flavio/Developer/VaultSync.nosync` read-only and left its clean `release/v1.8.4` worktree unchanged. The resulting repository study maps Core, CLI, UI, persistence, snapshot, retention, and backup-format seams to a future versioned evidence exporter.
-- Confirmed that the current VaultSync verifier cannot serve as ProofRestore's evidence source: it selects only the latest project snapshot, does not persist item-level failures, and cannot repair historical deferred hashes without rereading the actual backup destination.
-- Refined the future integration to begin with one explicit persisted backup and one reachable unencrypted destination, then add folder, ZIP, and encrypted content readers behind a common read-only interface. No submodule or shared database is proposed.
 - Replaced audience-specific video language with generic user language and rebuilt the recorder with seeded Bézier pointer paths, off-center clicks, human dwell timing, and smooth recorder-only scrolling.
 - Reassembled and fully decoded a 1:55, 1600×900 H.264 final video with natural 48 kHz stereo narration and an optional embedded English caption track; retimed both tracks across the full visual sequence, inspected representative frames, and verified the embedded captions match the SRT source.
 - Added the MIT license, `SECURITY.md`, `CONTRIBUTING.md`, CODEOWNERS, pull-request guidance, Dependabot, CodeQL, SHA-pinned Actions, and strict browser security headers.
