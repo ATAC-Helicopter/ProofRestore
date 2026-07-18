@@ -1,8 +1,8 @@
 # ProofRestore demo script
 
-Target runtime: **1:50–2:10**. Use the built-in vault and no API key for the most reliable recording.
+Target runtime: **1:15–1:30**. The checked-in narrated cut is **1:17**. Use the built-in vault and no API key for the most reliable recording.
 
-## 0:00–0:15 — Set up the problem
+## 0:00–0:08 — Set up the problem
 
 **On screen:** ProofRestore welcome screen.
 
@@ -12,24 +12,26 @@ Target runtime: **1:50–2:10**. Use the built-in vault and no API key for the m
 
 Point to the hero: **Know your backup will restore before you need it.**
 
-## 0:15–0:30 — Reveal hidden risk
+## 0:08–0:20 — Reveal hidden risk
 
 **Click:** **Explore demo vault**.
 
 **Expected result:** `Flavio's MacBook Backup` opens with eight snapshots. The central contrast reads:
 
-- **Backup status — Completed**
-- **Recoverability status — At risk**
+- **Latest backup job — Completed**
+- **Verified recoverability — At risk**
 
 **Narration:**
 
 > “This job reported success, but recoverability is at risk. Deterministic verification found integrity and retention problems that the job status missed.”
 
-## 0:30–0:55 — Find the thesis
+**Click:** **Check a file**.
+
+## 0:20–0:35 — Find the thesis
 
 The search is prefilled with `Thesis-Final.docx`.
 
-**Click:** `Documents/University/Thesis-Final.docx` in the matching-file list.
+**Click:** `Thesis-Final.docx` in the matching-file list, then select **Original location** so the dry run checks destination conflicts.
 
 **Expected result:** The file timeline appears. Healthy historical versions are green; later corrupted versions are red. The request field reads:
 
@@ -39,7 +41,7 @@ The search is prefilled with `Thesis-Final.docx`.
 
 > “The latest thesis copy is corrupt, so I’ll ask for the Tuesday-evening version.”
 
-## 0:55–1:15 — Prove the recovery point
+## 0:35–0:48 — Prove the recovery point
 
 **Click:** **Verify recoverability**.
 
@@ -48,14 +50,14 @@ The search is prefilled with `Thesis-Final.docx`.
 - request resolved to `Documents/University/Thesis-Final.docx`;
 - Tuesday evening interpreted as `2026-07-14 19:00 UTC`;
 - latest eligible snapshot selected: `snapshot-2026-07-14-1730`;
-- verdict: **Fully recoverable**;
+- verdict: **Yes — this version is fully recoverable**;
 - integrity: **verified**.
 
 **Narration:**
 
 > “The deterministic fallback interpreted the path and time for this no-key recording. Then trusted code selected the snapshot, found the stored object, checked its hash and size, and produced the verdict.”
 
-## 1:15–1:38 — Run the safe restore simulation
+## 0:48–1:03 — Run the safe restore simulation
 
 **Click:** **Run restore simulation**.
 
@@ -69,9 +71,9 @@ The search is prefilled with `Thesis-Final.docx`.
 
 Point to `snapshot_selected`, `path_found`, `object_found`, `hash_match`, `size_match`, and `destination_conflict` evidence.
 
-## 1:38–1:55 — Generate proof
+## 1:03–1:13 — Generate proof
 
-**Click:** **Generate proof report**.
+**Click:** **Continue to proof report**, then **Generate and download Markdown report**.
 
 **Expected result:** `proof-of-recoverability.md` downloads and a preview appears. It contains the request, recovery point, verdict, metrics, conflicts, restore plan, retention warnings, evidence appendix, methodology, and an explicit simulation statement.
 
@@ -79,7 +81,7 @@ Point to `snapshot_selected`, `path_found`, `object_found`, `hash_match`, `size_
 
 > “ProofRestore turns the dry run into a portable evidence report. Every claim traces to deterministic checks.”
 
-## 1:55–2:10 — Close on the trust boundary
+## 1:13–1:17 — Close on the trust boundary
 
 **Narration:**
 
@@ -91,12 +93,15 @@ End on the footer: **Backups should not require faith.**
 
 ```text
 Explore demo vault
+→ Check a file
 → select Documents/University/Thesis-Final.docx
+→ choose Original location
 → Verify recoverability
 → Fully recoverable at snapshot-2026-07-14-1730
 → Run restore simulation
 → Open exact evidence
-→ Generate proof report
+→ Continue to proof report
+→ Generate and download Markdown report
 ```
 
 ## Recording preparation
@@ -108,6 +113,8 @@ Explore demo vault
 - Clear prior downloads so `proof-of-recoverability.md` is easy to identify.
 - Keep browser zoom at 100% and the pointer visible.
 - Rehearse once with the network disconnected; the primary flow should be unchanged.
+- To reproduce the checked-in media after a production build, run `npm run capture:submission` and `npm run record:demo`.
+- The narrated MP4, silent WebM, AIFF narration, and source text live in `docs/assets/submission/` and `docs/demo-narration.txt`.
 
 ## Fallback plan
 

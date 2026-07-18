@@ -25,7 +25,7 @@
 - The exact demo integration now proves: demo vault → thesis path → Tuesday 19:00 UTC → `snapshot-2026-07-14-1730` → verified object/hash/size → fully recoverable → deterministic conflict-aware plan.
 - The Vitest suite passes all **59** unit and integration tests.
 - Formatting, lint, strict type checking, and the Next.js 15.5.20 production build pass in the final validation chain.
-- The Playwright Chromium suite passes **3/3**, covering the critical demo through report download, valid and malformed imports, the no-key API fallback, and a mobile viewport smoke test.
+- The Playwright Chromium suite passes **4/4**, covering the critical demo through report download, valid and malformed imports, the no-key API fallback, mobile overflow, and stale-result invalidation.
 - `npm audit` reports only transitive moderate PostCSS advisories with no currently available non-breaking remediation.
 
 ### Final fixes and decisions
@@ -45,3 +45,14 @@
 - Captured a 1500×1000 cover plus dashboard, result, simulation/evidence, and report screenshots at 1600×900.
 - Corrected hard-coded dashboard claims for imported manifests, changed the initial restore-test status to **Not run**, added keyboard-operable import buttons, exposed selected-file state, and moved focus to new recovery results.
 - Added a 64 KiB interpreter request limit and made credentialed model use require `ENABLE_OPENAI_INTERPRETER=true`; public no-key demos remain safe and deterministic.
+
+### Guided experience redesign
+
+- Replaced the expanding dashboard with a four-stage guided workspace: vault health, recovery request, restore simulation, and proof report.
+- Added explicit safe-copy/original-location, exact recovery-point, and recursive-folder controls; safe copy is the default and input changes invalidate stale plans and reports.
+- Separated the content verdict from restore-plan safety, added request/path/snapshot/destination provenance, and made verdict styling deterministic for verified, partial, and failed outcomes.
+- Added focus management, a skip link, one concise live region, 44 px targets, reduced-motion handling, mobile overflow coverage, and scoped imported-manifest status language.
+- Regenerated the cover, Open Graph art, and six submission screenshots from the production build.
+- Recorded a paced 1:17 demo as silent WebM and narrated MP4, with the narration track and source script retained for editing.
+- Three independent read-only agents supplied the guided-flow specification, adversarial accessibility/trust review, and release/video audit; the lead inspected and integrated their recommendations.
+- Linked the repository to the `proofrestore` Vercel project, deployed the deterministic no-key build, and verified the public homepage and interpreter fallback at `https://proofrestore.vercel.app`.

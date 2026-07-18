@@ -1,0 +1,13 @@
+Backup success is not recovery success. ProofRestore checks whether a completed backup can actually be recovered before an emergency.
+
+This demo vault shows the contradiction immediately: the latest backup job completed, but deterministic verification found two integrity issues and one retention risk.
+
+I’ll check the historical thesis file. ProofRestore shows its available recovery points, including damaged recent versions and a verified Tuesday version. Natural language helps identify the requested path and time, while tested code makes every recovery decision.
+
+I’ll simulate the original location so overwrite risks are visible. The Tuesday-evening version is fully recoverable: its object exists, its hash and size match, and the selected snapshot is eligible.
+
+The restore simulation changes nothing. It identifies a newer destination file and protects it as a conflict. Every statement traces to exact deterministic evidence, including snapshot selection, path resolution, object availability, hash, size, and destination checks.
+
+Finally, ProofRestore produces a portable Proof of Recoverability with the request, recovery point, verdict, restore safety, conflicts, methodology, and evidence appendix.
+
+Backups should not require faith.

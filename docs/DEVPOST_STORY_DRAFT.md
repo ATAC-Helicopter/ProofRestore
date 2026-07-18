@@ -6,8 +6,8 @@
 
 - **Tagline:** Know your backup will restore before you need it.
 - **Built with:** Next.js, React, TypeScript, Tailwind CSS, Zod, OpenAI Responses API, Vitest, Playwright, Codex
-- **Repository:** `[add public repository URL]`
-- **Live demo:** `[add deployment URL]`
+- **Repository:** https://github.com/ATAC-Helicopter/ProofRestore
+- **Live demo:** https://proofrestore.vercel.app
 - **Video:** `[add public video URL]`
 - **Demo limitation:** Restore operations are simulations; the built-in vault is synthetic and the primary recording uses the deterministic no-key interpreter.
 

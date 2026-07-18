@@ -1,0 +1,31 @@
+1
+00:00:00,000 --> 00:00:08,500
+Backup success is not recovery success. ProofRestore checks whether a completed backup can actually be recovered before an emergency.
+
+2
+00:00:08,500 --> 00:00:18,500
+This demo vault shows the contradiction immediately: the latest backup job completed, but deterministic verification found two integrity issues and one retention risk.
+
+3
+00:00:18,500 --> 00:00:29,500
+I’ll check the historical thesis file. ProofRestore shows its recovery points, including damaged recent versions and a verified Tuesday version.
+
+4
+00:00:29,500 --> 00:00:39,000
+Natural language helps identify the requested path and time, while tested code makes every recovery decision.
+
+5
+00:00:39,000 --> 00:00:49,000
+I’ll simulate the original location so overwrite risks are visible. The Tuesday-evening version is fully recoverable: its object exists, and its hash and size match.
+
+6
+00:00:49,000 --> 00:01:01,000
+The restore simulation changes nothing. It identifies a newer destination file and protects it as a conflict. Every statement traces to exact deterministic evidence.
+
+7
+00:01:01,000 --> 00:01:13,000
+Finally, ProofRestore produces a portable report with the request, recovery point, verdict, restore safety, conflicts, methodology, and evidence appendix.
+
+8
+00:01:13,000 --> 00:01:17,350
+Backups should not require faith.

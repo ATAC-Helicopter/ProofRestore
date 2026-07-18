@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 6 in progress — local submission package prepared; external publication pending.
+Phase 6 in progress — redesigned submission package deployed; final Devpost publication pending.
 
 ## Completed
 
@@ -18,17 +18,22 @@ Phase 6 in progress — local submission package prepared; external publication 
 - Added unit and integration coverage across manifests, interpretation, recovery, fixtures, retention, evidence, and reports.
 - Confirmed all 59 Vitest tests and the production build pass.
 - Confirmed formatting, lint, strict type checking, and the Next.js 15.5.20 production build pass in the final chain.
-- Confirmed the Playwright Chromium suite passes 3/3, covering the mandatory flow through report download, valid and malformed imports, the no-key API fallback, and a mobile viewport.
+- Confirmed the Playwright Chromium suite passes 4/4, covering the mandatory flow, imports, no-key fallback, mobile overflow, and stale-result invalidation.
 - Added architecture, edge-case, setup, deployment, demo, and submission documentation.
 - Rehearsed setup from a fresh local clone with `npm ci`, full static checks, tests, and a production build.
 - Added CI, Node/npm metadata, favicon/social metadata, and reproducible submission-media capture.
-- Captured the 3:2 cover and four gallery screenshots from the deterministic production flow.
+- Rebuilt the interface as a focused four-stage workflow: health, recovery request, restore simulation, and proof report.
+- Made safe copy the default destination, exposed exact snapshot and recursion controls, separated content recoverability from restore safety, and added deterministic provenance to results.
+- Captured the 3:2 cover and six gallery states from the production flow.
+- Recorded a 1:17 narrated 1600×900 MP4 plus editable silent WebM, AIFF narration, and narration script.
+- Deployed the safe deterministic build to https://proofrestore.vercel.app and smoke-tested its homepage and no-key interpreter endpoint.
+- Prepared the public repository at https://github.com/ATAC-Helicopter/ProofRestore.
 - Replaced imported-vault status claims with deterministic dashboard analysis and made restore-test timing truthful.
 - Routed the UI through the constrained interpreter endpoint while keeping model use explicit opt-in with a safe fallback.
 
 ## In progress
 
-- External submission work: publish the repository, deploy, record the video, upload media, and finish the Devpost fields.
+- External submission work: publish the video, upload media, and finish the Devpost fields.
 
 ## Next
 
@@ -48,10 +53,10 @@ Phase 6 in progress — local submission package prepared; external publication 
 ## Risks
 
 - API-key behavior needs one final credentialed smoke test; it is not required for the no-key demo.
-- Deployment, video recording, gallery upload, and final Devpost entry remain external release tasks.
+- Deployment, public video/gallery upload, and final Devpost entry remain external release tasks.
 - `npm audit` reports only transitive moderate PostCSS advisories and currently offers no non-breaking remediation; recheck before production use.
 
 ## Blocked items
 
 - Credentialed Responses API smoke testing requires a user-supplied key and explicit model-use opt-in.
-- Public repository, deployment, gallery, video, category, and Devpost fields require external account actions and final user choices.
+- Gallery/video hosting, category, license choice, and final Devpost fields require external account actions or final user choices.

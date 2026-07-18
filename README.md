@@ -4,6 +4,10 @@
 
 ProofRestore verifies whether a backup can actually be recovered before disaster strikes. It analyzes snapshot history, validates referenced objects, checks hashes and sizes, simulates restore actions without touching real files, surfaces retention risk, and downloads an evidence-backed **Proof of Recoverability** report.
 
+**Live demo:** [proofrestore.vercel.app](https://proofrestore.vercel.app)
+
+**Source:** [github.com/ATAC-Helicopter/ProofRestore](https://github.com/ATAC-Helicopter/ProofRestore)
+
 The product is built around one distinction:
 
 > Backup success is not recovery success.
@@ -17,13 +21,13 @@ The built-in synthetic vault demonstrates that distinction directly: the latest 
 The complete demo works without an OpenAI API key.
 
 1. Open ProofRestore and click **Explore demo vault**.
-2. Confirm the dashboard contrast: **Backup status — Completed** and **Recoverability status — At risk**.
-3. Search for `Thesis-Final.docx` and select `Documents/University/Thesis-Final.docx`.
+2. Confirm the health contrast: **Latest backup job — Completed** and **Verified recoverability — At risk**, then click **Check a file**.
+3. Search for `Thesis-Final.docx`, select `Documents/University/Thesis-Final.docx`, and choose **Original location** to expose conflicts.
 4. Keep the request **Can I recover my thesis from Tuesday evening?** and click **Verify recoverability**.
 5. ProofRestore selects the latest eligible snapshot at or before Tuesday 19:00 UTC: `snapshot-2026-07-14-1730`.
 6. Inspect the **Fully recoverable** verdict and verified object, hash, and size evidence.
 7. Click **Run restore simulation**. The original-location plan surfaces the newer destination copy as a conflict without changing it.
-8. Open **exact evidence**, then click **Generate proof report** to download `proof-of-recoverability.md`.
+8. Open **exact evidence**, continue to the proof report, then click **Generate and download Markdown report**.
 
 See [docs/demo-script.md](docs/demo-script.md) for the timed narration and fallback path.
 
@@ -74,7 +78,7 @@ If model use is disabled, the key is missing, the request times out, or model ou
 
 Requirements:
 
-- Node.js 20.17 or newer
+- Node.js 24.x
 - npm
 
 ```bash
@@ -123,22 +127,28 @@ npm run build
 npm run test:e2e
 ```
 
-The Chromium E2E suite passes 3/3. It covers the demo vault through thesis selection, Tuesday recovery, restore simulation, evidence expansion, and report download; valid and malformed manifest imports; the no-key API fallback; and a mobile viewport smoke test.
+The Chromium E2E suite passes 4/4. It covers the demo vault through thesis selection, Tuesday recovery, restore simulation, evidence expansion, and report download; valid and malformed manifest imports; the no-key API fallback; mobile overflow; and invalidation of stale evidence when a request changes.
 
 ## Submission media
 
-The checked-in capture script reproduces the cover and four gallery screenshots from the production build:
+The checked-in scripts reproduce the cover, six gallery states, and a paced silent screen recording from the production build:
 
 ```bash
 npm run build
 npm run capture:submission
+npm run record:demo
 ```
 
 - [3:2 project cover](docs/assets/submission/cover-1500x1000.png)
-- [Vault dashboard](docs/assets/submission/01-dashboard-1600x900.png)
-- [Recovery result](docs/assets/submission/02-recovery-result-1600x900.png)
-- [Restore simulation and evidence](docs/assets/submission/03-simulation-evidence-1600x900.png)
-- [Proof report](docs/assets/submission/04-proof-report-1600x900.png)
+- [Welcome](docs/assets/submission/00-welcome-1600x900.png)
+- [Vault health](docs/assets/submission/01-vault-health-1600x900.png)
+- [Recovery request](docs/assets/submission/02-recovery-request-1600x900.png)
+- [Verified result](docs/assets/submission/03-verified-result-1600x900.png)
+- [Restore simulation and evidence](docs/assets/submission/04-simulation-evidence-1600x900.png)
+- [Proof report](docs/assets/submission/05-proof-report-1600x900.png)
+- [Narrated demo video with embedded captions](docs/assets/submission/proofrestore-demo-captioned.mp4)
+
+The editable source assets are the silent WebM recording, AIFF narration track, [SRT captions](docs/assets/submission/proofrestore-demo-captions.srt), and [demo-narration.txt](docs/demo-narration.txt). The generated narrated cut is 1:17 at 1600×900.
 
 ## Manifest import
 
