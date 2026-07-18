@@ -138,8 +138,8 @@ Explore demo vault
 - Clear prior downloads so `proof-of-recoverability.md` is easy to identify.
 - Keep browser zoom at 100%; the automated recorder renders a high-contrast pointer and click pulse into the page.
 - Rehearse once with the network disconnected; the primary flow should be unchanged.
-- To reproduce the checked-in media after a production build, run `npm run capture:submission`, `npm run record:demo`, regenerate narration as documented, and run `npm run assemble:demo`.
-- The publication MP4, silent WebM, neural narration MP3, SRT captions, and source text live in `docs/assets/submission/` and `docs/demo-narration.txt`.
+- To reproduce the gallery and visual recording after a production build, run `npm run capture:submission` and `npm run record:demo`.
+- The repository retains the publication MP4, SRT captions, and narration source. Large intermediate audio and silent-video renders are intentionally excluded.
 - Use only `proofrestore-demo-final.mp4` for submission. Attach `proofrestore-demo-captions.srt` separately on the host and verify that CC remains toggleable after transcoding. See [media-production.md](media-production.md).
 
 ## Fallback plan

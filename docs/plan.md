@@ -25,8 +25,7 @@ Phase 6 in progress — redesigned submission package deployed; final Devpost pu
 - Rebuilt the interface as a focused four-stage workflow: health, recovery request, restore simulation, and proof report.
 - Made safe copy the default destination, exposed exact snapshot and recursion controls, separated content recoverability from restore safety, and added deterministic provenance to results.
 - Captured the 3:2 cover and eight gallery states from the production flow, including Recovery Lab setup/safety and corruption/evidence views.
-- Recorded a 1:55 narrated 1600×900 MP4 covering the core recovery flow and Recovery Lab, plus its editable silent WebM, natural neural MP3, selectable SRT captions, and narration script.
-- Completed a read-only study of VaultSync's Core, CLI, UI, persistence, verification, snapshot, retention, and backup-format seams; documented a safe evidence-export contract without changing the VaultSync repository.
+- Recorded a 1:55 narrated 1600×900 MP4 covering the core recovery flow and Recovery Lab, with selectable SRT captions and a retained narration script.
 - Added an MIT license, public security policy, contribution guidance, CodeQL and Dependabot configuration, SHA-pinned Actions, patched PostCSS resolution, and browser security headers.
 - Rebuilt the recorder with deterministic human-like pointer paths, intentional dwell/click timing, and smooth recorder-only scrolling while preserving reduced-motion behavior in the product.
 - Deployed the safe deterministic build to https://proofrestore.vercel.app and smoke-tested its homepage and no-key interpreter endpoint.

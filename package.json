@@ -28,8 +28,7 @@
     "test:e2e": "playwright test",
     "validate": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build",
     "capture:submission": "node scripts/capture-submission-assets.mjs",
-    "record:demo": "node scripts/record-demo.mjs",
-    "assemble:demo": "node scripts/assemble-demo.mjs"
+    "record:demo": "node scripts/record-demo.mjs"
   },
   "dependencies": {
     "next": "15.5.20",
