@@ -1,31 +1,75 @@
 1
-00:00:00,000 --> 00:00:08,500
-Backup success is not recovery success. ProofRestore checks whether a completed backup can actually be recovered before an emergency.
+00:00:00,000 --> 00:00:04,500
+[AI-generated narration] Backup success is not recovery success. ProofRestore verifies recovery before an emergency.
 
 2
-00:00:08,500 --> 00:00:18,500
-This demo vault shows the contradiction immediately: the latest backup job completed, but deterministic verification found two integrity issues and one retention risk.
+00:00:04,500 --> 00:00:07,000
+I’ll start with Explore demo vault.
 
 3
-00:00:18,500 --> 00:00:29,500
-I’ll check the historical thesis file. ProofRestore shows its recovery points, including damaged recent versions and a verified Tuesday version.
+00:00:07,000 --> 00:00:12,500
+The latest backup job says Completed, but verified recoverability is At risk.
 
 4
-00:00:29,500 --> 00:00:39,000
-Natural language helps identify the requested path and time, while tested code makes every recovery decision.
+00:00:12,500 --> 00:00:18,000
+Eight snapshots contain two integrity issues and one retention risk. I’ll click Check a file.
 
 5
-00:00:39,000 --> 00:00:49,000
-I’ll simulate the original location so overwrite risks are visible. The Tuesday-evening version is fully recoverable: its object exists, and its hash and size match.
+00:00:18,000 --> 00:00:23,000
+The request asks for my thesis from Tuesday evening.
 
 6
-00:00:49,000 --> 00:01:01,000
-The restore simulation changes nothing. It identifies a newer destination file and protects it as a conflict. Every statement traces to exact deterministic evidence.
+00:00:23,000 --> 00:00:27,000
+I’ll select Thesis Final, then open the exact snapshot history.
 
 7
-00:01:01,000 --> 00:01:13,000
-Finally, ProofRestore produces a portable report with the request, recovery point, verdict, restore safety, conflicts, methodology, and evidence appendix.
+00:00:27,000 --> 00:00:32,000
+Recent versions are damaged, while the Tuesday copy is verified.
 
 8
-00:01:13,000 --> 00:01:17,350
+00:00:32,000 --> 00:00:37,500
+I’ll keep the time from my request and choose Original location.
+
+9
+00:00:37,500 --> 00:00:44,000
+The dry run will check for overwrite danger. Now I’ll click Verify recoverability.
+
+10
+00:00:44,000 --> 00:00:50,000
+The no-key interpreter resolves the path and Tuesday evening.
+
+11
+00:00:50,000 --> 00:00:58,000
+Deterministic code selects the eligible snapshot, finds the object, and verifies its hash and size. The version is fully recoverable.
+
+12
+00:00:58,000 --> 00:01:04,000
+Next, I’ll run the restore simulation. This changes nothing.
+
+13
+00:01:04,000 --> 00:01:10,000
+A newer destination file exists, so ProofRestore flags a conflict instead of overwriting it.
+
+14
+00:01:10,000 --> 00:01:16,000
+I’ll open the exact evidence.
+
+15
+00:01:16,000 --> 00:01:22,000
+These entries prove the snapshot, path, object, matching hash and size, and destination conflict.
+
+16
+00:01:22,000 --> 00:01:28,000
+I’ll continue to the proof report, then generate and download the Markdown report.
+
+17
+00:01:28,000 --> 00:01:37,000
+It records the request, recovery point, verdict, restore plan, conflict, methodology, and evidence appendix.
+
+18
+00:01:37,000 --> 00:01:42,000
+Natural language can interpret the request, but only deterministic code decides recoverability.
+
+19
+00:01:42,000 --> 00:01:46,500
 Backups should not require faith.

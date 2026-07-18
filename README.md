@@ -146,9 +146,11 @@ npm run record:demo
 - [Verified result](docs/assets/submission/03-verified-result-1600x900.png)
 - [Restore simulation and evidence](docs/assets/submission/04-simulation-evidence-1600x900.png)
 - [Proof report](docs/assets/submission/05-proof-report-1600x900.png)
-- [Narrated demo video with embedded captions](docs/assets/submission/proofrestore-demo-captioned.mp4)
+- [Final narrated demo with selectable captions and visible pointer](docs/assets/submission/proofrestore-demo-final.mp4)
+- [Narrated demo without burned-in captions](docs/assets/submission/proofrestore-demo-narrated.mp4)
+- [Alternate demo with permanently visible captions](docs/assets/submission/proofrestore-demo-burned-captions.mp4)
 
-The editable source assets are the silent WebM recording, AIFF narration track, [SRT captions](docs/assets/submission/proofrestore-demo-captions.srt), and [demo-narration.txt](docs/demo-narration.txt). The generated narrated cut is 1:17 at 1600×900.
+The editable source assets are the silent WebM recording, neural narration MP3, [SRT captions](docs/assets/submission/proofrestore-demo-captions.srt), and [demo-narration.txt](docs/demo-narration.txt). The final 1:48 cut is 1600×900 H.264 with normalized 48 kHz stereo AAC audio and a default English caption track that viewers can enable or disable. A separate burned-caption copy is included for platforms that cannot display embedded captions. The narration uses an AI-generated voice and is disclosed in the first caption.
 
 ## Manifest import
 

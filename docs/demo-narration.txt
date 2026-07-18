@@ -1,13 +1,17 @@
-Backup success is not recovery success. ProofRestore checks whether a completed backup can actually be recovered before an emergency.
+Backup success is not recovery success. ProofRestore verifies recovery before an emergency. I’ll start with Explore demo vault.
 
-This demo vault shows the contradiction immediately: the latest backup job completed, but deterministic verification found two integrity issues and one retention risk.
+The latest backup job says Completed, but verified recoverability is At risk. Eight snapshots contain two integrity issues and one retention risk. I’ll click Check a file.
 
-I’ll check the historical thesis file. ProofRestore shows its available recovery points, including damaged recent versions and a verified Tuesday version. Natural language helps identify the requested path and time, while tested code makes every recovery decision.
+The request asks for my thesis from Tuesday evening. I’ll select Thesis Final, then open the exact snapshot history. Recent versions are damaged, while the Tuesday copy is verified.
 
-I’ll simulate the original location so overwrite risks are visible. The Tuesday-evening version is fully recoverable: its object exists, its hash and size match, and the selected snapshot is eligible.
+I’ll keep the time from my request and choose Original location so the dry run checks for overwrite danger. Now I’ll click Verify recoverability.
 
-The restore simulation changes nothing. It identifies a newer destination file and protects it as a conflict. Every statement traces to exact deterministic evidence, including snapshot selection, path resolution, object availability, hash, size, and destination checks.
+The no-key interpreter resolves the path and Tuesday evening. Deterministic code selects the latest eligible snapshot, confirms that the stored object exists, and verifies its hash and size. The version is fully recoverable.
 
-Finally, ProofRestore produces a portable Proof of Recoverability with the request, recovery point, verdict, restore safety, conflicts, methodology, and evidence appendix.
+Next, I’ll run the restore simulation. This changes nothing. A newer, different destination file exists, so ProofRestore flags a conflict instead of overwriting it.
 
-Backups should not require faith.
+I’ll open the exact evidence. These entries prove the selected snapshot, resolved path, available object, matching hash and size, and destination conflict.
+
+I’ll continue to the proof report, then generate and download the Markdown report. It records the request, recovery point, verdict, restore plan, conflict, methodology, and evidence appendix.
+
+Natural language can interpret the request, but only deterministic code decides recoverability. Backups should not require faith.

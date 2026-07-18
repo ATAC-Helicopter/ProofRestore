@@ -95,6 +95,8 @@ End on the footer: **Backups should not require faith.**
 Explore demo vault
 → Check a file
 → select Documents/University/Thesis-Final.docx
+→ open exact snapshot history and show older versions
+→ keep Use time from my request
 → choose Original location
 → Verify recoverability
 → Fully recoverable at snapshot-2026-07-14-1730
@@ -111,10 +113,11 @@ Explore demo vault
 - Leave `OPENAI_API_KEY` unset for a deterministic recording.
 - Keep `ENABLE_OPENAI_INTERPRETER=false` for the primary recording.
 - Clear prior downloads so `proof-of-recoverability.md` is easy to identify.
-- Keep browser zoom at 100% and the pointer visible.
+- Keep browser zoom at 100%; the automated recorder renders a high-contrast pointer and click pulse into the page.
 - Rehearse once with the network disconnected; the primary flow should be unchanged.
 - To reproduce the checked-in media after a production build, run `npm run capture:submission` and `npm run record:demo`.
-- The narrated MP4, silent WebM, AIFF narration, and source text live in `docs/assets/submission/` and `docs/demo-narration.txt`.
+- The final MP4, silent WebM, neural narration MP3, SRT captions, and source text live in `docs/assets/submission/` and `docs/demo-narration.txt`.
+- Use `proofrestore-demo-final.mp4` for submission. It has a default selectable English caption track and its opening caption discloses that the narration is AI-generated. Use `proofrestore-demo-burned-captions.mp4` only on platforms that cannot expose embedded captions.
 
 ## Fallback plan
 

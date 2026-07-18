@@ -50,9 +50,11 @@
 - [x] Restore simulation screenshot captured
 - [x] Proof report screenshot captured
 - [x] Welcome and recovery-request screenshots captured
-- [x] Video under required duration: 1:17
-- [x] Narration track generated and muxed into the MP4
-- [x] SRT captions added for upload and accessibility
+- [x] Video under required duration: 1:48
+- [x] Natural neural narration generated, normalized, and muxed as 48 kHz stereo AAC
+- [x] Selectable English captions embedded in the final MP4 and retained as an SRT sidecar
+- [x] Alternate burned-caption MP4 retained for platforms without subtitle controls
+- [x] High-contrast pointer and click pulses recorded for every interaction
 
 ## Final release checks
 
@@ -62,7 +64,7 @@
 - [x] Git remote configured and pushed
 - [x] `npx playwright install chromium` completed in the verification environment
 - [x] No-key demo rehearsed in a clean Chromium context
-- [ ] Report download verified in the deployed site
+- [x] Report download verified in the deployed site
 - [x] Mobile viewport smoke-tested
 - [x] Keyboard-accessible labels used by the final automated flow
 - [x] Deployment uses the deterministic no-key path and exposes no application secrets

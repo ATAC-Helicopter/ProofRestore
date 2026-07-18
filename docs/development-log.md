@@ -64,3 +64,12 @@
 - Removed nested scrolling from the recovery workflow and report, added sticky-header scroll clearance, and made the investigation workspace stack before it becomes cramped.
 - Reduced dashboard and result clutter, hid empty simulation groups, preserved restore-action labels on mobile, and corrected partial/unavailable simulations so they cannot appear as green success.
 - Regenerated every checked-in submission screenshot and added browser assertions for clipping, target sizes, exact-snapshot readability, and unavailable-item visibility.
+
+### Narrated demo correction
+
+- Expanded the walkthrough to 1:48 so every click and deterministic decision is narrated in sequence, including exact snapshot history, destination selection, simulation, evidence, and report download.
+- Replaced the system narration with a natural AI-generated neural voice and added an explicit on-screen disclosure.
+- Added a rendered high-contrast pointer plus click pulses because headless browser recordings do not include the operating-system cursor.
+- Embedded a default selectable English caption track in the final H.264 video, retained the SRT sidecar, and kept a separate burned-caption fallback for platforms without subtitle controls.
+- Normalized narration and exported 48 kHz stereo AAC audio for broad player compatibility.
+- Fully decoded the final MP4, measured its audio, inspected an eight-frame contact sheet, and verified that captioned frames differ from the uncaptioned master.
