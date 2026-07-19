@@ -160,10 +160,10 @@ async function showBuildDisclosure(page) {
         <h1>Developed with Codex + GPT-5.6 Sol</h1>
         <p class="build-disclosure-lede">Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab, build adversarial tests, refine accessibility, and run release validation.</p>
         <div class="build-disclosure-boundary">
-          <strong>AI interprets intent.</strong>
-          <span>Deterministic code alone decides recovery.</span>
+          <strong>Verified by tests.</strong>
+          <span>Explained with transparent evidence.</span>
         </div>
-        <p class="build-disclosure-close">Backups should not require faith.</p>
+        <p class="build-disclosure-close">Public source. Reproducible validation.</p>
       </div>
     `;
     const style = document.createElement("style");

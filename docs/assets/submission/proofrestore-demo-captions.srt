@@ -1,100 +1,99 @@
 1
-00:00:00,058 --> 00:00:03,453
+00:00:00,058 --> 00:00:03,019
 [AI-generated narration] Backup success is not recovery success.
 
 2
-00:00:03,453 --> 00:00:07,262
+00:00:03,019 --> 00:00:06,314
 ProofRestore verifies recovery before an emergency.
 
 3
-00:00:07,262 --> 00:00:08,949
+00:00:06,314 --> 00:00:07,758
 I’ll open the demo vault.
 
 4
-00:00:08,949 --> 00:00:18,149
+00:00:08,949 --> 00:00:16,785
 The latest backup completed, but recoverability is at risk: eight snapshots hide two integrity issues and a retention risk.
 
 5
-00:00:18,149 --> 00:00:19,349
+00:00:16,785 --> 00:00:17,762
 I’ll check a file.
 
 6
-00:00:19,349 --> 00:00:22,750
+00:00:19,349 --> 00:00:22,196
 The request asks for my thesis from Tuesday evening.
 
 7
-00:00:22,750 --> 00:00:28,154
+00:00:22,196 --> 00:00:26,628
 Its history shows damaged recent versions and a verified Tuesday copy.
 
 8
-00:00:28,154 --> 00:00:33,334
+00:00:26,628 --> 00:00:31,071
 I’ll keep the interpreted time, choose the original location, and verify.
 
 9
-00:00:33,334 --> 00:00:40,886
+00:00:33,334 --> 00:00:39,965
 Deterministic code selects the eligible snapshot, finds the stored object, and proves its hash and size.
 
 10
-00:00:40,886 --> 00:00:43,549
+00:00:39,965 --> 00:00:42,386
 This version is fully recoverable.
 
 11
-00:00:43,549 --> 00:00:46,356
+00:00:43,549 --> 00:00:45,953
 The restore simulation changes nothing.
 
 12
-00:00:46,356 --> 00:00:53,224
+00:00:45,953 --> 00:00:51,680
 A newer destination file would conflict, so ProofRestore protects it instead of overwriting it.
 
 13
-00:00:53,224 --> 00:01:01,344
+00:00:53,224 --> 00:00:59,969
 These evidence entries trace the snapshot, path, object, matching hash and size, and conflict.
 
 14
-00:01:01,344 --> 00:01:08,567
+00:00:59,969 --> 00:01:06,412
 The downloaded proof report preserves the request, verdict, plan, methodology, and appendix.
 
 15
-00:01:08,567 --> 00:01:11,414
+00:01:08,567 --> 00:01:10,835
 Anyone can test the same engine directly.
 
 16
-00:01:11,414 --> 00:01:19,625
+00:01:10,835 --> 00:01:17,903
 The Recovery Lab reads selected files locally and changes only in-memory copies—nothing is uploaded or modified.
 
 17
-00:01:19,625 --> 00:01:24,238
+00:01:17,903 --> 00:01:21,960
 I’ll load the sample, corrupt one stored copy, and run the check.
 
 18
-00:01:24,238 --> 00:01:28,404
+00:01:24,238 --> 00:01:27,801
 The ordered log exposes every snapshot and byte change.
 
 19
-00:01:28,404 --> 00:01:35,641
+00:01:27,801 --> 00:01:33,858
 The fixed expected hash and changed observed hash produce hash mismatch and an unrecoverable result.
 
 20
-00:01:35,641 --> 00:01:44,762
+00:01:35,641 --> 00:01:43,613
 You can choose your own files or folder, remove an object, create a conflict, export the manifest, or continue through the full workflow.
 
 21
-00:01:44,762 --> 00:01:50,285
+00:01:43,613 --> 00:01:48,886
 Natural language interprets requests, but deterministic code decides recovery.
 
 22
-00:01:50,285 --> 00:01:53,000
+00:01:48,886 --> 00:01:51,079
 Backups should not require faith.
 
 23
-00:01:56,850 --> 00:02:04,175
+00:01:56,850 --> 00:02:04,288
 ProofRestore was developed during OpenAI Build Week with Codex running GPT-5.6 Sol from start to finish.
 
 24
-00:02:04,175 --> 00:02:14,311
-Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab,
-build adversarial tests, refine accessibility, and run release validation.
+00:02:04,288 --> 00:02:14,731
+Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab, build adversarial tests, refine accessibility, and run release validation.
 
 25
-00:02:14,311 --> 00:02:19,322
-AI interprets intent, but deterministic code alone decides recovery.
+00:02:14,731 --> 00:02:20,470
+Every recoverability claim remains backed by executable tests and transparent evidence.

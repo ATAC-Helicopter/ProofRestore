@@ -11,7 +11,7 @@ npm run record:demo
 
 The recorder starts the production application, captures the complete demo and Recovery Lab path at 1600×900, and writes a temporary `proofrestore-demo-silent.webm`. It renders its own high-contrast pointer and click pulse because headless recordings do not contain the operating-system cursor. The silent render and generated narration audio are production intermediates and are intentionally not retained in the public repository.
 
-The checked-in narration source uses Microsoft Edge's `en-US-AndrewMultilingualNeural` voice in the final cut. The curated SRT remains alongside the publication MP4 so caption wording, timing, and the AI-narration disclosure can be reviewed and uploaded independently.
+The checked-in narration source uses Microsoft Edge's `en-US-AndrewMultilingualNeural` voice in the final cut. Each narration section is aligned from zero against the corresponding visual chapter rather than reusing audio from another recording. The curated SRT is timed from the same fresh speech boundaries and remains alongside the publication MP4 so caption wording, timing, and the AI-narration disclosure can be reviewed and uploaded independently.
 
 ## Publishing check
 

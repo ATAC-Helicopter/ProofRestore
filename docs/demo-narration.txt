@@ -16,4 +16,4 @@ The ordered log exposes every snapshot and byte change. The fixed expected hash 
 
 You can choose your own files or folder, remove an object, create a conflict, export the manifest, or continue through the full workflow. Natural language interprets requests, but deterministic code decides recovery. Backups should not require faith.
 
-ProofRestore was developed during OpenAI Build Week with Codex running GPT-5.6 Sol from start to finish. Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab, build adversarial tests, refine accessibility, and run release validation. AI interprets intent, but deterministic code alone decides recovery.
+ProofRestore was developed during OpenAI Build Week with Codex running GPT-5.6 Sol from start to finish. Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab, build adversarial tests, refine accessibility, and run release validation. Every recoverability claim remains backed by executable tests and transparent evidence.
