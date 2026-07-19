@@ -112,8 +112,8 @@ OPENAI_API_KEY=
 # Explicit opt-in. Leave false for public no-key demos.
 ENABLE_OPENAI_INTERPRETER=false
 
-# Optional override; defaults to GPT-5.6 Terra.
-OPENAI_MODEL=gpt-5.6-terra
+# Optional override; defaults to GPT-5.6 Sol.
+OPENAI_MODEL=gpt-5.6-sol
 
 # Optional canonical deployment URL for social metadata.
 NEXT_PUBLIC_SITE_URL=
@@ -164,7 +164,7 @@ npm run record:demo
 - [Recovery Lab with injected corruption and evidence](docs/assets/submission/07-recovery-lab-result-1600x900.png)
 - [Final narrated demo with selectable captions and visible pointer](docs/assets/submission/proofrestore-demo-final.mp4)
 
-The repository retains only the publication MP4, [SRT captions](docs/assets/submission/proofrestore-demo-captions.srt), and [narration source](docs/demo-narration.txt)—not large intermediate audio or silent-video renders. The final 2:20 cut is 1600×900 H.264 with normalized 48 kHz stereo AAC audio, smooth recorder-controlled scrolling, human-like pointer movement and click pulses, and a default English caption track that viewers can enable or disable. It covers the mandatory thesis recovery, hands-on Recovery Lab, and how Codex with GPT-5.6 supported development. The narration uses Microsoft Edge's `en-US-AndrewMultilingualNeural` voice and is disclosed in the first caption. Upload the SRT separately because video hosts may discard embedded subtitles during transcoding. Publishing checks are in [docs/media-production.md](docs/media-production.md).
+The repository retains only the publication MP4, [SRT captions](docs/assets/submission/proofrestore-demo-captions.srt), and [narration source](docs/demo-narration.txt)—not large intermediate audio or silent-video renders. The final 2:21 cut is 1600×900 H.264 with normalized 48 kHz stereo AAC audio, smooth recorder-controlled scrolling, human-like pointer movement and click pulses, and a default English caption track that viewers can enable or disable. It covers the mandatory thesis recovery, hands-on Recovery Lab, and how Codex with GPT-5.6 Sol supported development. The narration uses Microsoft Edge's `en-US-AndrewMultilingualNeural` voice and is disclosed in the first caption. Upload the SRT separately because video hosts may discard embedded subtitles during transcoding. Publishing checks are in [docs/media-production.md](docs/media-production.md).
 
 ## Manifest import
 
@@ -197,7 +197,7 @@ For another Node host, run `npm install`, `npm run build`, and `npm run start`. 
 
 ## Hackathon development note
 
-ProofRestore was created during OpenAI Build Week with Codex running GPT-5.6. Codex helped establish the architecture, implement and integrate the deterministic recovery engine and Recovery Lab, generate adversarial tests, refine accessibility and interface behavior, and run release validation. Independent subagents worked with non-overlapping ownership on the manifest schema, recovery engine, demo fixture, testing, UX, and submission readiness. All recoverability claims remain backed by executable deterministic logic and tests rather than agent or model judgment.
+ProofRestore was created during OpenAI Build Week with Codex running GPT-5.6 Sol from start to finish. Codex helped establish the architecture, implement and integrate the deterministic recovery engine and Recovery Lab, generate adversarial tests, refine accessibility and interface behavior, and run release validation. Independent subagents worked with non-overlapping ownership on the manifest schema, recovery engine, demo fixture, testing, UX, and submission readiness. All recoverability claims remain backed by executable deterministic logic and tests rather than agent or model judgment.
 
 ## License and security
 

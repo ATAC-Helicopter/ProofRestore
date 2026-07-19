@@ -1,6 +1,6 @@
 # ProofRestore demo script
 
-Target runtime: **under three minutes**. The checked-in narrated cut is **2:20** and includes the mandatory recovery proof, hands-on Recovery Lab, and explicit Codex/GPT-5.6 development disclosure required for OpenAI Build Week. Use the built-in vault and no API key for the most reliable recording.
+Target runtime: **under three minutes**. The checked-in narrated cut is **2:21** and includes the mandatory recovery proof, hands-on Recovery Lab, and explicit Codex/GPT-5.6 Sol development disclosure required for OpenAI Build Week. Use the built-in vault and no API key for the most reliable recording.
 
 ## 0:00–0:08 — Set up the problem
 
@@ -101,15 +101,15 @@ Point to `snapshot_selected`, `path_found`, `object_found`, `hash_match`, `size_
 
 End on the footer: **Backups should not require faith.**
 
-## 1:56–2:20 — Explain how it was built
+## 1:56–2:21 — Explain how it was built
 
 **On screen:** A concise OpenAI Build Week disclosure card.
 
 **Narration:**
 
-> “ProofRestore was developed during OpenAI Build Week with Codex and GPT-5.6. Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab, build adversarial tests, refine accessibility, and run release validation. AI interprets intent, but deterministic code alone decides recovery.”
+> “ProofRestore was developed during OpenAI Build Week with Codex running GPT-5.6 Sol from start to finish. Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab, build adversarial tests, refine accessibility, and run release validation. AI interprets intent, but deterministic code alone decides recovery.”
 
-End on **Developed with Codex + GPT-5.6** and the deterministic trust boundary.
+End on **Developed with Codex + GPT-5.6 Sol** and the deterministic trust boundary.
 
 ## Extended hands-on test path
 
@@ -137,7 +137,7 @@ Explore demo vault
 → Apply to virtual vault
 → Run recovery check
 → Unrecoverable with hash_mismatch and ordered evidence
-→ Developed with Codex + GPT-5.6 disclosure
+→ Developed with Codex + GPT-5.6 Sol disclosure
 ```
 
 ## Recording preparation

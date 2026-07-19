@@ -25,7 +25,7 @@ Phase 6 technically complete — application, tests, production build, security 
 - Rebuilt the interface as a focused four-stage workflow: health, recovery request, restore simulation, and proof report.
 - Made safe copy the default destination, exposed exact snapshot and recursion controls, separated content recoverability from restore safety, and added deterministic provenance to results.
 - Captured the 3:2 cover and eight gallery states from the production flow, including Recovery Lab setup/safety and corruption/evidence views.
-- Recorded a 2:20 narrated 1600×900 MP4 covering the core recovery flow, Recovery Lab, and Codex/GPT-5.6 development disclosure, with selectable SRT captions and a retained narration script.
+- Recorded a 2:21 narrated 1600×900 MP4 covering the core recovery flow, Recovery Lab, and disclosure that Codex ran GPT-5.6 Sol from start to finish, with selectable SRT captions and a retained narration script.
 - Added an MIT license, public security policy, contribution guidance, CodeQL and Dependabot configuration, SHA-pinned Actions, patched PostCSS resolution, and browser security headers.
 - Rebuilt the recorder with deterministic human-like pointer paths, intentional dwell/click timing, and smooth recorder-only scrolling while preserving reduced-motion behavior in the product.
 - Deployed the safe deterministic build to https://proofrestore.vercel.app and smoke-tested its homepage and no-key interpreter endpoint.

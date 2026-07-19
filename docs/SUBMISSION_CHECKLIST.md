@@ -55,9 +55,9 @@
 - [x] Welcome and recovery-request screenshots captured
 - [x] Recovery Lab setup/safety screenshot captured
 - [x] Recovery Lab corruption/evidence screenshot captured
-- [x] Video under required duration: 2:20 (official maximum: 3:00)
+- [x] Video under required duration: 2:21 (official maximum: 3:00)
 - [x] Final video demonstrates the mandatory thesis flow and hands-on Recovery Lab
-- [x] Final video explicitly explains how Codex and GPT-5.6 supported development
+- [x] Final video explicitly explains how Codex with GPT-5.6 Sol supported development from start to finish
 - [x] Natural neural narration generated, normalized, and muxed as 48 kHz stereo AAC
 - [x] Selectable English captions embedded in the final MP4 and retained as an SRT sidecar
 - [x] High-contrast pointer and click pulses recorded for every interaction

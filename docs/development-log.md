@@ -94,6 +94,6 @@
 ### Public release hardening and final video
 
 - Replaced audience-specific video language with generic user language and rebuilt the recorder with seeded Bézier pointer paths, off-center clicks, human dwell timing, and smooth recorder-only scrolling.
-- Reassembled and fully decoded a 2:20, 1600×900 H.264 final video with natural 48 kHz stereo narration and an optional embedded English caption track; added the rules-required Codex/GPT-5.6 development disclosure, inspected representative frames, and verified the embedded captions match the SRT source.
+- Reassembled and fully decoded a 2:21, 1600×900 H.264 final video with natural 48 kHz stereo narration and an optional embedded English caption track; added the rules-required disclosure that Codex ran GPT-5.6 Sol from start to finish, inspected representative frames, and verified the embedded captions match the SRT source.
 - Added the MIT license, `SECURITY.md`, `CONTRIBUTING.md`, CODEOWNERS, pull-request guidance, Dependabot, CodeQL, SHA-pinned Actions, and strict browser security headers.
 - Pinned patched PostCSS 8.5.19 through the package override; `npm audit` now reports zero vulnerabilities.

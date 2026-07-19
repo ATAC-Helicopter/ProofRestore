@@ -157,7 +157,7 @@ async function showBuildDisclosure(page) {
       <div class="build-disclosure-frame">
         <div class="build-disclosure-brand"><span>PR</span> ProofRestore</div>
         <p class="build-disclosure-eyebrow">OPENAI BUILD WEEK</p>
-        <h1>Developed with Codex + GPT-5.6</h1>
+        <h1>Developed with Codex + GPT-5.6 Sol</h1>
         <p class="build-disclosure-lede">Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab, build adversarial tests, refine accessibility, and run release validation.</p>
         <div class="build-disclosure-boundary">
           <strong>AI interprets intent.</strong>
@@ -207,7 +207,7 @@ async function showBuildDisclosure(page) {
         letter-spacing: 0.16em;
       }
       #codex-build-disclosure h1 {
-        max-width: 980px;
+        max-width: 1120px;
         margin: 0;
         font-size: 72px;
         line-height: 1.03;

@@ -6,7 +6,7 @@
 
 - **Tagline:** Know your backup will restore before you need it.
 - **Category:** Work and Productivity
-- **Built with:** Codex, GPT-5.6, OpenAI Responses API, Next.js, React, TypeScript, Tailwind CSS, Zod, Vitest, Playwright
+- **Built with:** Codex, GPT-5.6 Sol, OpenAI Responses API, Next.js, React, TypeScript, Tailwind CSS, Zod, Vitest, Playwright
 - **Repository:** https://github.com/ATAC-Helicopter/ProofRestore
 - **Live demo:** https://proofrestore.vercel.app
 - **Video:** `[add public video URL]`
@@ -60,7 +60,7 @@ A deterministic TypeScript recovery engine performs:
 
 The application is built with Next.js, strict TypeScript, Tailwind CSS, Zod, the OpenAI Responses API, Vitest, and Playwright. It is stateless, requires no database, and is ready for a conventional Vercel deployment.
 
-Codex running GPT-5.6 was the primary development environment. A lead agent coordinated architecture, integration, validation, and scope while independent subagents owned the manifest schema, deterministic engine and tests, demo fixture, and documentation through non-overlapping files. Codex also drove adversarial testing, accessibility refinement, browser-flow verification, deployment checks, and submission-media QA.
+Codex running GPT-5.6 Sol was the primary development environment from start to finish. A lead agent coordinated architecture, integration, validation, and scope while independent subagents owned the manifest schema, deterministic engine and tests, demo fixture, and documentation through non-overlapping files. Codex also drove adversarial testing, accessibility refinement, browser-flow verification, deployment checks, and submission-media QA.
 
 ## Challenges we faced
 
