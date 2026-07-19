@@ -2,7 +2,7 @@
 
 ## Current phase
 
-Phase 6 in progress — redesigned submission package deployed; final Devpost publication pending.
+Phase 6 technically complete — application, tests, production build, security hardening, and submission media are ready; only account-bound YouTube and Devpost publication remain.
 
 ## Completed
 
@@ -25,7 +25,7 @@ Phase 6 in progress — redesigned submission package deployed; final Devpost pu
 - Rebuilt the interface as a focused four-stage workflow: health, recovery request, restore simulation, and proof report.
 - Made safe copy the default destination, exposed exact snapshot and recursion controls, separated content recoverability from restore safety, and added deterministic provenance to results.
 - Captured the 3:2 cover and eight gallery states from the production flow, including Recovery Lab setup/safety and corruption/evidence views.
-- Recorded a 1:55 narrated 1600×900 MP4 covering the core recovery flow and Recovery Lab, with selectable SRT captions and a retained narration script.
+- Recorded a 2:20 narrated 1600×900 MP4 covering the core recovery flow, Recovery Lab, and Codex/GPT-5.6 development disclosure, with selectable SRT captions and a retained narration script.
 - Added an MIT license, public security policy, contribution guidance, CodeQL and Dependabot configuration, SHA-pinned Actions, patched PostCSS resolution, and browser security headers.
 - Rebuilt the recorder with deterministic human-like pointer paths, intentional dwell/click timing, and smooth recorder-only scrolling while preserving reduced-motion behavior in the product.
 - Deployed the safe deterministic build to https://proofrestore.vercel.app and smoke-tested its homepage and no-key interpreter endpoint.
@@ -62,5 +62,5 @@ Phase 6 in progress — redesigned submission package deployed; final Devpost pu
 
 ## Blocked items
 
-- Credentialed Responses API smoke testing requires a user-supplied key and explicit model-use opt-in.
+- The public deployment intentionally leaves credentialed model use disabled until authentication, rate limits, and spend controls exist; this does not affect the deterministic submission flow.
 - Gallery/video hosting, category, and final Devpost fields require external account actions or final user choices.

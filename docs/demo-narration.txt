@@ -15,3 +15,5 @@ Anyone can test the same engine directly. The Recovery Lab reads selected files 
 The ordered log exposes every snapshot and byte change. The fixed expected hash and changed observed hash produce hash mismatch and an unrecoverable result.
 
 You can choose your own files or folder, remove an object, create a conflict, export the manifest, or continue through the full workflow. Natural language interprets requests, but deterministic code decides recovery. Backups should not require faith.
+
+ProofRestore was developed during OpenAI Build Week with Codex and GPT-5.6. Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab, build adversarial tests, refine accessibility, and run release validation. AI interprets intent, but deterministic code alone decides recovery.

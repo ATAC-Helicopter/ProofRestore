@@ -5,10 +5,13 @@
 ## Ready-to-paste metadata
 
 - **Tagline:** Know your backup will restore before you need it.
-- **Built with:** Next.js, React, TypeScript, Tailwind CSS, Zod, OpenAI Responses API, Vitest, Playwright, Codex
+- **Category:** Work and Productivity
+- **Built with:** Codex, GPT-5.6, OpenAI Responses API, Next.js, React, TypeScript, Tailwind CSS, Zod, Vitest, Playwright
 - **Repository:** https://github.com/ATAC-Helicopter/ProofRestore
 - **Live demo:** https://proofrestore.vercel.app
 - **Video:** `[add public video URL]`
+- **Main Codex session ID:** `019f725f-5164-7321-a0a9-a67dab130787`
+- **Project timing:** New project created during the July 13–21, 2026 submission period; the commit history and Codex session provide dated evidence.
 - **Demo limitation:** Restore operations are simulations; the built-in vault is synthetic and the primary recording uses the deterministic no-key interpreter.
 
 ## Inspiration
@@ -57,7 +60,7 @@ A deterministic TypeScript recovery engine performs:
 
 The application is built with Next.js, strict TypeScript, Tailwind CSS, Zod, the OpenAI Responses API, Vitest, and Playwright. It is stateless, requires no database, and is ready for a conventional Vercel deployment.
 
-Codex was the primary development environment. A lead agent coordinated architecture, integration, validation, and scope while independent subagents owned the manifest schema, deterministic engine and tests, demo fixture, and documentation through non-overlapping files.
+Codex running GPT-5.6 was the primary development environment. A lead agent coordinated architecture, integration, validation, and scope while independent subagents owned the manifest schema, deterministic engine and tests, demo fixture, and documentation through non-overlapping files. Codex also drove adversarial testing, accessibility refinement, browser-flow verification, deployment checks, and submission-media QA.
 
 ## Challenges we faced
 
@@ -65,7 +68,7 @@ The hardest challenge was preserving a real trust boundary while still making na
 
 Recovery is also more nuanced than a single green or red badge. We had to distinguish object integrity from restore safety. A version can be fully recoverable while still conflicting with a newer destination file. A folder can be partially recoverable because one child is healthy and another references a missing object. Retention risk requires asking whether a different healthy copy survives an expiry, not merely whether a snapshot has an expiry date.
 
-The final challenge was making these technical distinctions legible within a two-minute demo. Stable evidence codes, compact status hierarchy, a fixed adversarial fixture, and a deterministic downloadable report let the UI stay concise without asking the audience to trust an unexplained verdict.
+The final challenge was making these technical distinctions legible within a concise demo. Stable evidence codes, compact status hierarchy, a fixed adversarial fixture, and a deterministic downloadable report let the UI stay concise without asking the audience to trust an unexplained verdict.
 
 ## Accomplishments that we're proud of
 
@@ -90,7 +93,6 @@ Finally, backup completion is a statement about a job, not the future ability to
 - a versioned evidence contract so backup tools can export recoverability evidence without sharing internal storage;
 - adapters for other backup formats and providers;
 - scheduled restore simulations;
-- adapters for backup tools and formats;
 - isolated test restores into disposable environments;
 - signed recovery reports;
 - team and compliance workflows;

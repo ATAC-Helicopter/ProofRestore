@@ -666,7 +666,7 @@ export function ProofRestoreApp() {
 
           <section className="how-it-works" aria-labelledby="how-title">
             <div>
-              <span className="eyebrow">A two-minute answer</span>
+              <span className="eyebrow">A clear recovery answer</span>
               <h2 id="how-title">From backup status to recovery proof.</h2>
             </div>
             <ol>
