@@ -46,7 +46,7 @@ export async function interpretWithModel(
   const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
   const response = await client.responses.create(
     {
-      model: process.env.OPENAI_MODEL ?? "gpt-5-mini",
+      model: process.env.OPENAI_MODEL ?? "gpt-5.6-terra",
       instructions:
         "Interpret recovery intent only. Never decide existence, integrity, safety, or recoverability. resolvedPath must be one exact supplied candidate or an empty string. Preserve ambiguity and use UTC ISO 8601 timestamps.",
       input: JSON.stringify({

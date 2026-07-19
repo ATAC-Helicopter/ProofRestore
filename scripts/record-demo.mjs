@@ -147,6 +147,105 @@ async function revealAndHold(page, locator, milliseconds, block = "start") {
   await pause(milliseconds);
 }
 
+async function showBuildDisclosure(page) {
+  await movePointer(page, { x: 1_460, y: 92 });
+  await page.evaluate(() => {
+    const disclosure = document.createElement("section");
+    disclosure.id = "codex-build-disclosure";
+    disclosure.setAttribute("aria-label", "How ProofRestore was built");
+    disclosure.innerHTML = `
+      <div class="build-disclosure-frame">
+        <div class="build-disclosure-brand"><span>PR</span> ProofRestore</div>
+        <p class="build-disclosure-eyebrow">OPENAI BUILD WEEK</p>
+        <h1>Developed with Codex + GPT-5.6</h1>
+        <p class="build-disclosure-lede">Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab, build adversarial tests, refine accessibility, and run release validation.</p>
+        <div class="build-disclosure-boundary">
+          <strong>AI interprets intent.</strong>
+          <span>Deterministic code alone decides recovery.</span>
+        </div>
+        <p class="build-disclosure-close">Backups should not require faith.</p>
+      </div>
+    `;
+    const style = document.createElement("style");
+    style.textContent = `
+      #codex-build-disclosure {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483600;
+        display: grid;
+        place-items: center;
+        padding: 76px;
+        color: #eef6ff;
+        background:
+          radial-gradient(circle at 82% 18%, rgba(55, 125, 255, 0.18), transparent 34%),
+          linear-gradient(145deg, #07111e 0%, #0a1624 100%);
+      }
+      .build-disclosure-frame { width: min(1120px, 100%); }
+      .build-disclosure-brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 88px;
+        font-size: 24px;
+        font-weight: 750;
+      }
+      .build-disclosure-brand span {
+        display: grid;
+        width: 44px;
+        height: 44px;
+        place-items: center;
+        border: 1px solid #38c878;
+        border-radius: 12px;
+        color: #7ce8a8;
+        background: rgba(21, 105, 62, 0.28);
+      }
+      .build-disclosure-eyebrow {
+        margin: 0 0 18px;
+        color: #70aaff;
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+      }
+      #codex-build-disclosure h1 {
+        max-width: 980px;
+        margin: 0;
+        font-size: 72px;
+        line-height: 1.03;
+        letter-spacing: -0.045em;
+      }
+      .build-disclosure-lede {
+        max-width: 1020px;
+        margin: 30px 0 38px;
+        color: #b9c8d9;
+        font-size: 25px;
+        line-height: 1.5;
+      }
+      .build-disclosure-boundary {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        width: fit-content;
+        padding: 18px 22px;
+        border: 1px solid #31506f;
+        border-radius: 14px;
+        background: #0d1d2d;
+        font-size: 20px;
+      }
+      .build-disclosure-boundary strong { color: #83b8ff; }
+      .build-disclosure-boundary span { color: #dce7f4; }
+      .build-disclosure-close {
+        margin: 54px 0 0;
+        color: #7ce8a8;
+        font-size: 20px;
+        font-weight: 750;
+      }
+    `;
+    document.head.append(style);
+    document.body.append(disclosure);
+  });
+  await pause(24_000);
+}
+
 async function waitForServer() {
   for (let attempt = 0; attempt < 60; attempt += 1) {
     try {
@@ -349,6 +448,7 @@ try {
   );
   await page.getByRole("heading", { name: "Unrecoverable" }).waitFor();
   await revealAndHold(page, page.locator(".lab-result"), 17_000);
+  await showBuildDisclosure(page);
 
   await page.close();
   await context.close();

@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   },
   description:
     "Verify backup integrity, simulate recovery, and generate evidence-backed proof before disaster strikes.",
+  alternates: { canonical: "/" },
   applicationName: "ProofRestore",
   keywords: [
     "backup verification",
@@ -22,6 +23,7 @@ export const metadata: Metadata = {
     "restore simulation",
   ],
   openGraph: {
+    url: "/",
     title: "ProofRestore — Know your backup will restore",
     description:
       "Evidence-backed backup verification and safe restore simulation.",

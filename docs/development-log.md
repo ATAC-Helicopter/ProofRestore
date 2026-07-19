@@ -70,13 +70,13 @@
 - Expanded the walkthrough to 1:48 so every click and deterministic decision is narrated in sequence, including exact snapshot history, destination selection, simulation, evidence, and report download.
 - Replaced the system narration with a natural AI-generated neural voice and added an explicit on-screen disclosure.
 - Added a rendered high-contrast pointer plus click pulses because headless browser recordings do not include the operating-system cursor.
-- Embedded a default selectable English caption track in the final H.264 video, retained the SRT sidecar, and kept a separate burned-caption fallback for platforms without subtitle controls.
+- Embedded a default selectable English caption track in the H.264 video and retained the SRT sidecar for hosts that replace embedded subtitles.
 - Normalized narration and exported 48 kHz stereo AAC audio for broad player compatibility.
-- Fully decoded the final MP4, measured its audio, inspected an eight-frame contact sheet, and verified that captioned frames differ from the uncaptioned master.
+- Fully decoded the MP4, measured its audio, inspected representative frames, and verified the embedded caption track against the SRT source.
 
 ### Hands-on Recovery Lab
 
-- Added a separate Recovery Lab so anyone can choose their own files or folder, or load a safe built-in sample, without disrupting the two-minute guided demo.
+- Added a separate Recovery Lab so anyone can choose their own files or folder, or load a safe built-in sample, without disrupting the concise guided demo.
 - Implemented bounded local SHA-256 hashing, parent-directory synthesis, baseline and follow-up snapshots, virtual modification and deletion, stored-byte corruption, missing objects, and destination conflicts.
 - Kept uploaded bytes entirely in browser memory, removed raw content from generated manifests, bypassed the interpretation endpoint for lab vaults, and displayed the limitation that same-origin baseline hashes are not independent provider proof.
 - Reused the production Zod manifest boundary and deterministic recovery engine for every lab verdict, total, action, and evidence record.
@@ -87,13 +87,13 @@
 
 - Made repeated corruption injection fail safely instead of flipping the same byte back to its healthy value.
 - Added separate Recovery Lab setup/safety and corruption/evidence gallery images.
-- Re-cut the complete demo to 1:45 with a warm conversational neural voice, selectable English captions, visible pointer/click pulses, and a concise hands-on Recovery Lab sequence.
+- Re-cut an interim 1:45 demo with a warm conversational neural voice, selectable English captions, visible pointer/click pulses, and a concise hands-on Recovery Lab sequence; the superseded render was later removed.
 - Documented the final voice, caption publishing step, and retained publication artifacts.
 - Removed duplicate, obsolete, subtitle-free, permanently captioned, and large production intermediates after verifying the final MP4.
 
 ### Public release hardening and final video
 
 - Replaced audience-specific video language with generic user language and rebuilt the recorder with seeded Bézier pointer paths, off-center clicks, human dwell timing, and smooth recorder-only scrolling.
-- Reassembled and fully decoded a 1:55, 1600×900 H.264 final video with natural 48 kHz stereo narration and an optional embedded English caption track; retimed both tracks across the full visual sequence, inspected representative frames, and verified the embedded captions match the SRT source.
+- Reassembled and fully decoded a 2:20, 1600×900 H.264 final video with natural 48 kHz stereo narration and an optional embedded English caption track; added the rules-required Codex/GPT-5.6 development disclosure, inspected representative frames, and verified the embedded captions match the SRT source.
 - Added the MIT license, `SECURITY.md`, `CONTRIBUTING.md`, CODEOWNERS, pull-request guidance, Dependabot, CodeQL, SHA-pinned Actions, and strict browser security headers.
 - Pinned patched PostCSS 8.5.19 through the package override; `npm audit` now reports zero vulnerabilities.

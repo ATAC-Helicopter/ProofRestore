@@ -85,3 +85,16 @@ Natural language interprets requests, but deterministic code decides recovery.
 22
 00:01:50,285 --> 00:01:53,000
 Backups should not require faith.
+
+23
+00:01:56,850 --> 00:02:03,118
+ProofRestore was developed during OpenAI Build Week with Codex and GPT-5.6.
+
+24
+00:02:03,118 --> 00:02:13,356
+Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab,
+build adversarial tests, refine accessibility, and run release validation.
+
+25
+00:02:13,356 --> 00:02:18,288
+AI interprets intent, but deterministic code alone decides recovery.
