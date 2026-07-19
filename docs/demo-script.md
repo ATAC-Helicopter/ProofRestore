@@ -107,9 +107,9 @@ End on the footer: **Backups should not require faith.**
 
 **Narration:**
 
-> “ProofRestore was developed during OpenAI Build Week with Codex running GPT-5.6 Sol from start to finish. Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab, build adversarial tests, refine accessibility, and run release validation. AI interprets intent, but deterministic code alone decides recovery.”
+> “ProofRestore was developed during OpenAI Build Week with Codex running GPT-5.6 Sol from start to finish. Codex helped shape the architecture, implement the deterministic recovery engine and Recovery Lab, build adversarial tests, refine accessibility, and run release validation. Every recoverability claim remains backed by executable tests and transparent evidence.”
 
-End on **Developed with Codex + GPT-5.6 Sol** and the deterministic trust boundary.
+End on **Developed with Codex + GPT-5.6 Sol**, executable tests, and transparent evidence.
 
 ## Extended hands-on test path
 
