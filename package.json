@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "next": "15.5.20",
-    "openai": "^5.10.2",
+    "openai": "^6.49.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "zod": "^3.25.76"
