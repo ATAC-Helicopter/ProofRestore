@@ -33,13 +33,13 @@
   "dependencies": {
     "next": "15.5.20",
     "openai": "^5.10.2",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "zod": "^3.25.76"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
-    "@playwright/test": "^1.54.1",
+    "@playwright/test": "^1.62.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^22.16.5",
@@ -48,7 +48,7 @@
     "eslint": "^9.31.0",
     "eslint-config-next": "15.5.20",
     "jsdom": "^26.1.0",
-    "prettier": "^3.6.2",
+    "prettier": "^3.9.6",
     "tailwindcss": "^4.1.11",
     "@tailwindcss/postcss": "^4.1.11",
     "typescript": "^5.8.3",
